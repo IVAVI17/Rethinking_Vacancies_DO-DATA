@@ -447,3 +447,4 @@ def add_review(space_id: str, review: ReviewRequest):
         "review_count": reviews["review_count"],
         "average_stars": reviews["average_stars"]
     }
+    
