@@ -269,8 +269,13 @@
       <p>Wi-Fi: ${p.facilities?.wifi_available?'Yes':'No'} · Kitchen: ${p.facilities?.kitchen_available?'Yes':'No'}</p>
       <span class="chip">FICTIONAL DEMO SPACE</span></div>`;
     }
-    function openSpace(p){map.flyTo({center:coordinates(p),zoom:Math.max(map.getZoom(),14),speed:1.6});
-      new maplibregl.Popup({offset:26,maxWidth:'300px'}).setLngLat(coordinates(p)).setHTML(renderPopup(p)).addTo(map);
+    function openSpace(p){
+      // Open the full listing detail page in a separate browser tab.
+      // The listing ID is passed so the detail page fetches the latest JSON data,
+      // including reviews added through POST /spaces/{space_id}/reviews.
+      const detailUrl = new URL('/space.html', window.location.origin);
+      detailUrl.searchParams.set('id', p.id);
+      window.open(detailUrl.toString(), '_blank', 'noopener');
     }
     function buildFeatures(){return {type:'FeatureCollection',features:filtered.filter(isLocated).map(p=>{
       const r=getRate(p);return {type:'Feature',id:p.id,geometry:{type:'Point',coordinates:coordinates(p)},properties:{id:p.id,price_label:r?short(r.value):'—'}};

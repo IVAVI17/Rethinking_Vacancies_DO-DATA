@@ -34,3 +34,11 @@ def all_spaces():
         "synthetic_data": True,
         "notice": "All records are fictional hackathon demonstration listings.",
     }
+
+@app.get("/space.html", include_in_schema=False)
+def space_detail_frontend():
+    path = ROOT / "frontend" / "space.html"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="frontend/space.html is missing")
+    return FileResponse(path, media_type="text/html")
+
