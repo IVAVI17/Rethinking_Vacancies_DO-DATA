@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReVive Dortmund — Explore Commercial Spaces</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.13.0/dist/maplibre-gl.css" />
+  <style>
+    :root { --red:#f43f5e; --red-dark:#d82249; --ink:#182332; --soft:#748091; --line:#e8ebef; --bg:#f8f9fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+    .topbar { height:76px; display:flex; align-items:center; justify-content:space-between; padding:0 26px; background:#fff; border-bottom:1px solid var(--line); position:relative; z-index:10; }
+    .brand {display:flex; align-items:center; gap:11px; font-weight:850; font-size:23px; letter-spacing:-.8px; }
+    .symbol {width:40px; height:40px; display:grid; place-items:center; border-radius:13px; color:#fff; background:linear-gradient(145deg,#ff6b7d,#ea2d54); box-shadow:0 5px 14px #f43f5e35; font-weight:900;}
+    .muted {color:var(--soft);} .topright {font-size:12px; font-weight:650; display:flex; align-items:center; gap:12px;}
+    .demo {background:#fff1f3; color:#c22548; border-radius:100px; padding:8px 12px;}
+    .layout {display:grid; grid-template-columns:minmax(320px,370px) minmax(0,1fr); height:calc(100dvh - 76px); min-height:520px;}
+    aside {background:#fff; padding:24px 18px; overflow:auto; border-right:1px solid var(--line); scrollbar-width:thin;}
+    h1 {font-size:25px; letter-spacing:-.8px; margin:0 0 6px;}
+    .intro {font-size:13px;line-height:1.5; color:var(--soft); margin:0 0 19px;}
+    .searchwrap {position:relative; margin-bottom:14px;}
+    .searchwrap svg {position:absolute; top:13px; left:14px; opacity:.65;}
+    #search {width:100%; border-radius:13px; border:1px solid #dfe4ea; font-size:14px; outline:none; background:#fff; padding:14px 12px 14px 41px;}
+    #search:focus {border-color:#f07489;box-shadow:0 0 0 3px #f43f5e1a;}
+    .filters {display:flex; gap:8px; margin-bottom:13px;}
+    .filters select {width:50%; padding:11px 9px; background:#fff; color:#334155; border:1px solid #e1e4e9; border-radius:11px; font-size:12px;}
+    .results {display:flex; align-items:center; justify-content:space-between; font-size:12px; margin:18px 2px 12px; color:var(--soft);}
+    .results b {color:var(--ink); font-size:13px;}
+    .listing {border:1px solid var(--line);border-radius:16px;padding:14px; margin-bottom:10px; cursor:pointer; background:#fff; transition:border-color .12s,box-shadow .12s;}
+    .listing:hover,.listing.selected {border-color:#f66982; box-shadow:0 6px 20px #f43f5e14;}
+    .address {font-size:15px; font-weight:750; margin-bottom:6px;}
+    .location {font-size:12px;color:var(--soft); margin-bottom:13px;}
+    .pricebar {display:flex; justify-content:space-between; align-items:baseline;}
+    .pricebar strong {font-size:18px; color:var(--red-dark);}
+    .pricebar span {font-size:12px; color:var(--soft);}
+    .fineprint {border-top:1px solid var(--line); padding:14px 1px 30px; font-size:11px; color:var(--soft); line-height:1.5;}
+    .mapwrap {position:relative; overflow:hidden; background:#e7eeef; min-width:0;}
+    #map {width:100%;height:100%;}
+    .map-pin {border:2px solid white; border-radius:22px; padding:9px 13px; background:var(--red); color:#fff; font-weight:850; font-size:13px; line-height:1; white-space:nowrap; cursor:pointer; box-shadow:0 2px 11px #102d3e42; transform:translateZ(0); transition:background .1s, box-shadow .1s;}
+    .map-pin:hover,.map-pin.active {background:var(--red-dark); box-shadow:0 4px 14px #111c2e5c;}
+    .maplibregl-marker {z-index:2;}
+    .maplibregl-marker:hover {z-index:4;}
+    .maplibregl-popup {z-index:8;}
+    .maplibregl-popup-content {border-radius:18px; box-shadow:0 8px 35px #152c4740; padding:0; overflow:hidden;}
+    .maplibregl-popup-close-button {font-size:21px; padding:3px 9px; color:#64748b;}
+    .popup {padding:18px; width:248px;}
+    .popup h3 {font-size:16px;letter-spacing:-.3px; margin:0 18px 5px 0;}
+    .popup .dim {color:var(--soft);font-size:12px;line-height:1.6;}
+    .popup .big {font-size:23px;font-weight:850;color:var(--red-dark);margin-top:11px;}
+    .popup .warning {font-size:11px;color:#875b20; background:#fff7e6; border-radius:8px; padding:7px 9px; margin-top:11px;}
+    .popup a {display:block;text-align:center;margin-top:11px;background:var(--red);color:#fff;text-decoration:none;font-size:12px;font-weight:750;padding:11px;border-radius:9px;}
+    .map-note {position:absolute; bottom:25px; left:18px; z-index:4; background:#fffffff2; backdrop-filter:blur(12px); border:1px solid #e6e9ef; padding:11px 13px; max-width:345px; border-radius:13px; box-shadow:0 4px 18px #18233218; font-size:11px; line-height:1.4; color:#475569;}
+    .map-note b {color:#293241;}
+    .error {display:none;position:absolute;top:18px;left:18px;right:18px;padding:14px;border-radius:12px;background:#fff;color:#a12a35; z-index:6;border:1px solid #ffcad3;box-shadow:0 4px 15px #27344920;font-size:13px;}
+    .maplibregl-ctrl-group {border-radius:13px!important; overflow:hidden; box-shadow:0 3px 15px #0e203625!important;}
+    @media (max-width:740px) {
+      .topbar {height:64px;padding:0 16px;} .brand{font-size:19px;} .topright .muted{display:none;}
+      .layout {grid-template-columns:1fr;grid-template-rows:215px minmax(500px,1fr);height:auto;min-height:0;}
+      aside {max-height:215px;padding:16px;}.mapwrap{height:calc(100dvh - 279px); min-height:460px;}
+      h1{font-size:20px;}.intro{display:none;}.filters{margin-bottom:6px;}.map-note{bottom:12px;left:12px;right:12px;max-width:none;}
+    }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="symbol">R</div> ReVive <span style="color:var(--red)">Dortmund</span></div>
+  <div class="topright"><span class="muted">Give spaces a second life.</span><span class="demo">HACKATHON DEMO</span></div>
+</header>
+<main class="layout">
+  <aside>
+    <h1>Explore spaces</h1>
+    <p class="intro">Real commercial rental listings in Dortmund, displayed on a fast interactive map.</p>
+    <div class="searchwrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input type="search" id="search" placeholder="Search address or district..." aria-label="Search locations" /></div>
+    <div class="filters"><select id="budget" aria-label="Maximum monthly rent"><option value="">Any monthly budget</option><option value="1000">Up to €1,000</option><option value="1500">Up to €1,500</option><option value="2500">Up to €2,500</option></select><select id="area" aria-label="Minimum floor area"><option value="0">Any size</option><option value="50">50 m² and up</option><option value="100">100 m² and up</option><option value="150">150 m² and up</option></select></div>
+    <div class="results"><b id="count">Loading spaces…</b><span>Monthly base rent</span></div>
+    <div id="list" aria-live="polite"></div>
+    <div class="fineprint"><b>Data note:</b> Listings do not confirm current vacancy, owner permission for temporary rentals, or actual day/week prices. Entries without precise coordinates are not mapped.</div>
+  </aside>
+  <section class="mapwrap" aria-label="Map of commercial property listings in Dortmund">
+    <div id="map"></div><div class="error" id="error" role="alert"></div>
+    <div class="map-note"><b>● Red markers = advertised commercial rental spaces</b><br>Prices are base rent per month, <b>not verified Airbnb-style short-term prices</b>.</div>
+  </section>
+</main>
+<script type="module">
+  import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.13.0/dist/maplibre-gl.mjs';
+
+  // WebGL vector maps are smoother on many devices; external map tiles still need internet.
+  const map = new maplibregl.Map({
+    container: 'map',
+    style: 'https://tiles.openfreemap.org/styles/liberty',
+    center: [7.4653, 51.5136],
+    zoom: 11.8,
+    pitch: 0,
+    antialias: false,
+    cooperativeGestures: false,
+    maxZoom: 18,
+    attributionControl: true
+  });
+  map.addControl(new maplibregl.NavigationControl({showCompass:false}), 'top-right');
+  const esc = x => String(x ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const euro = x => x == null ? 'Price on request' : '€' + Math.round(x).toLocaleString('de-DE');
+  const isMapped = p => Number.isFinite(p.latitude) && Number.isFinite(p.longitude);
+  const pins = new Map();
+  let all = [];
+  let activeId = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const popups = new Map();
+  function showError(message) {const el=document.getElementById('error');el.textContent=message;el.style.display='block';}
+  map.on('error', e => {if(/style|tile|source|network/i.test(String(e.error?.message||''))) console.warn('Map tiles:',e.error?.message);});
+  function popupHtml(p) {
+    const url = /^https:\/\//.test(p.source_url||'') ? p.source_url : '';
+    return `<div class="popup"><h3>${esc(p.address)}</h3><div class="dim">${esc(p.district)} · ${esc(p.area_m2)} m²</div>
+      <div class="big">${esc(euro(p.base_rent_eur_month))}</div><div class="dim">Base rent / month</div>
+      <div class="dim" style="margin-top:8px">${p.nearest_transit_stop ? '🚉 '+esc(p.nearest_transit_stop)+' · '+esc(p.transit_distance_m)+' m' : 'Transit data unavailable'}</div>
+      <div class="warning">Availability and short-term rental conditions unverified</div>
+      ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">See original listing ↗</a>` : ''}</div>`;
+  }
+  function choose(p) {
+    activeId=p.id;
+    document.querySelectorAll('.listing').forEach(el=>el.classList.toggle('selected',el.dataset.id===p.id));
+    pins.forEach((info,id)=>info.el.classList.toggle('active', id===p.id));
+    const m=pins.get(p.id);
+    if(m){
+      map.flyTo({center:[p.longitude,p.latitude],zoom:Math.max(13.5,map.getZoom()),speed:1.4,essential:!reducedMotion});
+      m.popup.addTo(map);
+    }
+  }
+  function addPin(p) {
+    const el=document.createElement('button');el.type='button';el.className='map-pin';
+    el.textContent=euro(p.base_rent_eur_month);el.title=p.address;
+    el.setAttribute('aria-label',`${p.address}, ${euro(p.base_rent_eur_month)} per month`);
+    const popup = new maplibregl.Popup({offset:23,maxWidth:'295px',closeButton:true,closeOnClick:true}).setHTML(popupHtml(p));
+    const marker = new maplibregl.Marker({element:el,anchor:'center'}).setLngLat([p.longitude,p.latitude]).setPopup(popup).addTo(map);
+    el.addEventListener('click',()=>{
+      activeId=p.id;
+      document.querySelectorAll('.listing').forEach(n=>n.classList.toggle('selected',n.dataset.id===p.id));
+      pins.forEach((info,id)=>info.el.classList.toggle('active',id===p.id));
+    });
+    pins.set(p.id,{el,marker,popup});
+  }
+  function render() {
+    const search = document.getElementById('search').value.toLocaleLowerCase('de').trim();
+    const maxRent = document.getElementById('budget').value;
+    const minArea = Number(document.getElementById('area').value);
+    const filtered=all.filter(p=>isMapped(p) && (`${p.address} ${p.district} ${p.postcode}`).toLocaleLowerCase('de').includes(search) && (!maxRent || (p.base_rent_eur_month != null && p.base_rent_eur_month<=Number(maxRent))) && (p.area_m2 || 0)>=minArea);
+    pins.forEach(info=>info.marker.remove());pins.clear();
+    filtered.forEach(addPin);
+    const list=document.getElementById('list');list.replaceChildren();
+    document.getElementById('count').textContent=`${filtered.length} mapped space${filtered.length===1?'':'s'}`;
+    for(const p of filtered){
+      const el=document.createElement('div');el.className='listing';el.dataset.id=p.id;el.tabIndex=0;el.setAttribute('role','button');
+      el.innerHTML=`<div class="address">${esc(p.address)}</div><div class="location">📍 ${esc(p.district)} · ${esc(p.postcode)}</div><div class="pricebar"><strong>${esc(euro(p.base_rent_eur_month))} <span>/month</span></strong><span>${esc(p.area_m2)} m²</span></div>`;
+      el.addEventListener('click',()=>choose(p));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(p);}});
+      list.appendChild(el);
+    }
+    if(!filtered.length)list.textContent='No matches. Try another search or budget.';
+    if(activeId && filtered.some(p=>p.id===activeId)) {
+      document.querySelectorAll('.listing').forEach(el=>el.classList.toggle('selected',el.dataset.id===activeId));
+    }
+  }
+  async function boot(){
+    try {
+      const r=await fetch('/api/properties');if(!r.ok)throw Error('Property API returned '+r.status);
+      const j=await r.json();all=j.properties||[];render();
+      const mapped=all.filter(isMapped);
+      if(mapped.length){
+        const bounds=new maplibregl.LngLatBounds();mapped.forEach(p=>bounds.extend([p.longitude,p.latitude]));
+        map.fitBounds(bounds,{padding:65,maxZoom:12.9,duration:reducedMotion?0:600});
+      }
+    } catch(e){showError('Could not load property data: '+e.message);document.getElementById('count').textContent='Unable to load';}
+  }
+  for(const id of ['search','budget','area'])document.getElementById(id).addEventListener(id==='search'?'input':'change',render);
+  boot();
+</script>
+</body>
+</html>
