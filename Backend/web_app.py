@@ -11,6 +11,7 @@ from fastapi.responses import FileResponse
 
 ROOT = Path(__file__).resolve().parent.parent
 os.environ.setdefault("SPACES_JSON_PATH", str(ROOT / "Data" / "dortmund_synthetic_spaces.json"))
+os.environ.setdefault("EVENTS_JSON_PATH", str(ROOT / "Data" / "dortmund_public_events.json"))
 
 # Import the team's existing FastAPI app and Groq-powered /search/prompt.
 from Backend.main import LISTINGS, app  # noqa: E402

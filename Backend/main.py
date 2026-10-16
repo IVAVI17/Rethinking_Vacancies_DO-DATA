@@ -1,6 +1,8 @@
 import json
 import os
 import re
+from datetime import date as Date, time as Time
+from urllib.parse import quote_plus
 from pathlib import Path
 from typing import Any, Optional
 
@@ -14,12 +16,18 @@ from dotenv import load_dotenv
 # Configuration
 # ---------------------------------------------------------------------------
 load_dotenv(Path(__file__).resolve().parent / ".env")
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "Data"
 
 DATA_FILE = Path(os.getenv(
     "SPACES_JSON_PATH",
-    r"C:\Users\DELL\Desktop\PROJECTS\DO_DATA_code\Rethinking_Vacancies_DO-DATA\Data\dortmund_synthetic_spaces.json"
+    str(DATA_DIR / "dortmund_synthetic_spaces.json")
 ))
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+EVENTS_FILE = Path(os.getenv(
+    "EVENTS_JSON_PATH",
+    str(DATA_DIR / "dortmund_public_events.json")
+))
 
 app = FastAPI(
     title="SpaceMatch Dortmund API",
@@ -57,6 +65,48 @@ def load_listings() -> list[dict[str, Any]]:
 
 
 LISTINGS = load_listings()
+
+
+def save_json_file(path: Path, payload: Any) -> None:
+    """Write JSON atomically so an interrupted write does not corrupt the dataset."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = path.with_suffix(path.suffix + ".tmp")
+    with temp_path.open("w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=4, ensure_ascii=False)
+    temp_path.replace(path)
+
+
+def load_events_payload() -> dict[str, Any]:
+    if not EVENTS_FILE.exists():
+        raise HTTPException(
+            status_code=500,
+            detail=f"Events JSON file not found: {EVENTS_FILE}. Set EVENTS_JSON_PATH to the events dataset path."
+        )
+    try:
+        with EVENTS_FILE.open("r", encoding="utf-8") as f:
+            payload = json.load(f)
+    except (OSError, json.JSONDecodeError) as exc:
+        raise HTTPException(status_code=500, detail=f"Could not read events JSON: {exc}") from exc
+    if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
+        raise HTTPException(status_code=500, detail="Events JSON must be an object containing an 'events' array.")
+    return payload
+
+
+def next_prefixed_id(items: list[dict[str, Any]], field: str, prefix: str) -> str:
+    highest = 0
+    for item in items:
+        value = str(item.get(field, ""))
+        match = re.fullmatch(re.escape(prefix) + r"(\d+)", value)
+        if match:
+            highest = max(highest, int(match.group(1)))
+    return f"{prefix}{highest + 1:04d}"
+
+
+def google_maps_link(address: str, latitude: Optional[float], longitude: Optional[float]) -> str:
+    if latitude is not None and longitude is not None:
+        return f"https://www.google.com/maps?q={latitude},{longitude}"
+    return "https://www.google.com/maps/search/?api=1&query=" + quote_plus(address)
+
 
 
 # ---------------------------------------------------------------------------
@@ -117,6 +167,47 @@ class ParsedCriteria(BaseModel):
 class ReviewRequest(BaseModel):
     stars: int = Field(..., ge=1, le=5)
     comment: Optional[str] = None
+
+
+class ListingCreateRequest(BaseModel):
+    # Required: only the essentials, so the form stays short.
+    title: str = Field(..., min_length=2, max_length=120, description="Name/title of the space")
+    address: str = Field(..., min_length=3, max_length=250, description="Street address in Dortmund")
+    district: str = Field(..., min_length=2, max_length=80)
+    purpose: str = Field(..., min_length=2, max_length=80, description="e.g. workshop, office, art")
+    # Everything below is optional.
+    description: Optional[str] = Field(default=None, max_length=2000)
+    postcode: Optional[str] = Field(default=None, max_length=10)
+    area_sqm: Optional[float] = Field(default=None, gt=0)
+    capacity_people: Optional[int] = Field(default=None, gt=0)
+    price_hour: Optional[float] = Field(default=None, ge=0)
+    price_day: Optional[float] = Field(default=None, ge=0)
+    price_week: Optional[float] = Field(default=None, ge=0)
+    price_month: Optional[float] = Field(default=None, ge=0)
+    latitude: Optional[float] = Field(default=None, ge=-90, le=90)
+    longitude: Optional[float] = Field(default=None, ge=-180, le=180)
+    photo_url: Optional[str] = Field(default=None, max_length=1000)
+    contact_name: Optional[str] = Field(default=None, max_length=120)
+    contact_email: Optional[str] = Field(default=None, max_length=254)
+
+
+class EventCreateRequest(BaseModel):
+    # Required essentials.
+    event_name: str = Field(..., min_length=2, max_length=160)
+    date: Date
+    start_time: Time
+    venue: str = Field(..., min_length=2, max_length=160)
+    address: str = Field(..., min_length=3, max_length=250)
+    # Optional details.
+    end_time: Optional[Time] = None
+    description: Optional[str] = Field(default=None, max_length=2000)
+    event_category: Optional[str] = Field(default=None, max_length=80)
+    district: Optional[str] = Field(default=None, max_length=80)
+    postcode: Optional[str] = Field(default=None, max_length=10)
+    latitude: Optional[float] = Field(default=None, ge=-90, le=90)
+    longitude: Optional[float] = Field(default=None, ge=-180, le=180)
+    capacity_people: Optional[int] = Field(default=None, gt=0)
+    join_mode: Optional[str] = Field(default="open", pattern="^(open|request)$")
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -368,6 +459,149 @@ def get_space(space_id: str):
         if listing.get("id") == space_id:
             return public_listing(listing)
     raise HTTPException(status_code=404, detail="Space not found")
+
+@app.post("/spaces", status_code=201, tags=["Listings"])
+def create_space(request: ListingCreateRequest):
+    """Create a space listing. Only title, address, district and purpose are required."""
+    if (request.latitude is None) != (request.longitude is None):
+        raise HTTPException(status_code=422, detail="Provide both latitude and longitude, or neither.")
+
+    space_id = next_prefixed_id(LISTINGS, "id", "DO-USER-")
+    exact_address = request.address.strip()
+    maps_link = google_maps_link(exact_address, request.latitude, request.longitude)
+
+    rates = {}
+    for key, value in [
+        ("hour", request.price_hour),
+        ("day", request.price_day),
+        ("week", request.price_week),
+        ("month", request.price_month),
+    ]:
+        if value is not None:
+            rates[key] = value
+
+    listing = {
+        "id": space_id,
+        "data_status": "user_submitted",
+        "title": request.title.strip(),
+        "description": request.description.strip() if request.description else None,
+        "address": {
+            "exact_address": exact_address,
+            "district": request.district.strip(),
+            "postcode": request.postcode.strip() if request.postcode else None,
+            "latitude": request.latitude,
+            "longitude": request.longitude,
+            "google_maps_link": maps_link,
+        },
+        "purpose": request.purpose.strip(),
+        "purposes_allowed_or_suggested": [request.purpose.strip()],
+        "area_sqm": request.area_sqm,
+        "capacity_people": request.capacity_people,
+        "price": {
+            "currency": "EUR",
+            "rates": rates,
+            "negotiable": False,
+            "deposit": {"required": False, "amount_eur": None, "refundable": None},
+        },
+        "facilities": {},
+        "availability": {},
+        "photos": {
+            "space_photo_url": request.photo_url,
+            "neighbourhood_photo_url": None,
+        },
+        "reviews": {"average_stars": None, "review_count": 0, "items": [], "is_synthetic": False},
+        "contact": {
+            "name": request.contact_name.strip() if request.contact_name else None,
+            "email": request.contact_email.strip() if request.contact_email else None,
+            "verified": False,
+        },
+        "is_synthetic": False,
+        "submission_status": "pending_review",
+    }
+
+    LISTINGS.append(listing)
+    try:
+        save_json_file(DATA_FILE, LISTINGS)
+    except OSError as exc:
+        LISTINGS.pop()
+        raise HTTPException(status_code=500, detail=f"Failed to save listing to JSON: {exc}") from exc
+
+    return {
+        "message": "Listing submitted successfully",
+        "id": space_id,
+        "listing": listing,
+        "submission_status": "pending_review",
+    }
+
+
+@app.post("/events", status_code=201, tags=["Events"])
+def create_event(request: EventCreateRequest):
+    """Create a public event. Only name, date, start time, venue and address are required."""
+    if (request.latitude is None) != (request.longitude is None):
+        raise HTTPException(status_code=422, detail="Provide both latitude and longitude, or neither.")
+    if request.end_time is not None and request.end_time <= request.start_time:
+        raise HTTPException(status_code=422, detail="end_time must be later than start_time.")
+
+    payload = load_events_payload()
+    events = payload["events"]
+    event_id = next_prefixed_id(events, "event_id", "DO-EVT-USER-")
+    address = request.address.strip()
+    maps_link = google_maps_link(address, request.latitude, request.longitude)
+
+    location = {
+        "venue": request.venue.strip(),
+        "address": address,
+        "google_maps_link": maps_link,
+    }
+    if request.district:
+        location["district"] = request.district.strip()
+    if request.postcode:
+        location["postcode"] = request.postcode.strip()
+    if request.latitude is not None and request.longitude is not None:
+        location["latitude"] = request.latitude
+        location["longitude"] = request.longitude
+        location["coordinates"] = {
+            "latitude": request.latitude,
+            "longitude": request.longitude,
+        }
+
+    event = {
+        "event_id": event_id,
+        "event_name": request.event_name.strip(),
+        "date": request.date.isoformat(),
+        "start_time": request.start_time.strftime("%H:%M"),
+        "end_time": request.end_time.strftime("%H:%M") if request.end_time else None,
+        "location": location,
+        "event_type": "public",
+        "event_category": request.event_category.strip() if request.event_category else None,
+        "description": request.description.strip() if request.description else None,
+        "capacity_people": request.capacity_people,
+        "join_mode": request.join_mode or "open",
+        "is_synthetic": False,
+        "source": "User-submitted",
+        "created_by": "user",
+        "submission_status": "pending_review",
+    }
+
+    events.append(event)
+    payload["total_events"] = len(events)
+    payload["user_submitted_events_count"] = sum(
+        1 for item in events if item.get("source") == "User-submitted"
+    )
+    try:
+        save_json_file(EVENTS_FILE, payload)
+    except OSError as exc:
+        events.pop()
+        payload["total_events"] = len(events)
+        raise HTTPException(status_code=500, detail=f"Failed to save event to JSON: {exc}") from exc
+
+    return {
+        "message": "Event submitted successfully",
+        "event_id": event_id,
+        "event": event,
+        "submission_status": "pending_review",
+    }
+
 
 @app.post("/spaces/{space_id}/reviews")
 def add_review(space_id: str, review: ReviewRequest):
