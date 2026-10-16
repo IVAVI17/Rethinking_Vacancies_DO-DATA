@@ -26,6 +26,14 @@ def frontend():
     return FileResponse(path, media_type="text/html")
 
 
+
+@app.get("/submit.html", include_in_schema=False)
+def submission_frontend():
+    path = ROOT / "frontend" / "submit.html"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="frontend/submit.html is missing")
+    return FileResponse(path, media_type="text/html")
+
 @app.get("/api/spaces")
 def all_spaces():
     """Return the same 300 records used by /search/prompt."""

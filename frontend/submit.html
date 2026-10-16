@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit · ReVive Dortmund</title>
+<style>
+:root{--red:#ef3455;--ink:#20232a;--muted:#737982;--line:#e9ebee}
+*{box-sizing:border-box}body{margin:0;background:#f7f7f8;color:var(--ink);font:14px system-ui,-apple-system,Segoe UI,sans-serif}
+header{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:#fff;border-bottom:1px solid var(--line)}
+.brand{font-size:22px;font-weight:850;letter-spacing:-.6px}.brand b{color:var(--red)}
+main{max-width:760px;margin:28px auto;padding:0 18px 50px}
+.back{border:1px solid #d9dfe5;background:white;border-radius:10px;padding:10px 13px;font:inherit;font-weight:750;cursor:pointer}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px;margin-top:18px}
+h1{font-size:28px;letter-spacing:-.6px;margin:0 0 7px} .intro{color:var(--muted);line-height:1.5;margin:0 0 22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.field{min-width:0}.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:800;margin:13px 0 6px}
+input,select,textarea{width:100%;border:1px solid #d9dfe5;border-radius:10px;padding:11px;background:#fff;font:inherit;color:var(--ink)}
+textarea{resize:vertical;min-height:90px}
+input:focus,select:focus,textarea:focus{outline:2px solid #ef34552b;border-color:var(--red)}
+.optional{color:var(--muted);font-weight:500}
+.actions{display:flex;gap:10px;margin-top:22px}.submit{flex:1;border:0;border-radius:11px;background:var(--red);color:#fff;padding:13px 16px;font:inherit;font-weight:850;cursor:pointer}.submit:disabled{opacity:.6;cursor:wait}
+.cancel{border:1px solid #d9dfe5;border-radius:11px;background:#fff;padding:13px 16px;font:inherit;font-weight:750;cursor:pointer}
+.status{font-size:13px;line-height:1.5;margin-top:15px;overflow-wrap:anywhere}.error{color:#ad1a38}.success{color:#256349}.required-note{font-size:12px;color:var(--muted);margin-top:14px}
+[hidden]{display:none!important}
+@media(max-width:600px){header{padding:0 14px}.panel{padding:18px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="brand">ReVive <b>Dortmund</b></div><button class="back" id="back-map" type="button">← Back to map</button></header>
+<main>
+  <button class="back" id="back-choice" type="button">← Change submission type</button>
+  <section class="panel">
+    <h1 id="page-title">Add a listing</h1>
+    <p class="intro" id="page-intro">Share a space with the Dortmund community. Only the basic details are required; the rest is optional.</p>
+    <form id="submission-form">
+      <div id="listing-fields" class="form-grid" hidden>
+        <div class="field"><label for="title">Listing title *</label><input id="title" name="title" maxlength="120" minlength="2" placeholder="e.g. Creative Community Studio" required></div>
+        <div class="field"><label for="district">District *</label><input id="district" name="district" maxlength="80" minlength="2" placeholder="e.g. Innenstadt-West" required></div>
+        <div class="field full"><label for="address">Address *</label><input id="address" name="address" maxlength="250" minlength="3" placeholder="Street and house number, Dortmund" required></div>
+        <div class="field full"><label for="purpose">Purpose *</label><input id="purpose" name="purpose" maxlength="80" minlength="2" placeholder="e.g. workshops, office, art" required></div>
+        <div class="field full"><label for="description">Description <span class="optional">(optional)</span></label><textarea id="description" name="description" maxlength="2000" placeholder="Tell people about the space"></textarea></div>
+        <div class="field"><label for="postcode">Postcode <span class="optional">(optional)</span></label><input id="postcode" name="postcode" maxlength="10" placeholder="e.g. 44137"></div>
+        <div class="field"><label for="area_sqm">Area in m² <span class="optional">(optional)</span></label><input id="area_sqm" name="area_sqm" type="number" min="0.1" step="any"></div>
+        <div class="field"><label for="capacity_people">Capacity (people) <span class="optional">(optional)</span></label><input id="capacity_people" name="capacity_people" type="number" min="1" step="1"></div>
+        <div class="field"><label for="price_hour">Price per hour (€) <span class="optional">(optional)</span></label><input id="price_hour" name="price_hour" type="number" min="0" step="any"></div>
+        <div class="field"><label for="price_day">Price per day (€) <span class="optional">(optional)</span></label><input id="price_day" name="price_day" type="number" min="0" step="any"></div>
+        <div class="field"><label for="price_week">Price per week (€) <span class="optional">(optional)</span></label><input id="price_week" name="price_week" type="number" min="0" step="any"></div>
+        <div class="field"><label for="price_month">Price per month (€) <span class="optional">(optional)</span></label><input id="price_month" name="price_month" type="number" min="0" step="any"></div>
+        <div class="field"><label for="latitude">Latitude <span class="optional">(optional)</span></label><input id="latitude" name="latitude" type="number" min="-90" max="90" step="any"></div>
+        <div class="field"><label for="longitude">Longitude <span class="optional">(optional)</span></label><input id="longitude" name="longitude" type="number" min="-180" max="180" step="any"></div>
+        <div class="field full"><label for="photo_url">Photo URL <span class="optional">(optional)</span></label><input id="photo_url" name="photo_url" type="url" maxlength="1000" placeholder="https://…"></div>
+        <div class="field"><label for="contact_name">Contact name <span class="optional">(optional)</span></label><input id="contact_name" name="contact_name" maxlength="120"></div>
+        <div class="field"><label for="contact_email">Contact email <span class="optional">(optional)</span></label><input id="contact_email" name="contact_email" type="email" maxlength="254"></div>
+      </div>
+      <div id="event-fields" class="form-grid" hidden>
+        <div class="field full"><label for="event_name">Event name *</label><input id="event_name" name="event_name" maxlength="160" minlength="2" placeholder="e.g. Dortmund Community Art Workshop" required></div>
+        <div class="field"><label for="date">Date *</label><input id="date" name="date" type="date" required></div>
+        <div class="field"><label for="start_time">Start time *</label><input id="start_time" name="start_time" type="time" required></div>
+        <div class="field"><label for="end_time">End time <span class="optional">(optional)</span></label><input id="end_time" name="end_time" type="time"></div>
+        <div class="field"><label for="venue">Venue *</label><input id="venue" name="venue" maxlength="160" minlength="2" placeholder="Venue name" required></div>
+        <div class="field full"><label for="address">Address *</label><input id="event-address" name="address" maxlength="250" minlength="3" placeholder="Street and house number, Dortmund" required></div>
+        <div class="field full"><label for="event_description">Description <span class="optional">(optional)</span></label><textarea id="event_description" name="description" maxlength="2000" placeholder="What will happen at the event?"></textarea></div>
+        <div class="field"><label for="event_category">Category <span class="optional">(optional)</span></label><input id="event_category" name="event_category" maxlength="80" placeholder="e.g. Art & Culture"></div>
+        <div class="field"><label for="event_district">District <span class="optional">(optional)</span></label><input id="event_district" name="district" maxlength="80"></div>
+        <div class="field"><label for="event_postcode">Postcode <span class="optional">(optional)</span></label><input id="event_postcode" name="postcode" maxlength="10"></div>
+        <div class="field"><label for="event_capacity">Capacity (people) <span class="optional">(optional)</span></label><input id="event_capacity" name="capacity_people" type="number" min="1" step="1"></div>
+        <div class="field"><label for="event_latitude">Latitude <span class="optional">(optional)</span></label><input id="event_latitude" name="latitude" type="number" min="-90" max="90" step="any"></div>
+        <div class="field"><label for="event_longitude">Longitude <span class="optional">(optional)</span></label><input id="event_longitude" name="longitude" type="number" min="-180" max="180" step="any"></div>
+        <div class="field"><label for="join_mode">Joining method <span class="optional">(optional)</span></label><select id="join_mode" name="join_mode"><option value="open">Open to join</option><option value="request">Request to join</option></select></div>
+      </div>
+      <div class="required-note">* Required fields. Optional details can be left blank. User submissions are saved as pending review.</div>
+      <div class="actions"><button class="cancel" type="button" id="cancel">Cancel</button><button class="submit" type="submit" id="submit-button">Submit listing</button></div>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const type=new URLSearchParams(location.search).get('type')==='event'?'event':'listing';
+const isEvent=type==='event';
+$('page-title').textContent=isEvent?'Add an event':'Add a listing';
+$('page-intro').textContent=isEvent?'Share an upcoming event in Dortmund. Only the basic details are required; the rest is optional.':'Share a space with the Dortmund community. Only the basic details are required; the rest is optional.';
+$('event-fields').hidden=!isEvent;$('listing-fields').hidden=isEvent;
+for(const el of $('event-fields').querySelectorAll('input,textarea,select'))el.disabled=!isEvent;
+for(const el of $('listing-fields').querySelectorAll('input,textarea,select'))el.disabled=isEvent;
+$('submit-button').textContent=isEvent?'Submit event':'Submit listing';
+$('back-map').addEventListener('click',()=>location.href='/');
+$('back-choice').addEventListener('click',()=>location.href='/');
+$('cancel').addEventListener('click',()=>location.href='/');
+function getPayload(){
+  const fields=$(isEvent?'event-fields':'listing-fields');
+  const payload={};
+  for(const el of fields.querySelectorAll('input,textarea,select')){
+    if(!el.name)continue;
+    const value=el.value.trim();
+    if(value==='')continue;
+    if(el.type==='number')payload[el.name]=Number(value);
+    else payload[el.name]=value;
+  }
+  return payload;
+}
+$('submission-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=$('submit-button'),status=$('status');
+  btn.disabled=true;btn.textContent='Submitting…';status.className='status';status.textContent='Saving your submission…';
+  try{
+    const response=await fetch(isEvent?'/events':'/spaces',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(getPayload())});
+    const result=await response.json();
+    if(!response.ok){
+      const detail=Array.isArray(result.detail)?result.detail.map(x=>(x.loc||[]).slice(1).join('.')+': '+x.msg).join(' · '):(result.detail||'Submission failed');
+      throw new Error(detail);
+    }
+    status.className='status success';
+    status.textContent=`Submitted successfully. Reference: ${result.id||result.event?.id||result.listing?.id||'created'}. Status: ${result.submission_status||result.status||'pending review'}. Your submission has been saved and will not be shown publicly until reviewed.`;
+    $('submission-form').reset();
+  }catch(err){status.className='status error';status.textContent=err.message||'Could not submit. Please try again.';}
+  finally{btn.disabled=false;btn.textContent=isEvent?'Submit event':'Submit listing';}
+});
+</script>
+</body>
+</html>
