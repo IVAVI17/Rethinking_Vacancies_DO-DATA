@@ -44,6 +44,46 @@
     .section-label{font-size:11px;letter-spacing:.07em;font-weight:850;color:#80818a;text-transform:uppercase;margin-top:8px}
     .match-label{font-size:10px;color:#1b775c;font-weight:800;margin-top:6px}
     .fallback{margin:10px 0;color:#72737d;font-size:12px;line-height:1.4}
+
+    /* Airbnb-inspired advanced filters, adapted for ReVive */
+    .filter-toolbar{display:flex;gap:9px;align-items:center;margin:12px 0 16px}
+    .filter-trigger{display:inline-flex;align-items:center;gap:9px;border:1px solid #ced3d9;background:#fff;border-radius:13px;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer;box-shadow:0 2px 6px #1111}
+    .filter-trigger:hover,.filter-trigger:focus-visible{border-color:var(--red);outline-color:#ff8da4}
+    .filter-icon{font-size:19px;line-height:1;color:#30313b}.active-count{display:none;border-radius:99px;padding:3px 7px;background:var(--red);color:#fff;font-size:10px}
+    .filter-help{font-size:11px;color:var(--muted)}
+    .modal-backdrop[hidden]{display:none}
+    .modal-backdrop{position:fixed;inset:0;z-index:1000;background:#17202a8c;display:flex;justify-content:center;align-items:center;padding:18px}
+    .filter-modal{width:min(620px,100%);max-height:min(91dvh,920px);background:#fff;border-radius:22px;display:flex;flex-direction:column;box-shadow:0 20px 65px #1115;overflow:hidden}
+    .modal-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+    .modal-head h2{font-size:18px;margin:0}.icon-close{width:33px;height:33px;border:0;border-radius:50%;background:#f3f4f5;font-size:22px;cursor:pointer}
+    .modal-body{padding:0 25px 26px;overflow:auto;overscroll-behavior:contain}
+    .filter-section{padding:22px 0;border-bottom:1px solid var(--line)}.filter-section:last-child{border-bottom:none}
+    .filter-section h3{font-size:19px;letter-spacing:-.35px;margin:0 0 5px}.filter-section .sub{color:#7b7e88;font-size:12px;margin:0 0 17px}
+    .price-select{max-width:165px;margin:11px 0 15px}.price-select label{font-size:11px;font-weight:750;display:block;margin-bottom:5px}
+    .histogram{display:flex;align-items:flex-end;gap:3px;height:112px;padding:6px 8px 0;overflow:hidden;border-bottom:2px solid #e8a4b2}
+    .histogram .bar{background:#e8a6b5;border-radius:4px 4px 0 0;flex:1;min-width:0;transition:background .08s ease}
+    .histogram .bar.active{background:#d91c4d}
+    .range-wrap{position:relative;height:31px;margin:-15px 1px 11px;touch-action:none}
+    .range-line,.range-fill{position:absolute;top:12px;height:5px;border-radius:5px}
+    .range-line{left:0;right:0;background:#e5e6e9}.range-fill{background:#d91c4d}
+    .range-wrap input[type=range]{-webkit-appearance:none;appearance:none;position:absolute;left:0;top:0;width:100%;height:29px;margin:0;background:none;pointer-events:none}
+    .range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:30px;height:30px;border:1px solid #dbdfe3;border-radius:50%;background:#fff;box-shadow:0 2px 7px #0002;pointer-events:auto;cursor:grab}
+    .range-wrap input[type=range]::-moz-range-thumb{width:29px;height:29px;border:1px solid #dbdfe3;border-radius:50%;background:#fff;box-shadow:0 2px 7px #0002;pointer-events:auto;cursor:grab}
+    .range-values{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:13px}
+    .range-values label{display:block;color:#656a73;font-size:12px;margin:0 0 7px;font-weight:700}
+    .money-field{border:1px solid #d7dbe0;border-radius:14px;display:flex;align-items:center;padding:0 10px;gap:4px}
+    .money-field input{border:0;padding:12px 3px;min-width:0;outline:none}.money-field:focus-within{border-color:var(--red);outline:1px solid var(--red)}
+    .hint-inline{font-size:11px;color:#777b85;margin-top:10px}
+    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .modal-grid label{display:block;font-size:12px;font-weight:750;margin-bottom:6px}
+    .checks{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .checks label{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:13px}
+    .checks input{width:18px;height:18px;accent-color:var(--red)}
+    .modal-footer{padding:16px 22px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff}
+    .reset-btn{border:0;background:transparent;text-decoration:underline;font:inherit;font-weight:800;cursor:pointer;padding:10px}
+    .show-btn{border:0;background:var(--red);border-radius:12px;padding:12px 17px;color:#fff;font:inherit;font-weight:800;cursor:pointer}
+    .show-btn:hover{background:#d82b4a}
+    @media(max-width:600px){.modal-backdrop{padding:0;align-items:flex-end}.filter-modal{max-height:96dvh;border-radius:20px 20px 0 0}.modal-body{padding:0 18px 18px}.modal-grid{gap:9px}.modal-head{padding:15px 18px}.modal-footer{padding:12px 18px}}
     @media(max-width:720px){.ai-panel{margin-top:8px}main{grid-template-rows:minmax(330px,46dvh) 1fr}aside{overflow-y:auto}}
     @media(max-width:720px){header{padding:0 12px;height:58px}.brand{font-size:18px}main{grid-template-columns:1fr;grid-template-rows:280px 1fr;height:calc(100dvh - 58px)}aside{padding:12px}#map{min-height:420px}.notice{bottom:10px;right:10px}}
   </style>
@@ -61,19 +101,71 @@
         <div class="ai-buttons"><button class="primary-btn" type="submit" id="ai-submit">✦ Find matches</button><button class="clear-btn" type="button" id="clear-ai" hidden>Clear</button></div>
         <div id="ai-status" role="status" aria-live="polite"></div>
       </form>
-      <div class="section-label">Manual filters</div>
+      <div class="section-label">Explore spaces</div>
       <input id="search" placeholder="Search district, purpose or address" aria-label="Search listings">
-      <div class="filters">
-        <div><div class="label">Price unit</div><select id="unit"><option value="any">Any unit</option><option value="day">Per day</option><option value="week">Per week</option><option value="month">Per month</option><option value="hour">Per hour</option></select></div>
-        <div><div class="label">Maximum price</div><input id="maxprice" type="number" min="0" placeholder="No limit"></div>
-        <div><div class="label">Min area (m²)</div><input id="minarea" type="number" min="0" placeholder="Any size"></div>
-        <div><div class="label">Business purpose</div><select id="purpose"><option value="">All purposes</option></select></div>
+      <div class="filter-toolbar">
+        <button type="button" class="filter-trigger" id="open-filters" aria-haspopup="dialog"><span class="filter-icon" aria-hidden="true">☷</span> Filters <span class="active-count" id="active-count"></span></button>
+        <span class="filter-help" id="filter-summary">Price, size, amenities &amp; more</span>
       </div>
       <div id="count">Loading spaces…</div><div id="cards"></div>
       <div class="hint">All listings, prices, dates, locations, reviews and photos are fictional/illustrative. Not real rental offers. The map uses approximate demo points.</div>
     </aside>
     <div class="maparea"><div id="map"></div><div class="notice"><b>Red price dots = synthetic example spaces.</b> Zoom in for individual prices; clusters show counts. Not real vacancies or bookings.</div></div>
   </main>
+
+  <div class="modal-backdrop" id="filter-backdrop" hidden>
+    <section class="filter-modal" role="dialog" aria-modal="true" aria-labelledby="filters-title" id="filter-dialog">
+      <div class="modal-head"><h2 id="filters-title">Advanced filters</h2><button type="button" id="close-filters" class="icon-close" aria-label="Close filters">×</button></div>
+      <div class="modal-body">
+        <div class="filter-section">
+          <h3>Price range</h3><p class="sub">Choose a price per rental period. The bars show the distribution of demo listing prices.</p>
+          <div class="price-select"><label for="f-unit">Price per</label><select id="f-unit"><option value="day">Day</option><option value="week">Week</option><option value="month">Month</option><option value="hour">Hour</option></select></div>
+          <div class="histogram" id="histogram" aria-label="Price distribution of demo listings"></div>
+          <div class="range-wrap" aria-label="Selected price range">
+            <div class="range-line"></div><div class="range-fill" id="range-fill"></div>
+            <input id="price-slider-min" type="range" min="0" max="350" value="0" aria-label="Minimum price slider">
+            <input id="price-slider-max" type="range" min="0" max="350" value="350" aria-label="Maximum price slider">
+          </div>
+          <div class="range-values">
+            <div><label for="f-price-min">Minimum</label><div class="money-field"><span>€</span><input id="f-price-min" type="number" min="0" inputmode="numeric" aria-label="Minimum price in euros"></div></div>
+            <div><label for="f-price-max">Maximum</label><div class="money-field"><span>€</span><input id="f-price-max" type="number" min="0" inputmode="numeric" aria-label="Maximum price in euros"></div></div>
+          </div>
+          <div class="hint-inline" id="price-context">Loading price distribution…</div>
+        </div>
+        <div class="filter-section"><h3>Space &amp; capacity</h3><p class="sub">Choose the space size and number of people.</p>
+          <div class="modal-grid">
+            <div><label for="f-area-min">Minimum area (m²)</label><input id="f-area-min" type="number" min="0" placeholder="Any"></div>
+            <div><label for="f-area-max">Maximum area (m²)</label><input id="f-area-max" type="number" min="0" placeholder="Any"></div>
+            <div><label for="f-capacity">Minimum capacity (people)</label><input id="f-capacity" type="number" min="0" placeholder="Any"></div>
+            <div><label for="f-district">District</label><select id="f-district"><option value="">All districts</option></select></div>
+          </div>
+        </div>
+        <div class="filter-section"><h3>Business &amp; availability</h3><p class="sub">Filter by intended use or rental duration.</p>
+          <div class="modal-grid">
+            <div><label for="f-purpose">Suggested purpose</label><select id="f-purpose"><option value="">Any purpose</option></select></div>
+            <div><label for="f-duration">Duration type</label><select id="f-duration"><option value="">Any duration</option><option value="short_term">Short-term</option><option value="flexible">Flexible</option><option value="long_term">Long-term</option></select></div>
+          </div>
+        </div>
+        <div class="filter-section"><h3>Amenities</h3><p class="sub">Select everything you need.</p>
+          <div class="checks">
+            <label><input type="checkbox" id="f-wifi"> Wi-Fi</label>
+            <label><input type="checkbox" id="f-kitchen"> Kitchen</label>
+            <label><input type="checkbox" id="f-washroom"> Washroom</label>
+            <label><input type="checkbox" id="f-parking"> Parking available</label>
+          </div>
+        </div>
+        <div class="filter-section"><h3>Additional details</h3>
+          <div class="modal-grid">
+            <div><label for="f-condition">Property condition</label><select id="f-condition"><option value="">Any condition</option></select></div>
+            <div><label for="f-transit">Minimum transport score</label><input id="f-transit" type="number" min="0" max="100" placeholder="Any"></div>
+            <div><label for="f-deposit">Security deposit</label><select id="f-deposit"><option value="">Any</option><option value="no">Not required</option><option value="yes">Required</option></select></div>
+            <div><label for="f-negotiable">Negotiable price</label><select id="f-negotiable"><option value="">Any</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><button type="button" id="reset-filters" class="reset-btn">Clear all</button><button type="button" id="apply-filters" class="show-btn">Show spaces</button></div>
+    </section>
+  </div>
   <script type="module">
     import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.13.0/dist/maplibre-gl.mjs';
     const map = new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/liberty',center:[7.4653,51.5136],zoom:11.6,pitch:0,antialias:false});
@@ -84,9 +176,88 @@
     const short = x => x>=1000 ? `€${(x/1000).toFixed(1)}k`: `€${Math.round(x)}`;
     const rateUnit = {hour:'hr',day:'day',week:'wk',month:'mo'};
     let listings=[], filtered=[], ready=false, aiMatches=null;
-    function getRate(p){const unit=$('unit').value;const rates=p.price?.rates||{};
-      const chosen=unit==='any' ? ['day','week','month','hour'].find(u=>Number.isFinite(rates[u])) : unit;
+    const emptyFilters = () => ({unit:'day',priceMin:null,priceMax:null,areaMin:null,areaMax:null,capacity:null,district:'',purpose:'',duration:'',wifi:false,kitchen:false,washroom:false,parking:false,condition:'',transit:null,deposit:'',negotiable:''});
+    let applied=emptyFilters(),priceTouched=false,chartMax=350,chartMin=0,histogramValues=[],lastFocus=null;
+    function getRate(p){const rates=p.price?.rates||{};
+      const chosen=applied.priceMin!==null||applied.priceMax!==null ? applied.unit : ['day','week','month','hour'].find(u=>Number.isFinite(rates[u]));
       return Number.isFinite(rates[chosen]) ? {unit:chosen,value:rates[chosen]} : null;
+    }
+    const numeric = id => $(id).value.trim()===''?null:Number($(id).value);
+    const optionalBool = (value,choice)=>!choice||(choice==='yes'?value===true:value===false);
+    function matchesFilters(p){
+      const a=applied,area=Number(p.area_sqm),r=p.price?.rates?.[a.unit];
+      if((a.priceMin!==null||a.priceMax!==null) && (!Number.isFinite(r)||(a.priceMin!==null&&r<a.priceMin)||(a.priceMax!==null&&r>a.priceMax)))return false;
+      if(a.areaMin!==null&&area<a.areaMin||a.areaMax!==null&&area>a.areaMax)return false;
+      if(a.capacity!==null&&Number(p.capacity_people)<a.capacity)return false;
+      if(a.district&&p.address?.district!==a.district)return false;
+      if(a.purpose&&!(p.purposes_allowed_or_suggested||[]).includes(a.purpose))return false;
+      if(a.duration&&p.availability?.duration_type!==a.duration)return false;
+      if(a.wifi&&p.facilities?.wifi_available!==true||a.kitchen&&p.facilities?.kitchen_available!==true||a.washroom&&p.facilities?.washroom_available!==true)return false;
+      if(a.parking&&p.facilities?.parking_available!==true&&p.facilities?.parking_available!=='limited')return false;
+      if(a.condition&&p.condition?.description!==a.condition)return false;
+      if(a.transit!==null&&Number(p.public_transport?.connectivity_score)<a.transit)return false;
+      if(!optionalBool(p.price?.deposit?.required,a.deposit)||!optionalBool(p.price?.negotiable,a.negotiable))return false;
+      return true;
+    }
+    function activeFilterCount(a=applied){return [a.priceMin!==null||a.priceMax!==null,a.areaMin!==null,a.areaMax!==null,a.capacity!==null,!!a.district,!!a.purpose,!!a.duration,a.wifi,a.kitchen,a.washroom,a.parking,!!a.condition,a.transit!==null,!!a.deposit,!!a.negotiable].filter(Boolean).length;}
+    function setFilterIndicator(){const n=activeFilterCount(),badge=$('active-count');badge.style.display=n?'inline-block':'none';badge.textContent=n; $('filter-summary').textContent=n?`${n} active filter${n===1?'':'s'}`:'Price, size, amenities & more';}
+    function resetPriceChart(unit='day'){
+      const vals=listings.map(p=>p.price?.rates?.[unit]).filter(Number.isFinite);
+      histogramValues=vals;
+      chartMin=0;chartMax=Math.max(20,Math.ceil(Math.max(0,...vals)/10)*10);
+      for(const id of ['price-slider-min','price-slider-max']){$(id).min=chartMin;$(id).max=chartMax;$(id).step=1;}
+      $('price-slider-min').value=chartMin;$('price-slider-max').value=chartMax;
+      $('f-price-min').value=chartMin;$('f-price-max').value=chartMax;
+      $('price-context').textContent=`${vals.length} synthetic listings have a price per ${unit}. Prices and locations are fictional.`;
+      paintHistogram();
+    }
+    function paintHistogram(){
+      const low=Number($('price-slider-min').value),high=Number($('price-slider-max').value),count=32;
+      const buckets=Array(count).fill(0);
+      for(const v of histogramValues){const idx=Math.min(count-1,Math.floor((v-chartMin)/Math.max(1,chartMax-chartMin)*count));buckets[Math.max(0,idx)]++;}
+      const peak=Math.max(...buckets,1),chart=$('histogram');chart.replaceChildren();
+      for(let i=0;i<count;i++){const bar=document.createElement('div');bar.className='bar'+((i+.5)/count*chartMax>=low&&(i+.5)/count*chartMax<=high?' active':'');bar.style.height=`${Math.max(3,buckets[i]/peak*100)}%`;bar.title=`${buckets[i]} listings`;chart.appendChild(bar);}
+      const p1=low/chartMax*100,p2=high/chartMax*100;const fill=$('range-fill');fill.style.left=p1+'%';fill.style.width=(p2-p1)+'%';
+      $('price-slider-min').style.zIndex=low>=high-2?'3':'2';$('price-slider-max').style.zIndex='2';
+    }
+    function syncPriceFromSlider(which){
+      const low=$('price-slider-min'),high=$('price-slider-max');
+      if(Number(low.value)>Number(high.value)){
+        if(which==='min')low.value=high.value;else high.value=low.value;
+      }
+      $('f-price-min').value=low.value;$('f-price-max').value=high.value;priceTouched=true;paintHistogram();
+    }
+    function syncPriceFromNumber(which){
+      const low=$('f-price-min'),high=$('f-price-max');
+      const id=which==='min'?'price-slider-min':'price-slider-max';
+      const v=Number($(which==='min'?'f-price-min':'f-price-max').value);
+      if(!Number.isFinite(v)||v<0)return;
+      if(v>chartMax){chartMax=Math.ceil(v/10)*10;for(const s of ['price-slider-min','price-slider-max'])$(s).max=chartMax;}
+      $(id).value=v;
+      if(Number(low.value)>Number(high.value)){if(which==='min'){high.value=low.value;$('price-slider-max').value=high.value;}else{low.value=high.value;$('price-slider-min').value=low.value;}}
+      priceTouched=true;paintHistogram();
+    }
+    function loadFiltersIntoModal(){
+      for(const id of ['area-min','area-max','capacity','transit'])$('f-'+id).value=applied[{ 'area-min':'areaMin','area-max':'areaMax',capacity:'capacity',transit:'transit'}[id]]??'';
+      for(const id of ['district','purpose','duration','condition','deposit','negotiable'])$('f-'+id).value=applied[id];
+      for(const id of ['wifi','kitchen','washroom','parking'])$('f-'+id).checked=applied[id];
+      $('f-unit').value=applied.unit;priceTouched=applied.priceMin!==null||applied.priceMax!==null;
+      resetPriceChart(applied.unit);
+      if(priceTouched){$('price-slider-min').value=applied.priceMin??chartMin;$('price-slider-max').value=applied.priceMax??chartMax;
+        $('f-price-min').value=applied.priceMin??chartMin;$('f-price-max').value=applied.priceMax??chartMax;paintHistogram();}
+    }
+    function closeFilters(){ $('filter-backdrop').hidden=true;document.body.style.overflow='';lastFocus?.focus();}
+    function applyFilters(){
+      const numKey={areaMin:'f-area-min',areaMax:'f-area-max',capacity:'f-capacity',transit:'f-transit'};
+      const next=emptyFilters();next.unit=$('f-unit').value;
+      if(priceTouched){next.priceMin=Number($('f-price-min').value);next.priceMax=Number($('f-price-max').value);if(next.priceMin>next.priceMax){alert('Minimum price must not exceed maximum price.');return;}}
+      for(const [key,id] of Object.entries(numKey))next[key]=numeric(id);
+      if(next.areaMin!==null&&next.areaMax!==null&&next.areaMin>next.areaMax){alert('Minimum area must not exceed maximum area.');return;}
+      for(const id of ['district','purpose','duration','condition','deposit','negotiable'])next[id]=$('f-'+id).value;
+      for(const id of ['wifi','kitchen','washroom','parking'])next[id]=$('f-'+id).checked;
+      applied=next;closeFilters();setFilterIndicator();
+      if(aiMatches!==null){aiMatches=null;$('clear-ai').hidden=true;$('ai-status').textContent='';$('ai-status').className='';}
+      update();
     }
     const coordinates = p => [Number(p.address?.longitude),Number(p.address?.latitude)];
     const isLocated = p => coordinates(p).every(Number.isFinite);
@@ -106,11 +277,10 @@
       const r=getRate(p);return {type:'Feature',id:p.id,geometry:{type:'Point',coordinates:coordinates(p)},properties:{id:p.id,price_label:r?short(r.value):'—'}};
     })};}
     function update(){if(!ready)return;
-      const term=$('search').value.toLocaleLowerCase('de').trim(),limit=Number($('maxprice').value),hasLimit=$('maxprice').value!=='';
-      const min=Number($('minarea').value)||0,purpose=$('purpose').value;
-      filtered = aiMatches !== null ? aiMatches.filter(isLocated) : listings.filter(p=>{
-        const r=getRate(p),txt=[p.address?.exact_address,p.address?.district,...(p.purposes_allowed_or_suggested||[])].join(' ').toLocaleLowerCase('de');
-        return isLocated(p)&&!!r&&txt.includes(term)&&(!hasLimit||r.value<=limit)&&(Number(p.area_sqm)||0)>=min&&(!purpose||(p.purposes_allowed_or_suggested||[]).includes(purpose));
+      const term=$('search').value.toLocaleLowerCase('de').trim();
+      filtered = (aiMatches!==null ? aiMatches : listings).filter(p=>{
+        const txt=[p.address?.exact_address,p.address?.district,...(p.purposes_allowed_or_suggested||[])].join(' ').toLocaleLowerCase('de');
+        return isLocated(p)&&txt.includes(term)&&matchesFilters(p);
       });
       map.getSource('spaces').setData(buildFeatures());$('count').textContent=`${filtered.length} ${aiMatches!==null?'AI-matched':'demo'} spaces`;
       const cards=$('cards');cards.replaceChildren();
@@ -119,11 +289,11 @@
         const img=p.photos?.space_photo_url;
         card.innerHTML=`<div class="cardtop">${/^https:\/\//.test(img||'')?`<img class="thumb" src="${escapeHtml(img)}" alt="Illustrative space photo" loading="lazy">`:''}
          <div><div class="title">${escapeHtml(p.address.district)} · ${escapeHtml(p.area_sqm)} m²</div><div class="small">${escapeHtml((p.purposes_allowed_or_suggested||[]).slice(0,2).join(' · '))}</div>
-         <div class="price">${r ? escapeHtml(money(r.value))+' / '+rateUnit[r.unit] : 'Ask for price'}</div>${aiMatches!==null?'<div class="match-label">✦ Meets extracted search criteria</div>':''}</div></div>`;
+         <div class="price">${r ? escapeHtml(money(r.value))+' / '+rateUnit[r.unit] : 'Price unavailable'}</div>${aiMatches!==null?'<div class="match-label">✦ Meets extracted search criteria</div>':''}</div></div>`;
         card.onclick=()=>openSpace(p);cards.appendChild(card);
       }
       if(filtered.length>40){const tip=document.createElement('p');tip.textContent=`Showing first 40 of ${filtered.length} matches; zoom and click the map for the rest.`;cards.appendChild(tip);}
-      if(!filtered.length)cards.textContent=aiMatches!==null?'No exact matches in the demo data. Try removing a requirement, changing the price unit or making your request broader.':'No matching spaces. Change the filters.';
+      if(!filtered.length)cards.textContent=aiMatches!==null?'No matching demo spaces. Try a broader AI prompt or clear advanced filters.':'No matching spaces. Change or clear the filters.';
     }
     const byId=new Map();
     map.on('load',async()=>{
@@ -134,7 +304,12 @@
         listings=data.listings.filter(p=>p.data_status==='synthetic_demo_only'&&isLocated(p));
         listings.forEach(p=>byId.set(p.id,p));
         const purposes=[...new Set(listings.flatMap(p=>p.purposes_allowed_or_suggested||[]))].sort();
-        for(const purpose of purposes){const opt=document.createElement('option');opt.value=purpose;opt.textContent=purpose;$('purpose').appendChild(opt);}
+        const districts=[...new Set(listings.map(p=>p.address?.district).filter(Boolean))].sort();
+        const conditions=[...new Set(listings.map(p=>p.condition?.description).filter(Boolean))].sort();
+        for(const [id,values] of [['f-purpose',purposes],['f-district',districts],['f-condition',conditions]]){
+          for(const value of values){const opt=document.createElement('option');opt.value=value;opt.textContent=value;$(id).appendChild(opt);}
+        }
+        resetPriceChart('day');
         map.addSource('spaces',{type:'geojson',data:{type:'FeatureCollection',features:[]},cluster:true,clusterRadius:52,clusterMaxZoom:13});
         map.addLayer({id:'clusters',type:'circle',source:'spaces',filter:['has','point_count'],paint:{'circle-color':'#ef3455','circle-radius':['step',['get','point_count'],23,15,29,50,35],'circle-stroke-color':'#ffffff','circle-stroke-width':3}});
         map.addLayer({id:'cluster-count',type:'symbol',source:'spaces',filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':14},paint:{'text-color':'#ffffff'}});
@@ -172,10 +347,19 @@
     }
     $('ai-form').addEventListener('submit',runAiSearch);
     $('clear-ai').addEventListener('click',()=>{aiMatches=null;$('clear-ai').hidden=true;$('ai-status').textContent='';$('ai-status').className='';update();});
-    for(const id of ['search','unit','maxprice','minarea','purpose'])$(id).addEventListener(id==='search'||id==='maxprice'||id==='minarea'?'input':'change',()=>{
-      if(aiMatches!==null){aiMatches=null;$('clear-ai').hidden=true;$('ai-status').textContent='';$('ai-status').className='';}
-      update();
-    });
+    $('search').addEventListener('input',()=>{update();});
+    $('open-filters').addEventListener('click',()=>{lastFocus=document.activeElement;loadFiltersIntoModal();$('filter-backdrop').hidden=false;document.body.style.overflow='hidden';$('close-filters').focus();});
+    $('close-filters').addEventListener('click',closeFilters);
+    $('filter-backdrop').addEventListener('click',e=>{if(e.target===$('filter-backdrop'))closeFilters();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('filter-backdrop').hidden)closeFilters();});
+    $('f-unit').addEventListener('change',()=>{priceTouched=false;resetPriceChart($('f-unit').value);});
+    for(const kind of ['min','max']){
+      $('price-slider-'+kind).addEventListener('input',()=>syncPriceFromSlider(kind));
+      $('f-price-'+kind).addEventListener('input',()=>syncPriceFromNumber(kind));
+    }
+    $('apply-filters').addEventListener('click',applyFilters);
+    $('reset-filters').addEventListener('click',()=>{applied=emptyFilters();priceTouched=false;loadFiltersIntoModal();});
+    setFilterIndicator();
   </script>
 </body>
 </html>
