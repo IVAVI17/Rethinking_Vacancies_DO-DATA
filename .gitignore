@@ -1,0 +1,15 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# API keys and environment variables
+.env
+.env.*
+!.env.example
+
+# Local editor files
+.vscode/
