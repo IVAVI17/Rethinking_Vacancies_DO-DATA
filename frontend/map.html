@@ -241,6 +241,123 @@ body:has(#submission-form) label{color:#29343B}
 }
 </style>
 <!-- REVIVE_CLEAN_MODERN_END -->
+
+<!-- REVIVE_QUICK_DATES_PRICE_STYLE_START -->
+<style id="revive-quick-dates-price-style">
+/* Quick search controls for ReVive — light Dortmund design */
+.revive-quick-panel{margin:11px 0 8px;padding:0;border:0;background:transparent}
+/* Keep quick controls discoverable on laptop screens without shrinking the AI input too far. */
+main > aside:not(.results-pane) .ai-panel{margin:10px 0 12px !important;padding:12px !important}
+main > aside:not(.results-pane) #prompt{min-height:72px !important;height:75px}
+main > aside:not(.results-pane) .section-label{margin-top:5px}
+.revive-date-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:8px}
+.revive-date-grid label{display:block;color:#253039;font-size:12px;font-weight:750;min-width:0}
+.revive-date-grid input[type=date]{display:block;margin-top:7px;width:100%;min-width:0;height:43px;font-size:12px;padding:8px 6px;border:1px solid #D7DEE3;border-radius:11px;color:#263139;background:#fff}
+.revive-date-grid input:focus-visible{outline:2px solid #E0BD17;outline-offset:1px}
+.revive-date-note{color:#6B7780;font-size:10px;line-height:1.45;margin:5px 0 6px}
+.revive-date-note.error{color:#AF263B;font-weight:750}
+#revive-price-slot .filter-section{padding:3px 0 12px !important;border:0 !important;background:transparent !important}
+#revive-price-slot .filter-section>h3{font-size:16px !important;font-weight:850 !important;margin:3px 0 2px !important;color:#1E292F !important}
+#revive-price-slot .filter-section>.sub{font-size:11px !important;margin:0 0 5px !important;line-height:1.35}
+#revive-price-slot .price-select{position:absolute !important;width:1px !important;height:1px !important;overflow:hidden !important;clip-path:inset(50%) !important;white-space:nowrap}
+#revive-price-slot .histogram{height:78px !important;margin-top:12px;padding:5px 3px 0;border-bottom-color:#F0D56B !important}
+#revive-price-slot .histogram .bar{background:#F5DF82 !important}
+#revive-price-slot .histogram .bar.active{background:#F0C218 !important}
+#revive-price-slot .range-wrap{margin-top:-15px !important}
+#revive-price-slot .range-values{margin-top:13px;gap:8px}
+#revive-price-slot .range-values label{font-size:11px;color:#66737E;margin-bottom:5px}
+#revive-price-slot .money-field{border-radius:10px;min-height:38px}
+#revive-price-slot .money-field input{font-size:12px;padding:9px 0}
+#revive-price-slot .hint-inline{font-size:10px;margin-top:7px;line-height:1.35}
+.revive-price-unit-label{font-size:12px;font-weight:800;color:#28333B;margin:9px 0 6px}
+.revive-unit-chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.revive-unit-chips button{display:block;padding:9px 0;background:#F5F6F7;border:1px solid #E7EAEB;border-radius:10px;color:#29343D;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.revive-unit-chips button[aria-pressed=true]{background:#FFD429 !important;color:#172027 !important;border-color:#E6BE16 !important;box-shadow:0 1px 5px #2E260014}
+.revive-unit-chips button:hover{border-color:#D4B022}
+.revive-quick-panel+.filter-toolbar{margin:9px 0 13px;display:flex;align-items:center;gap:9px}
+.revive-quick-panel+.filter-toolbar .filter-trigger{font-size:13px;padding:10px 13px;border-radius:11px}
+.revive-quick-panel+.filter-toolbar .filter-help{font-size:10px;line-height:1.35}
+@media(max-width:380px){.revive-date-grid{gap:7px}.revive-date-grid input[type=date]{font-size:11px;padding:7px 3px}}
+
+#rv-date-status:empty,#price-context:empty{display:none}
+</style>
+<!-- REVIVE_QUICK_DATES_PRICE_STYLE_END -->
+<!-- REVIVE_SMALL_LAYOUT_FINISH_START -->
+<style id="revive-small-layout-finish">
+
+/* UI-only refinements: period first, full-width More Filters. Existing handlers unchanged. */
+#revive-quick-panel .revive-price-unit-label {
+  margin: 12px 0 8px !important;
+}
+#revive-quick-panel .revive-unit-chips {
+  margin-bottom: 19px;
+}
+#revive-quick-panel + .filter-toolbar {
+  display: block !important;
+  position: relative;
+  margin: 16px 0 20px !important;
+  width: 100%;
+}
+#revive-quick-panel + .filter-toolbar #open-filters {
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: flex-start !important;
+  gap: 12px;
+  width: 100% !important;
+  min-height: 79px;
+  padding: 16px 45px 35px 16px !important;
+  text-align: left !important;
+  border: 1px solid #D6DDE2 !important;
+  border-radius: 15px !important;
+  background: #fff !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  line-height: 1.1;
+  white-space: normal;
+}
+#revive-quick-panel + .filter-toolbar #open-filters .filter-icon {
+  display: inline-flex;
+  min-width: 19px;
+  justify-content: center;
+  font-size: 19px;
+  line-height: 1.1;
+}
+#revive-quick-panel + .filter-toolbar .filter-help {
+  position: absolute;
+  left: 47px;
+  right: 36px;
+  bottom: 16px;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #6B7780 !important;
+  font-size: 11px !important;
+  line-height: 1.25;
+  pointer-events: none;
+}
+#revive-quick-panel + .filter-toolbar::after {
+  content: '›';
+  position: absolute;
+  right: 19px;
+  top: 23px;
+  color: #263039;
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
+}
+#revive-quick-panel + .filter-toolbar #active-count:not(:empty) {
+  margin-left: 3px;
+  align-self: flex-start;
+}
+@media(max-width:380px) {
+  #revive-quick-panel + .filter-toolbar .filter-help {font-size: 10px !important;}
+}
+
+</style>
+<!-- REVIVE_SMALL_LAYOUT_FINISH_END -->
 </head>
 <body>
   <header><div class="brand">ReVive <b>Dortmund</b></div><button type="button" id="add-menu-trigger" class="add-menu-trigger" aria-haspopup="dialog" aria-expanded="false" aria-label="Add an event or listing"><span class="plus-symbol">+</span><span class="add-label">Add</span></button></header>
@@ -249,20 +366,39 @@ body:has(#submission-form) label{color:#29343B}
       <h1>Discover spaces</h1><p>Explore possible short-term commercial rental experiences across Dortmund.</p>
       <form id="ai-form" class="ai-panel">
         <div class="ai-heading"><span aria-hidden="true">✦</span> Find a space with AI</div>
-        <div class="ai-copy">Describe what you're looking for in simple words.</div>
         <label for="prompt" class="sr-only">Describe your ideal space</label>
-        <textarea id="prompt" maxlength="2000" required minlength="3" placeholder="e.g. A space under €100 a day for my small business"></textarea>
+        <textarea id="prompt" maxlength="2000" required minlength="3" placeholder="Describe what you're looking for in simple words."></textarea>
         <div class="ai-buttons"><button class="primary-btn" type="submit" id="ai-submit">✦ Find matches</button><button class="clear-btn" type="button" id="clear-ai" hidden>Clear</button></div>
         <div id="ai-status" role="status" aria-live="polite"></div>
       </form>
       <div class="section-label">Explore spaces</div>
       <input id="search" placeholder="Search district, purpose or address" aria-label="Search listings">
+<!-- REVIVE_QUICK_DATES_PRICE_START -->
+      <section class="revive-quick-panel" id="revive-quick-panel" aria-label="Dates and price">
+        <div class="revive-date-grid">
+          <label for="rv-from">From
+            <input id="rv-from" type="date" aria-label="Rental start date">
+          </label>
+          <label for="rv-until">Until
+            <input id="rv-until" type="date" aria-label="Rental end date">
+          </label>
+        </div>
+        <p class="revive-date-note" id="rv-date-status" role="status" aria-live="polite"></p>
+        <div class="revive-price-unit-label" id="revive-price-unit-label">Price per</div>
+        <div class="revive-unit-chips" role="group" aria-labelledby="revive-price-unit-label">
+          <button type="button" data-quick-unit="hour" aria-pressed="false">Hour</button>
+          <button type="button" data-quick-unit="day" aria-pressed="true">Day</button>
+          <button type="button" data-quick-unit="week" aria-pressed="false">Week</button>
+          <button type="button" data-quick-unit="month" aria-pressed="false">Month</button>
+        </div>
+        <div id="revive-price-slot"><!-- Original price chart is moved here without duplicating it --></div>
+      </section>
+      <!-- REVIVE_QUICK_DATES_PRICE_END -->
       <div class="filter-toolbar">
-        <button type="button" class="filter-trigger" id="open-filters" aria-haspopup="dialog"><span class="filter-icon" aria-hidden="true">☷</span> Filters <span class="active-count" id="active-count"></span></button>
-        <span class="filter-help" id="filter-summary">Price, size, amenities &amp; more</span>
+        <button type="button" class="filter-trigger" id="open-filters" aria-haspopup="dialog"><span class="filter-icon" aria-hidden="true">☷</span> More Filters <span class="active-count" id="active-count"></span></button>
+        <span class="filter-help" id="filter-summary">Size, amenities, nearby places &amp; more</span>
       </div>
       <div id="count">Loading spaces…</div><div id="cards"></div>
-      <div class="hint">All listings, prices, dates, locations, reviews and photos are fictional/illustrative. Not real rental offers. The map uses approximate demo points.</div>
     </aside>
     <div class="maparea"><div id="map"></div><div class="notice"><b>Yellow price dots = synthetic example spaces.</b> Zoom in for individual prices; clusters show counts. Not real vacancies or bookings.</div></div>
     <!-- REVIVE_RESULTS_PANE_START -->
@@ -301,7 +437,7 @@ body:has(#submission-form) label{color:#29343B}
       <div class="modal-head"><h2 id="filters-title">Advanced filters</h2><button type="button" id="close-filters" class="icon-close" aria-label="Close filters">×</button></div>
       <div class="modal-body">
         <div class="filter-section">
-          <h3>Price range</h3><p class="sub">Choose a price per rental period. The bars show the distribution of demo listing prices.</p>
+          <h3>Price range</h3>
           <div class="price-select"><label for="f-unit">Price per</label><select id="f-unit"><option value="day">Day</option><option value="week">Week</option><option value="month">Month</option><option value="hour">Hour</option></select></div>
           <div class="histogram" id="histogram" aria-label="Price distribution of demo listings"></div>
           <div class="range-wrap" aria-label="Selected price range">
@@ -367,6 +503,14 @@ body:has(#submission-form) label{color:#29343B}
       <div class="modal-footer"><button type="button" id="reset-filters" class="reset-btn">Clear all</button><button type="button" id="apply-filters" class="show-btn">Show spaces</button></div>
     </section>
   </div>
+<script id="revive-quick-price-move">
+  // Reuse the existing modal's histogram, range sliders, inputs, and JavaScript handlers.
+  (function(){
+    const price=document.querySelector('#filter-dialog .modal-body > .filter-section');
+    const target=document.getElementById('revive-price-slot');
+    if(price && price.querySelector('#histogram') && target)target.appendChild(price);
+  })();
+  </script>
   <script type="module">
     import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.13.0/dist/maplibre-gl.mjs';
     import { initEventsMap } from '/frontend/events-map.js';
@@ -399,7 +543,7 @@ body:has(#submission-form) label{color:#29343B}
     const emptyFilters = () => ({unit:'day',priceMin:null,priceMax:null,areaMin:null,areaMax:null,capacity:null,district:'',purpose:'',duration:'',wifi:false,kitchen:false,washroom:false,parking:false,condition:'',transit:null,deposit:'',negotiable:''});
     let applied=emptyFilters(),priceTouched=false,chartMax=350,chartMin=0,histogramValues=[],lastFocus=null;
     function getRate(p){const rates=p.price?.rates||{};
-      const chosen=(applied.priceMin!==null||applied.priceMax!==null) ? applied.unit : ['day','week','month','hour'].find(u=>Number.isFinite(rates[u]));
+      const chosen=(applied.priceMin!==null||applied.priceMax!==null||Number.isFinite(rates[applied.unit])) ? applied.unit : ['day','week','month','hour'].find(u=>Number.isFinite(rates[u]));
       return Number.isFinite(rates[chosen]) ? {unit:chosen,value:rates[chosen]} : null;
     }
     const numeric = id => $(id).value.trim()===''?null:Number($(id).value);
@@ -450,11 +594,11 @@ body:has(#submission-form) label{color:#29343B}
       if(a.condition&&p.condition?.description!==a.condition)return false;
       if(a.transit!==null&&Number(p.public_transport?.connectivity_score)<a.transit)return false;
       if(!optionalBool(p.price?.deposit?.required,a.deposit)||!optionalBool(p.price?.negotiable,a.negotiable))return false;
-      if(!matchesNearby(p))return false;
+      if(!matchesNearby(p)||!matchesRequestedDates(p))return false;
       return true;
     }
     function activeFilterCount(a=applied){return [a.priceMin!==null||a.priceMax!==null,a.areaMin!==null,a.areaMax!==null,a.capacity!==null,!!a.district,!!a.purpose,!!a.duration,a.wifi,a.kitchen,a.washroom,a.parking,!!a.condition,a.transit!==null,!!a.deposit,!!a.negotiable].filter(Boolean).length;}
-    function setFilterIndicator(){const n=activeFilterCount()+nearbySelected.size,badge=$('active-count');badge.style.display=n?'inline-block':'none';badge.textContent=n; $('filter-summary').textContent=n?`${n} active filter${n===1?'':'s'}`:'Price, size, amenities & more';}
+    function setFilterIndicator(){const n=activeFilterCount()+nearbySelected.size,badge=$('active-count');badge.style.display=n?'inline-block':'none';badge.textContent=n; $('filter-summary').textContent=n?`${n} active filter${n===1?'':'s'}`:'Size, amenities, nearby places & more';}
     function resetPriceChart(unit='day'){
       const vals=listings.map(p=>p.price?.rates?.[unit]).filter(Number.isFinite);
       histogramValues=vals;
@@ -462,7 +606,7 @@ body:has(#submission-form) label{color:#29343B}
       for(const id of ['price-slider-min','price-slider-max']){$(id).min=chartMin;$(id).max=chartMax;$(id).step=1;}
       $('price-slider-min').value=chartMin;$('price-slider-max').value=chartMax;
       $('f-price-min').value=chartMin;$('f-price-max').value=chartMax;
-      $('price-context').textContent=`${vals.length} synthetic listings have a price per ${unit}. Prices and locations are fictional.`;
+      $('price-context').textContent='';
       paintHistogram();
     }
     function paintHistogram(){
@@ -497,6 +641,7 @@ body:has(#submission-form) label{color:#29343B}
       for(const id of ['wifi','kitchen','washroom','parking'])$('f-'+id).checked=applied[id];
        syncNearbyCheckboxes();
       $('f-unit').value=applied.unit;priceTouched=applied.priceMin!==null||applied.priceMax!==null;
+      syncQuickUnitButtons();
       resetPriceChart(applied.unit);
       if(priceTouched){$('price-slider-min').value=applied.priceMin??chartMin;$('price-slider-max').value=applied.priceMax??chartMax;
         $('f-price-min').value=applied.priceMin??chartMin;$('f-price-max').value=applied.priceMax??chartMax;paintHistogram();}
@@ -505,13 +650,13 @@ body:has(#submission-form) label{color:#29343B}
     function applyFilters(){
       const numKey={areaMin:'f-area-min',areaMax:'f-area-max',capacity:'f-capacity',transit:'f-transit'};
       const next=emptyFilters();next.unit=$('f-unit').value;
-      if(priceTouched){next.priceMin=Number($('f-price-min').value);next.priceMax=Number($('f-price-max').value);if(next.priceMin>next.priceMax){alert('Minimum price must not exceed maximum price.');return;}}
+      if(priceTouched){const low=Number($('f-price-min').value),high=Number($('f-price-max').value);if(low>high){alert('Minimum price must not exceed maximum price.');return;}next.priceMin=low>chartMin?low:null;next.priceMax=high<chartMax?high:null;}
       for(const [key,id] of Object.entries(numKey))next[key]=numeric(id);
       if(next.areaMin!==null&&next.areaMax!==null&&next.areaMin>next.areaMax){alert('Minimum area must not exceed maximum area.');return;}
       for(const id of ['district','purpose','duration','condition','deposit','negotiable'])next[id]=$('f-'+id).value;
       for(const id of ['wifi','kitchen','washroom','parking'])next[id]=$('f-'+id).checked;
        nearbySelected=new Set([...document.querySelectorAll('#revive-nearby-filters input[data-nearby]:checked')].map(x=>x.dataset.nearby));
-      applied=next;closeFilters();setFilterIndicator();
+      applied=next;closeFilters();syncQuickUnitButtons();setFilterIndicator();
       update();
     }
     const coordinates = p => [Number(p.address?.longitude),Number(p.address?.latitude)];
@@ -571,7 +716,8 @@ body:has(#submission-form) label{color:#29343B}
         for(const [id,values] of [['f-purpose',purposes],['f-district',districts],['f-condition',conditions]]){
           for(const value of values){const opt=document.createElement('option');opt.value=value;opt.textContent=value;$(id).appendChild(opt);}
         }
-        resetPriceChart('day');
+        resetPriceChart(applied.unit);
+        syncQuickUnitButtons();
         map.addSource('spaces',{type:'geojson',data:{type:'FeatureCollection',features:[]},cluster:true,clusterRadius:52,clusterMaxZoom:13});
         map.addLayer({id:'clusters',type:'circle',source:'spaces',filter:['has','point_count'],paint:{'circle-color':'#FFD429','circle-radius':['step',['get','point_count'],23,15,29,50,35],'circle-stroke-color':'#ffffff','circle-stroke-width':3}});
         map.addLayer({id:'cluster-count',type:'symbol',source:'spaces',filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':14},paint:{'text-color':'#182027'}});
@@ -627,6 +773,73 @@ body:has(#submission-form) label{color:#29343B}
     }
     $('apply-filters').addEventListener('click',applyFilters);
     $('reset-filters').addEventListener('click',()=>{applied=emptyFilters();priceTouched=false;nearbySelected.clear();loadFiltersIntoModal();});
+/* REVIVE_QUICK_DATES_PRICE_JS_START */
+    const rvDateState={from:'',until:''};
+    const weekdayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const parseDemoDay=value=>/^\d{4}-\d{2}-\d{2}$/.test(value||'') ? Date.parse(value+'T00:00:00Z') : NaN;
+    function matchesRequestedDates(p){
+      const {from,until}=rvDateState;
+      if(!from&&!until)return true;
+      if(from&&until&&from>until)return false;
+      const a=p.availability||{},starts=parseDemoDay(a.start_date),ends=parseDemoDay(a.end_date);
+      if(!Number.isFinite(starts)||!Number.isFinite(ends))return false;
+      const requestedStart=parseDemoDay(from||until),requestedEnd=parseDemoDay(until||from);
+      if(!Number.isFinite(requestedStart)||!Number.isFinite(requestedEnd) || requestedStart>requestedEnd)return false;
+      // A requested booking interval must fit entirely inside the listed demo date window.
+      if(requestedStart<starts||requestedEnd>ends)return false;
+      const days=(requestedEnd-requestedStart)/86400000+1;
+      if(days>366)return false; // avoid implausibly expensive date-iteration requests
+      const minRental=a.minimum_rental_duration||{};
+      const minimumDays=({hour:1/24,hours:1/24,day:1,days:1,week:7,weeks:7,month:30,months:30}[minRental.unit]||0)*Number(minRental.value||0);
+      if(from&&until&&days<minimumDays)return false;
+      // Respect permitted weekdays; the demo doesn't verify live owner availability.
+      if(Array.isArray(a.days_of_week)&&a.days_of_week.length){
+        for(let t=requestedStart;t<=requestedEnd;t+=86400000){
+          if(!a.days_of_week.includes(weekdayNames[new Date(t).getUTCDay()]))return false;
+        }
+      }
+      return true;
+    }
+    function onQuickDateChange(){
+      rvDateState.from=$('rv-from').value;rvDateState.until=$('rv-until').value;
+      const error=!!(rvDateState.from&&rvDateState.until&&rvDateState.from>rvDateState.until);
+      const el=$('rv-date-status');
+      el.classList.toggle('error',error);
+      el.textContent=error?'The start date must be on or before the end date.':'';
+      $('rv-until').setAttribute('aria-invalid',String(error));
+      if(ready)update();
+    }
+    function syncQuickUnitButtons(){
+      document.querySelectorAll('[data-quick-unit]').forEach(b=>{
+        b.setAttribute('aria-pressed',String(b.dataset.quickUnit===$('f-unit').value));
+      });
+    }
+    function applyQuickPrice(){
+      if(!ready)return;
+      applied.unit=$('f-unit').value;
+      const min=Number($('price-slider-min').value),max=Number($('price-slider-max').value);
+      applied.priceMin=min>chartMin ? min : null;
+      applied.priceMax=max<chartMax ? max : null;
+      priceTouched=applied.priceMin!==null||applied.priceMax!==null;
+      setFilterIndicator();update();
+    }
+    $('rv-from').addEventListener('change',onQuickDateChange);
+    $('rv-until').addEventListener('change',onQuickDateChange);
+    for(const b of document.querySelectorAll('[data-quick-unit]'))b.addEventListener('click',()=>{
+      const unit=b.dataset.quickUnit;
+      if($('f-unit').value!==unit){$('f-unit').value=unit;$('f-unit').dispatchEvent(new Event('change',{bubbles:true}));}
+      applied.unit=unit;applied.priceMin=null;applied.priceMax=null;priceTouched=false;
+      syncQuickUnitButtons();setFilterIndicator();if(ready)update();
+    });
+    // Existing chart slider handlers run first; after they update values, apply changes live.
+    for(const id of ['price-slider-min','price-slider-max','f-price-min','f-price-max'])
+      $(id).addEventListener('input',applyQuickPrice);
+    $('reset-filters').addEventListener('click',()=>{
+      $('rv-from').value='';$('rv-until').value='';onQuickDateChange();
+      syncQuickUnitButtons();
+    });
+    syncQuickUnitButtons();
+    /* REVIVE_QUICK_DATES_PRICE_JS_END */
     setFilterIndicator();
   </script>
 </body>

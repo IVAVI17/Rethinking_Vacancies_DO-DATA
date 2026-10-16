@@ -39,7 +39,7 @@ export async function initEventsMap({ map, maplibregl, listings, openSpace }) {
     <div class="revive-event-legend">
       <span><i class="revive-event-dot" style="background:#FFD429"></i> Spaces</span>
       <span><i class="revive-event-dot" style="background:#2563eb"></i> City</span>
-      <span><i class="revive-event-dot" style="background:#16a34a"></i> ReVive demo</span>
+      <span><i class="revive-event-dot" style="background:#16a34a"></i> Hosted events</span>
     </div>
     <div class="revive-event-status" role="status"><span id="revive-event-status">Loading events…</span> <button type="button" class="revive-refresh" id="revive-refresh-events" aria-label="Reload events JSON">↻ Refresh</button></div>`;
   place.appendChild(tools);
@@ -174,7 +174,7 @@ export async function initEventsMap({ map, maplibregl, listings, openSpace }) {
       }))});
       const city=events.filter(e=>e.is_synthetic===false).length,demo=events.filter(e=>e.is_synthetic===true).length;
       const unplaced=events.length-plotted.length;
-      status.textContent=`${plotted.length} events on map · ${city} city / ${demo} demo${unplaced?` · ${unplaced} need coordinates`:''}`;
+      status.textContent='';
       setVisible();
     }catch(err){
       status.textContent='Events unavailable; property search still works.';
