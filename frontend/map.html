@@ -168,6 +168,7 @@
   </div>
   <script type="module">
     import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.13.0/dist/maplibre-gl.mjs';
+    import { initEventsMap } from '/frontend/events-map.js';
     const map = new maplibregl.Map({container:'map',style:'https://tiles.openfreemap.org/styles/liberty',center:[7.4653,51.5136],zoom:11.6,pitch:0,antialias:false});
     map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
     const $ = id => document.getElementById(id);
@@ -322,12 +323,18 @@
         map.addLayer({id:'spaces-prices',type:'symbol',source:'spaces',filter:['!',['has','point_count']],layout:{'text-field':['get','price_label'],'text-size':12,'text-font':['Noto Sans Bold','Open Sans Bold'],'text-allow-overlap':true},paint:{'text-color':'#ffffff'}});
         map.on('click','clusters',e=>{const feat=e.features?.[0];if(!feat)return;
           const id=feat.properties.cluster_id;map.getSource('spaces').getClusterExpansionZoom(id).then(zoom=>map.easeTo({center:feat.geometry.coordinates,zoom}));});
-        for(const layer of ['spaces-dots','spaces-prices'])map.on('click',layer,e=>{const feature=e.features?.[0],p=byId.get(feature?.properties?.id);if(p)openSpace(p);});
+        for(const layer of ['spaces-dots','spaces-prices'])map.on('click',layer,e=>{
+          // Events are drawn over spaces; clicking an overlapping event must not open a property.
+          if(map.getLayer('revive-event-dots') && map.getLayoutProperty('revive-event-dots','visibility')!=='none' &&
+              map.queryRenderedFeatures(e.point,{layers:['revive-event-dots','revive-event-clusters']}).length)return;
+          const feature=e.features?.[0],p=byId.get(feature?.properties?.id);if(p)openSpace(p);});
         for(const layer of ['clusters','spaces-dots','spaces-prices']){
           map.on('mouseenter',layer,()=>map.getCanvas().style.cursor='pointer');
           map.on('mouseleave',layer,()=>map.getCanvas().style.cursor='');
         }
         ready=true;update();
+        // Two independently controlled map layers; no changes to search, filters or property cards.
+        initEventsMap({map,maplibregl,listings,openSpace}).catch(err=>console.warn('Events overlay unavailable:',err));
         const bounds=new maplibregl.LngLatBounds();listings.forEach(p=>bounds.extend(coordinates(p)));
         map.fitBounds(bounds,{padding:55,maxZoom:12.1,duration:700});
       }catch(err){$('count').textContent='Could not load spaces';$('cards').textContent=err.message+' — start the FastAPI server from the repository root.';console.error(err);}

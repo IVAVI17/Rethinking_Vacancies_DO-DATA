@@ -14,7 +14,7 @@ os.environ.setdefault("SPACES_JSON_PATH", str(ROOT / "Data" / "dortmund_syntheti
 os.environ.setdefault("EVENTS_JSON_PATH", str(ROOT / "Data" / "dortmund_public_events.json"))
 
 # Import the team's existing FastAPI app and Groq-powered /search/prompt.
-from Backend.main import LISTINGS, app  # noqa: E402
+from Backend.main import LISTINGS, app, load_events_payload  # noqa: E402
 
 
 @app.get("/", include_in_schema=False)
@@ -43,3 +43,34 @@ def space_detail_frontend():
         raise HTTPException(status_code=404, detail="frontend/space.html is missing")
     return FileResponse(path, media_type="text/html")
 
+
+
+@app.get("/api/events")
+def public_events():
+    """Current approved/city-sourced and synthetic demo events from the team's JSON.
+
+    User submissions pending review must not be advertised as scheduled public events.
+    Read each time so refreshed JSON data is reflected without restarting the server.
+    """
+    payload = load_events_payload()
+    visible = [
+        event for event in payload["events"]
+        if event.get("submission_status") != "pending_review"
+    ]
+    return {
+        "events": visible,
+        "total": len(visible),
+        "city_sourced": sum(event.get("is_synthetic") is False for event in visible),
+        "synthetic_demo": sum(event.get("is_synthetic") is True for event in visible),
+        "notice": "City-sourced dates and venues require verification; ReVive hosted events are fictional demos.",
+    }
+
+
+@app.get("/frontend/events-map.js", include_in_schema=False)
+def events_map_script():
+    return FileResponse(ROOT / "frontend" / "events-map.js", media_type="text/javascript")
+
+
+@app.get("/frontend/events-detail.js", include_in_schema=False)
+def events_detail_script():
+    return FileResponse(ROOT / "frontend" / "events-detail.js", media_type="text/javascript")
