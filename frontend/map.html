@@ -29,6 +29,26 @@
     .popup h3{margin:9px 0 4px;font-size:15px}.popup p{margin:5px 0}.popup strong{font-size:18px;color:#d31f42}
     .chip{display:inline-block;margin:7px 0 0;padding:5px 8px;border-radius:8px;background:#ffe9ed;color:#a5223e;font-weight:800;font-size:10px}
     .hint{padding:10px;border:1px dashed #eee;border-radius:10px;color:var(--muted);font-size:11px;line-height:1.45}
+    .ai-panel{border:1px solid #f1dce2;border-radius:16px;background:linear-gradient(145deg,#fff8fa,#fff);padding:14px;margin:14px 0 18px;box-shadow:0 3px 12px #ef34550b}
+    .ai-heading{font-size:15px;font-weight:850;display:flex;gap:8px;align-items:center;margin-bottom:5px}.ai-heading span{color:var(--red);font-size:19px}
+    .ai-copy{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.4}
+    #prompt{min-height:88px;width:100%;resize:vertical;font:inherit;line-height:1.45;background:#fff;border-radius:12px;border:1px solid #dedfe4;padding:12px}
+    #prompt:focus{outline:2px solid #f7a5b5;border-color:#d52b49}
+    .ai-buttons{display:flex;gap:8px;margin-top:9px;align-items:center}
+    .primary-btn{border:0;cursor:pointer;border-radius:11px;background:var(--red);color:white;padding:11px 14px;font:inherit;font-weight:800;flex:1}
+    .primary-btn:disabled{opacity:.55;cursor:wait}
+    .clear-btn{border:1px solid #dde0e5;background:#fff;color:var(--ink);border-radius:11px;padding:11px;cursor:pointer;font:inherit;font-weight:650}
+    .examples{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+    .example{border:1px solid #efdae0;background:#fff;color:#9f3d57;border-radius:20px;padding:6px 9px;cursor:pointer;font:inherit;font-size:11px;text-align:left}
+    .example:hover{border-color:var(--red)}
+    #ai-status{margin-top:9px;font-size:12px;line-height:1.45;min-height:0}
+    #ai-status.error{color:#ad1a38}#ai-status.success{color:#256349}
+    #criteria{display:none;flex-wrap:wrap;gap:5px;margin-top:8px}
+    .criterion{font-size:11px;border:1px solid #e7d9df;background:#fff;padding:5px 8px;border-radius:15px;color:#6a3344}
+    .section-label{font-size:11px;letter-spacing:.07em;font-weight:850;color:#80818a;text-transform:uppercase;margin-top:8px}
+    .match-label{font-size:10px;color:#1b775c;font-weight:800;margin-top:6px}
+    .fallback{margin:10px 0;color:#72737d;font-size:12px;line-height:1.4}
+    @media(max-width:720px){.ai-panel{margin-top:8px}main{grid-template-rows:minmax(330px,46dvh) 1fr}aside{overflow-y:auto}}
     @media(max-width:720px){header{padding:0 12px;height:58px}.brand{font-size:18px}main{grid-template-columns:1fr;grid-template-rows:280px 1fr;height:calc(100dvh - 58px)}aside{padding:12px}#map{min-height:420px}.notice{bottom:10px;right:10px}}
   </style>
 </head>
@@ -37,6 +57,21 @@
   <main>
     <aside>
       <h1>Discover spaces</h1><p>Explore possible short-term commercial rental experiences across Dortmund.</p>
+      <form id="ai-form" class="ai-panel">
+        <div class="ai-heading"><span aria-hidden="true">✦</span> Find a space with AI</div>
+        <div class="ai-copy">Describe your idea in your own words. We'll use the team's AI search to find suitable demo spaces.</div>
+        <label for="prompt" class="label">What would you like to do?</label>
+        <textarea id="prompt" maxlength="2000" required minlength="3" placeholder="I need a pop-up space in Dortmund for an art workshop, at least 40 m² and under €300 per week."></textarea>
+        <div class="ai-buttons"><button class="primary-btn" type="submit" id="ai-submit">✦ Find matches</button><button class="clear-btn" type="button" id="clear-ai" hidden>Clear</button></div>
+        <div class="examples" aria-label="Example searches">
+          <button type="button" class="example" data-prompt="I need a space for photography in Dortmund with Wi-Fi.">Photography + Wi-Fi</button>
+          <button type="button" class="example" data-prompt="I want a small pop-up retail shop, up to 100 square metres.">Pop-up retail</button>
+          <button type="button" class="example" data-prompt="I need a creative workshop space for at least 6 people.">Creative workshop</button>
+        </div>
+        <div id="ai-status" role="status" aria-live="polite"></div>
+        <div id="criteria" aria-label="Interpreted search criteria"></div>
+      </form>
+      <div class="section-label">Manual filters</div>
       <input id="search" placeholder="Search district, purpose or address" aria-label="Search listings">
       <div class="filters">
         <div><div class="label">Price unit</div><select id="unit"><option value="any">Any unit</option><option value="day">Per day</option><option value="week">Per week</option><option value="month">Per month</option><option value="hour">Per hour</option></select></div>
@@ -58,7 +93,7 @@
     const money = x => new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(x);
     const short = x => x>=1000 ? `€${(x/1000).toFixed(1)}k`: `€${Math.round(x)}`;
     const rateUnit = {hour:'hr',day:'day',week:'wk',month:'mo'};
-    let listings=[], filtered=[], ready=false;
+    let listings=[], filtered=[], ready=false, aiMatches=null;
     function getRate(p){const unit=$('unit').value;const rates=p.price?.rates||{};
       const chosen=unit==='any' ? ['day','week','month','hour'].find(u=>Number.isFinite(rates[u])) : unit;
       return Number.isFinite(rates[chosen]) ? {unit:chosen,value:rates[chosen]} : null;
@@ -83,27 +118,27 @@
     function update(){if(!ready)return;
       const term=$('search').value.toLocaleLowerCase('de').trim(),limit=Number($('maxprice').value),hasLimit=$('maxprice').value!=='';
       const min=Number($('minarea').value)||0,purpose=$('purpose').value;
-      filtered=listings.filter(p=>{
+      filtered = aiMatches !== null ? aiMatches.filter(isLocated) : listings.filter(p=>{
         const r=getRate(p),txt=[p.address?.exact_address,p.address?.district,...(p.purposes_allowed_or_suggested||[])].join(' ').toLocaleLowerCase('de');
         return isLocated(p)&&!!r&&txt.includes(term)&&(!hasLimit||r.value<=limit)&&(Number(p.area_sqm)||0)>=min&&(!purpose||(p.purposes_allowed_or_suggested||[]).includes(purpose));
       });
-      map.getSource('spaces').setData(buildFeatures());$('count').textContent=`${filtered.length} demo spaces matched`;
+      map.getSource('spaces').setData(buildFeatures());$('count').textContent=`${filtered.length} ${aiMatches!==null?'AI-matched':'demo'} spaces`;
       const cards=$('cards');cards.replaceChildren();
       for(const p of filtered.slice(0,40)){
         const r=getRate(p),card=document.createElement('button');card.className='card';
         const img=p.photos?.space_photo_url;
         card.innerHTML=`<div class="cardtop">${/^https:\/\//.test(img||'')?`<img class="thumb" src="${escapeHtml(img)}" alt="Illustrative space photo" loading="lazy">`:''}
          <div><div class="title">${escapeHtml(p.address.district)} · ${escapeHtml(p.area_sqm)} m²</div><div class="small">${escapeHtml((p.purposes_allowed_or_suggested||[]).slice(0,2).join(' · '))}</div>
-         <div class="price">${escapeHtml(money(r.value))} / ${rateUnit[r.unit]}</div></div></div>`;
+         <div class="price">${r ? escapeHtml(money(r.value))+' / '+rateUnit[r.unit] : 'Ask for price'}</div>${aiMatches!==null?'<div class="match-label">✦ Meets extracted search criteria</div>':''}</div></div>`;
         card.onclick=()=>openSpace(p);cards.appendChild(card);
       }
       if(filtered.length>40){const tip=document.createElement('p');tip.textContent=`Showing first 40 of ${filtered.length} matches; zoom and click the map for the rest.`;cards.appendChild(tip);}
-      if(!filtered.length)cards.textContent='No matching spaces. Change the filters.';
+      if(!filtered.length)cards.textContent=aiMatches!==null?'No exact matches in the demo data. Try removing a requirement, changing the price unit or making your request broader.':'No matching spaces. Change the filters.';
     }
     const byId=new Map();
     map.on('load',async()=>{
       try{
-        const res=await fetch('./../Data/dortmund_synthetic_spaces.json');if(!res.ok)throw new Error('HTTP '+res.status);
+        const res=await fetch('/api/spaces');if(!res.ok)throw new Error('HTTP '+res.status);
         const data=await res.json();
         if(!Array.isArray(data.listings))throw new Error('JSON must have listings array');
         listings=data.listings.filter(p=>p.data_status==='synthetic_demo_only'&&isLocated(p));
@@ -125,9 +160,43 @@
         ready=true;update();
         const bounds=new maplibregl.LngLatBounds();listings.forEach(p=>bounds.extend(coordinates(p)));
         map.fitBounds(bounds,{padding:55,maxZoom:12.1,duration:700});
-      }catch(err){$('count').textContent='Error loading data';$('cards').textContent=err.message+' — run via a local server, not file://';console.error(err);}
+      }catch(err){$('count').textContent='Could not load spaces';$('cards').textContent=err.message+' — start the FastAPI server from the repository root.';console.error(err);}
     });
-    for(const id of ['search','unit','maxprice','minarea','purpose'])$(id).addEventListener(id==='search'||id==='maxprice'||id==='minarea'?'input':'change',update);
+    function showCriteria(criteria){
+      const target=$('criteria');target.replaceChildren();
+      const labels={area:'Location',purpose:'Use',min_area_sqm:'Min size',max_area_sqm:'Max size',min_capacity:'Capacity',max_hourly_price:'Max €/hour',max_daily_price:'Max €/day',max_weekly_price:'Max €/week',max_monthly_price:'Max €/month',duration_type:'Rental type',days_of_week:'Days',time_from:'From',time_until:'Until',parking_required:'Parking',wifi_required:'Wi-Fi',washroom_required:'Washroom',kitchen_required:'Kitchen',negotiable_only:'Negotiable',deposit_required:'Deposit'};
+      for(const [key,val] of Object.entries(criteria||{})){
+        if(val===null||val===undefined||val===''||(Array.isArray(val)&&!val.length)||val===false)continue;
+        const chip=document.createElement('span');chip.className='criterion';
+        chip.textContent=(labels[key]||key)+': '+(Array.isArray(val)?val.join(', '):val===true?'required':String(val));target.appendChild(chip);
+      }
+      target.style.display=target.childElementCount?'flex':'none';
+    }
+    async function runAiSearch(event){
+      event.preventDefault();const prompt=$('prompt').value.trim();if(prompt.length<3)return;
+      const btn=$('ai-submit');btn.disabled=true;btn.textContent='Searching…';
+      $('ai-status').className='';$('ai-status').textContent='Asking the AI to interpret your request…';
+      try{
+        const res=await fetch('/search/prompt',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+        const payload=await res.json();
+        if(!res.ok)throw new Error(typeof payload.detail==='string'?payload.detail:`Search failed (HTTP ${res.status})`);
+        if(!Array.isArray(payload.results))throw new Error('The API response does not include a results array.');
+        aiMatches=payload.results;showCriteria(payload.parsed_criteria);$('clear-ai').hidden=false;
+        $('ai-status').className='success';$('ai-status').textContent=`${payload.total} matches found by the backend. AI extracts filters; it does not verify listings or their locations.`;
+        if(ready){update();const pts=filtered.filter(isLocated);if(pts.length){
+          const bounds=new maplibregl.LngLatBounds();pts.forEach(p=>bounds.extend(coordinates(p)));
+          map.fitBounds(bounds,{padding:60,maxZoom:13.2,duration:600});
+        }}
+      }catch(err){$('ai-status').className='error';$('ai-status').textContent=String(err.message||err)+'. You can still use manual filters below.';}
+      finally{btn.disabled=false;btn.textContent='✦ Find matches';}
+    }
+    $('ai-form').addEventListener('submit',runAiSearch);
+    $('clear-ai').addEventListener('click',()=>{aiMatches=null;$('clear-ai').hidden=true;$('ai-status').textContent='';$('ai-status').className='';showCriteria(null);update();});
+    for(const button of document.querySelectorAll('[data-prompt]'))button.addEventListener('click',()=>{$('prompt').value=button.dataset.prompt;$('ai-form').requestSubmit();});
+    for(const id of ['search','unit','maxprice','minarea','purpose'])$(id).addEventListener(id==='search'||id==='maxprice'||id==='minarea'?'input':'change',()=>{
+      if(aiMatches!==null){aiMatches=null;$('clear-ai').hidden=true;$('ai-status').textContent='Showing manual filters.';$('ai-status').className='';showCriteria(null);}
+      update();
+    });
   </script>
 </body>
 </html>
