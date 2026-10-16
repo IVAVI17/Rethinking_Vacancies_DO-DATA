@@ -16,6 +16,7 @@ button{font:inherit;cursor:pointer}.back{border:1px solid #d9dfe5;background:whi
 h1{font-size:30px;letter-spacing:-.6px;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 18px;line-height:1.5}
 .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:180px;gap:8px;border-radius:18px;overflow:hidden;margin:18px 0 24px}
 .gallery img{width:100%;height:100%;object-fit:cover;background:#e9ebee}.gallery img:first-child{grid-row:span 2}
+.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.photo-grid img{display:block;width:100%;height:220px;object-fit:cover;border-radius:12px;background:#e9ebee}.photo-grid .photo-empty{color:var(--muted);padding:12px 0}.photo-grid figure{margin:0}.photo-grid figcaption{font-size:12px;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
 .content{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr);gap:24px;align-items:start}
 .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
 h2{font-size:20px;margin:0 0 14px}h3{font-size:16px;margin:0 0 10px}
@@ -32,7 +33,7 @@ select,textarea{width:100%;border:1px solid #d9dfe5;border-radius:10px;padding:1
 textarea{resize:vertical;min-height:85px}.submit{margin-top:12px;border:0;border-radius:10px;background:var(--red);color:white;padding:12px 16px;font-weight:800;width:100%}
 .status{font-size:12px;line-height:1.5;margin-top:10px}.error{color:#ad1a38}.success{color:#256349}
 .raw{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
-@media(max-width:720px){.content{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:130px}.gallery img:first-child{grid-row:span 2}h1{font-size:24px}.grid{grid-template-columns:1fr}header{padding:0 12px}.demo{font-size:9px}}
+@media(max-width:720px){.content{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:130px}.gallery img:first-child{grid-row:span 2}h1{font-size:24px}.grid{grid-template-columns:1fr}.photo-grid{grid-template-columns:1fr}header{padding:0 12px}.demo{font-size:9px}}
 </style>
 </head>
 <body>
@@ -47,8 +48,7 @@ textarea{resize:vertical;min-height:85px}.submit{margin-top:12px;border:0;border
       <div>
         <section class="panel"><h2>About this space</h2><div id="summary" class="val"></div></section>
         <section class="panel"><h2>All listing information</h2><div id="all-fields" class="grid"></div></section>
-        <section class="panel"><h2>Photos and media information</h2><div id="photo-fields" class="grid"></div></section>
-        <section class="panel"><h2>Raw JSON data</h2><details><summary>Expand complete listing JSON</summary><pre id="raw" class="raw"></pre></details></section>
+        <section class="panel"><h2>Photos</h2><div id="photo-fields" class="photo-grid"></div></section>
       </div>
       <div>
         <section class="panel"><div id="price" class="price"></div><div id="rating-summary" class="muted" style="margin-top:7px"></div></section>
@@ -127,10 +127,18 @@ function renderListing(){
   unique.forEach((photo,i)=>{const img=document.createElement('img');img.src=photo.url;img.alt=`Illustrative listing photo ${i+1}`;img.loading=i<2?'eager':'lazy';img.onerror=()=>img.remove();gallery.appendChild(img);});
   if(!unique.length){gallery.style.display='none';}else{gallery.style.display='grid';}
   const photoFields=$('photo-fields');photoFields.replaceChildren();
-  const photoInfo=listing.photos||{};
-  if(typeof photoInfo==='object')flatten(photoInfo,'photos').forEach(([k,v])=>addField(photoFields,k,v));
-  if(!photoFields.children.length)addField(photoFields,'Photos','No additional photo fields in this listing.');
-  $('raw').textContent=JSON.stringify(listing,null,2);
+  unique.forEach((photo,i)=>{
+    const figure=document.createElement('figure');
+    const img=document.createElement('img');
+    img.src=photo.url; img.alt=`Space photo ${i+1}`; img.loading='lazy';
+    img.onerror=()=>figure.remove();
+    const caption=document.createElement('figcaption');
+    caption.textContent=`Photo ${i+1}`;
+    figure.append(img,caption); photoFields.appendChild(figure);
+  });
+  if(!unique.length){
+    photoFields.innerHTML='<div class="photo-empty">No photos are available for this listing.</div>';
+  }
   renderReviews();
 }
 async function loadListing(){
