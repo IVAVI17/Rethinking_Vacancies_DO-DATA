@@ -114,6 +114,9 @@ class ParsedCriteria(BaseModel):
     negotiable_only: Optional[bool] = None
     deposit_required: Optional[bool] = None
 
+class ReviewRequest(BaseModel):
+    stars: int = Field(..., ge=1, le=5)
+    comment: Optional[str] = None
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -365,3 +368,82 @@ def get_space(space_id: str):
         if listing.get("id") == space_id:
             return public_listing(listing)
     raise HTTPException(status_code=404, detail="Space not found")
+
+@app.post("/spaces/{space_id}/reviews")
+def add_review(space_id: str, review: ReviewRequest):
+    # Find the listing by ID
+    listing = next(
+        (space for space in LISTINGS if str(space.get("id")) == space_id),
+        None
+    )
+
+    if listing is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Space with ID '{space_id}' not found"
+        )
+
+    # Ensure the reviews structure exists
+    if not isinstance(listing.get("reviews"), dict):
+        listing["reviews"] = {
+            "average_stars": 0,
+            "review_count": 0,
+            "items": [],
+            "is_synthetic": True
+        }
+
+    reviews = listing["reviews"]
+    reviews.setdefault("items", [])
+
+    # Create the new review
+    new_review = {
+        "stars": review.stars,
+        "comment": review.comment,
+        "is_synthetic": True
+    }
+
+    # Append the review
+    reviews["items"].append(new_review)
+
+    # Update rating statistics
+    all_reviews = reviews["items"]
+    reviews["review_count"] = len(all_reviews)
+    reviews["average_stars"] = round(
+        sum(item["stars"] for item in all_reviews) / len(all_reviews),
+        1
+    )
+
+    # Persist the updated listings to the JSON file
+    try:
+        with open(DATA_FILE, "w", encoding="utf-8") as file:
+            json.dump(
+                LISTINGS,
+                file,
+                indent=4,
+                ensure_ascii=False
+            )
+    except OSError as exc:
+        # Roll back the in-memory addition if saving fails
+        reviews["items"].pop()
+        reviews["review_count"] = len(reviews["items"])
+        if reviews["items"]:
+            reviews["average_stars"] = round(
+                sum(item["stars"] for item in reviews["items"])
+                / len(reviews["items"]),
+                1
+            )
+        else:
+            reviews["average_stars"] = 0
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to save review to JSON: {exc}"
+        )
+
+    return {
+        "message": "Review added successfully",
+        "space_id": space_id,
+        "review": new_review,
+        "review_count": reviews["review_count"],
+        "average_stars": reviews["average_stars"]
+    }
