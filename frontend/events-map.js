@@ -5,7 +5,7 @@ export async function initEventsMap({ map, maplibregl, listings, openSpace }) {
     .revive-event-mode{display:flex;gap:4px;flex-wrap:wrap}
     .revive-event-mode button{border:0;background:transparent;border-radius:10px;padding:9px 11px;font:inherit;font-weight:800;cursor:pointer;color:#545b66}
     .revive-event-mode button[aria-pressed="true"]{background:#20232a;color:white}
-    .revive-event-mode button[data-layer="spaces"][aria-pressed="true"]{background:#ef3455;color:white}
+    .revive-event-mode button[data-layer="spaces"][aria-pressed="true"]{background:#FFD429;color:white}
     .revive-event-mode button[data-layer="events"][aria-pressed="true"]{background:#2563eb;color:white}
     .revive-event-legend{display:flex;align-items:center;flex-wrap:wrap;gap:11px;padding:8px 4px 2px;font-size:11px}
     .revive-event-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
@@ -37,7 +37,7 @@ export async function initEventsMap({ map, maplibregl, listings, openSpace }) {
       <button type="button" data-layer="events" aria-pressed="true">Events</button>
     </div>
     <div class="revive-event-legend">
-      <span><i class="revive-event-dot" style="background:#ef3455"></i> Spaces</span>
+      <span><i class="revive-event-dot" style="background:#FFD429"></i> Spaces</span>
       <span><i class="revive-event-dot" style="background:#2563eb"></i> City</span>
       <span><i class="revive-event-dot" style="background:#16a34a"></i> ReVive demo</span>
     </div>

@@ -35,6 +35,141 @@ textarea{resize:vertical;min-height:85px}.submit{margin-top:12px;border:0;border
 @media(max-width:720px){.content{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:130px}.gallery img:first-child{grid-row:span 2}h1{font-size:24px}.grid{grid-template-columns:1fr}header{padding:0 12px}.demo{font-size:9px}}
 </style>
 <script src="/frontend/events-detail.js" defer></script>
+
+<!-- REVIVE_CLEAN_MODERN_START -->
+<style id="revive-clean-modern-style">
+/* ReVive Clean & Modern — styling only. Light OpenFreeMap basemap, Dortmund accent. */
+:root { --red:#FFD429; --ink:#1C2329; --muted:#69747E; --line:#E6EAED;
+        --rv-yellow:#FFD429; --rv-charcoal:#151D21; --rv-surface:#fff; }
+html{color-scheme:light}
+body{background:#F5F7F7 !important;color:#1C2329 !important}
+header{background:#151D21 !important;border-color:#151D21 !important;color:#fff !important;
+       box-shadow:0 2px 15px #10202714;}
+.brand{display:inline-flex;align-items:center;gap:9px;color:#FFF !important;
+       font-weight:900;letter-spacing:-.04em}
+.brand::before{content:"";flex:none;width:34px;height:38px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2260%22%20height%3D%2265%22%20viewBox%3D%220%200%2060%2065%22%3E%0A%3Cpath%20d%3D%22M30%202C14%202%203%2013%203%2029c0%2017%2027%2033%2027%2033s27-16%2027-33C57%2013%2046%202%2030%202z%22%20fill%3D%22%23FFD429%22%2F%3E%0A%3Cpath%20d%3D%22M18%2026h24v18H18z%22%20fill%3D%22%23141B20%22%2F%3E%0A%3Cpath%20d%3D%22M15%2022l5-10h20l5%2010H15z%22%20fill%3D%22%23141B20%22%2F%3E%0A%3Cpath%20d%3D%22M15%2022h30v4c-4%204-7%204-10%200-3%204-7%204-10%200-3%204-6%204-10%200z%22%20fill%3D%22%23141B20%22%2F%3E%0A%3Cpath%20d%3D%22M27%2034h6v10h-6z%22%20fill%3D%22%23FFD429%22%2F%3E%0A%3C%2Fsvg%3E") center/contain no-repeat}
+.brand b{color:#FFD429 !important}
+.demo{background:#2C3027 !important;color:#FFE281 !important;border:1px solid #666031 !important}
+h1,h2,h3,.title,.val{color:#1C2329}
+p,.small,.muted,.sub{color:#69747E}
+main{background:#F5F7F7 !important}
+main > aside:not(.results-pane){background:#FFFFFF !important;border-right:1px solid #E7EAEC !important}
+/* Desktop: search, light map, result cards; DOM ids and behavior remain unchanged. */
+@media(min-width:1180px){
+ main:has(>.results-pane){display:grid !important;grid-template-columns:minmax(310px,350px) minmax(400px,1fr) minmax(275px,310px) !important;
+ grid-template-rows:minmax(0,1fr) !important;height:calc(100dvh - 68px) !important}
+ main:has(>.results-pane) > aside:not(.results-pane){grid-column:1;grid-row:1;overflow-y:auto}
+ main:has(>.results-pane) > .maparea{grid-column:2;grid-row:1;min-width:0}
+ main:has(>.results-pane) > .results-pane{grid-column:3;grid-row:1;min-width:0}
+}
+.results-pane{background:#fff;border-left:1px solid #E6EAED;padding:18px 13px;overflow-y:auto;overscroll-behavior:contain}
+.results-pane #count{margin:0 0 14px;font-weight:850;font-size:14px;color:#253036}
+.results-pane .card{border-color:#E6E9EC;background:#fff;border-radius:14px;box-shadow:0 3px 10px #10213009}
+.results-pane .card:hover,.results-pane .card:focus{border-color:#D7AE00 !important;box-shadow:0 5px 18px #41350d16 !important}
+.results-pane .cardtop{gap:10px;align-items:flex-start}
+.results-pane .thumb{width:88px;height:94px;object-fit:cover;flex:none}
+.results-pane .title{font-weight:850;line-height:1.3}
+.results-pane .price{display:inline-block;background:#FFD429;color:#101820 !important;border-radius:9px;padding:5px 8px;margin-top:7px;font-size:12px}
+.card,.panel,.field,.revive-insights{background:#fff !important;color:#1C2329 !important;border-color:#E6EAED !important}
+.card:hover,.card:focus{border-color:#DDBA22 !important;box-shadow:0 5px 18px #b59b1a20 !important}
+.price,.popup strong{color:#1F262B !important}
+.ai-panel{border:1px solid #F2E5A8 !important;border-radius:16px !important;
+ background:linear-gradient(145deg,#FFFDF4,#fff) !important;box-shadow:0 5px 20px #e6cc4c15 !important}
+.ai-heading span{color:#DBA500 !important}
+.ai-copy,.filter-help,.section-label,.label{color:#68717A !important}
+#prompt,aside input:not([type="range"]):not([type="checkbox"]),aside select,
+.filter-modal input:not([type="range"]):not([type="checkbox"]),.filter-modal select,
+input,select,textarea{background:#fff !important;color:#1C2329 !important;border-color:#D5DCE2 !important}
+input::placeholder,textarea::placeholder{color:#7C8790 !important;opacity:1}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{
+ outline:2px solid #DDB900 !important;outline-offset:2px}
+.primary-btn,.show-btn,.submit,.add-menu-trigger{background:#FFD429 !important;color:#131A1F !important;
+ border:1px solid #FFD429 !important;box-shadow:none !important}
+.primary-btn:hover,.show-btn:hover,.submit:hover,.add-menu-trigger:hover{background:#FFE36A !important}
+.clear-btn,.filter-trigger,.back,.cancel{background:#fff !important;color:#1F292F !important;border:1px solid #CED5D9 !important;box-shadow:none !important}
+.clear-btn:hover,.filter-trigger:hover,.back:hover,.cancel:hover{border-color:#C8A000 !important}
+.plus-symbol{background:#141B20 !important;color:#FFD429 !important}
+.filter-icon{color:#1A242A !important}
+.active-count{background:#FFD429 !important;color:#151D21 !important}
+.hint,.notice{background:#FFFEF9F2 !important;color:#66727D !important;border:1px solid #ECE9D6 !important;box-shadow:0 4px 15px #1111 !important}
+.notice b{color:#1A2429 !important}
+.chip,.tag{background:#FFF7D7 !important;color:#584900 !important;border:1px solid #F4E39E !important}
+#count{color:#1B242A}
+.match-label,#ai-status.success,.success{color:#167449 !important}
+#ai-status.error,.error{color:#AD283E !important}
+.modal-backdrop,.add-choice-backdrop{background:#15212691 !important}
+.filter-modal,.add-choice-card{background:#fff !important;color:#1C2329 !important;border:1px solid #D8DEE3 !important;
+ box-shadow:0 22px 60px #0D1C2B30 !important}
+.modal-head,.modal-footer,.modal-body,.filter-section{background:#fff !important;border-color:#E6EAED !important}
+.filter-section .sub,.hint-inline,.range-values label{color:#69747E !important}
+.icon-close,.add-choice-close{background:#F1F3F5 !important;color:#24313A !important}
+.histogram{border-bottom-color:#EBD88A !important}
+.histogram .bar{background:#FAEEC1 !important}.histogram .bar.active{background:#F0C316 !important}
+.range-line{background:#E4E8EA !important}.range-fill{background:#FFD429 !important}
+.range-wrap input[type="range"]::-webkit-slider-thumb{background:#fff !important;border-color:#DAB82A !important}
+.range-wrap input[type="range"]::-moz-range-thumb{background:#fff !important;border-color:#DAB82A !important}
+.money-field{background:#fff !important;border-color:#CED5D9 !important}
+.money-field input{background:transparent !important;border:0 !important;color:#1C2329 !important}
+.checks input{accent-color:#E9BF00 !important}
+.reset-btn{color:#253039 !important}
+.add-choice-icon{background:#FFF4C6 !important;color:#584300 !important}
+.add-choice-option{background:#fff !important;color:#1F292F !important;border-color:#E6EAED !important}
+.add-choice-option:hover{background:#FFFDF4 !important;border-color:#D8B629 !important}
+.maparea,#map{background:#E7EEE6 !important}
+.maplibregl-popup-content{background:#fff !important;color:#212A30 !important;border-radius:13px !important;
+ box-shadow:0 9px 26px #19232c2e !important}
+.maplibregl-popup-close-button{color:#2A323A !important}
+.maplibregl-ctrl-group{background:white !important;border:1px solid #DDE2E4 !important}
+.maplibregl-ctrl-group button{background:white !important}
+.maplibregl-ctrl button .maplibregl-ctrl-icon{filter:none !important}
+.maplibregl-ctrl-attrib{background:#FFFFFFD8 !important;color:#5A646B !important}
+.maplibregl-ctrl-attrib a{color:#3A5966 !important}
+/* Existing two independent events toggles: blue/green event markers remain unchanged. */
+.maparea .revive-event-tools{background:#FFFFFFF5 !important;border:1px solid #E4E8EB !important;
+ color:#202A30 !important;box-shadow:0 5px 20px #18283220 !important}
+.maparea .revive-event-mode button{color:#3D4952 !important}
+.maparea .revive-event-mode button[data-layer="spaces"][aria-pressed="true"]{
+ background:#FFD429 !important;color:#182027 !important}
+.maparea .revive-event-mode button[data-layer="events"][aria-pressed="true"]{
+ background:#2563EB !important;color:white !important}
+.maparea .revive-event-mode button[aria-pressed="false"]{background:#F3F5F6 !important;border:1px solid #E5E8EC !important}
+.maparea .revive-event-legend,.maparea .revive-event-status{color:#69747E !important}
+.maparea .revive-refresh{color:#425A6A !important}
+body .revive-insights{border-color:#E3E9EC !important;background:#fff !important}
+body .revive-insights h2,body .revive-insights h3{color:#202930 !important}
+body .revive-insights a{color:#725B00 !important}
+.review{border-color:#E7EAED !important}.stars{color:#DBAD00 !important}
+/* Nearby categories are text labels in synthetic listing JSON, NOT verified POI markers. */
+.revive-nearby-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}
+.revive-nearby-grid label{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid #DFE4E7;
+ border-radius:11px;font-size:12px;cursor:pointer;background:#fff;line-height:1.3}
+.revive-nearby-grid label:has(input:checked){background:#FFF9E4;border-color:#E3C041}
+.revive-nearby-grid label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.revive-nearby-grid input{width:17px;height:17px;flex:none;accent-color:#E4BC00}
+.revive-nearby-grid small{display:block;color:#77838C;font-size:10px;margin-top:2px}
+.revive-nearby-note{font-size:11px;color:#6D7780;line-height:1.55;margin:12px 0 0}
+/* Submission page always light and consistent with map/property details. */
+body:has(#submission-form){background:#F5F7F7 !important}
+body:has(#submission-form) .panel{box-shadow:0 12px 35px #1B293008;border-radius:18px}
+body:has(#submission-form) label{color:#29343B}
+@media(min-width:721px) and (max-width:1179px){
+ main:has(>.results-pane){display:grid !important;grid-template-columns:minmax(290px,345px) 1fr !important;
+ grid-template-rows:minmax(460px,calc(100dvh - 68px)) auto;height:auto !important}
+ main:has(>.results-pane) > aside:not(.results-pane){grid-column:1;grid-row:1;overflow-y:auto}
+ main:has(>.results-pane) > .maparea{grid-column:2;grid-row:1}
+ main:has(>.results-pane) > .results-pane{grid-column:1/-1;grid-row:2;max-height:310px;overflow-y:auto}
+ main:has(>.results-pane) > .results-pane #cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+}
+@media(max-width:720px){
+ .brand::before{width:27px;height:32px}
+ main:has(>.results-pane){display:flex !important;flex-direction:column;height:auto !important}
+ main:has(>.results-pane) > aside:not(.results-pane){overflow:visible !important;padding:16px !important}
+ main:has(>.results-pane) > .maparea{width:100%;height:360px;min-height:360px;flex:none}
+ main:has(>.results-pane) > .results-pane{min-height:220px;max-height:none;overflow:visible;padding:16px}
+ .revive-nearby-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+<!-- REVIVE_CLEAN_MODERN_END -->
 </head>
 <body>
 <header><div class="brand">ReVive <b>Dortmund</b></div><span class="demo">SYNTHETIC DATA · HACKATHON DEMO</span></header>
