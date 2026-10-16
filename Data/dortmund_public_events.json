@@ -1,0 +1,658 @@
+{
+  "dataset_name": "ReVive Dortmund Public Events",
+  "schema_version": "1.0",
+  "generated_on": "2026-10-16",
+  "date_range": {
+    "from": "2026-10-16",
+    "to": "2027-04-16"
+  },
+  "event_type_values": [
+    "public"
+  ],
+  "total_events": 26,
+  "official_events_count": 11,
+  "synthetic_demo_events_count": 15,
+  "notice": "Official events are sourced from the City of Dortmund event calendar and should be rechecked before production use. Synthetic events are fictional demos at synthetic spaces and must not be presented as real events.",
+  "sources": [
+    {
+      "name": "City of Dortmund – Events & Highlights",
+      "url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
+      "used_for": "Official event names, dates, times and venues where shown."
+    },
+    {
+      "name": "City of Dortmund – Veranstaltungskalender",
+      "url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/",
+      "used_for": "Official event calendar listings."
+    }
+  ],
+  "events": [
+    {
+      "event_id": "DO-EVT-OFFICIAL-001",
+      "event_name": "Green Movies 2026 – Ernte teilen – Anders ackern für die Umwelt",
+      "date": "2026-10-22",
+      "start_time": "18:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": null,
+        "district": "Innenstadt-Nord"
+      },
+      "event_type": "public",
+      "event_category": "Theater & Film",
+      "description": "Film in the Green Movies environmental film series, in cooperation with Ökonetzwerk Dortmund.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-002",
+      "event_name": "Green Movies 2026 – Barbara Buser – Pionierin der Nachhaltigkeit",
+      "date": "2026-10-29",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": null,
+        "district": "Innenstadt-Nord"
+      },
+      "event_type": "public",
+      "event_category": "Theater & Film",
+      "description": "Film in the Green Movies environmental film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-003",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-03",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": null,
+        "district": "Innenstadt-Nord"
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series; the city calendar lists additional dates.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-004",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-10",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": null,
+        "district": "Innenstadt-Nord"
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-005",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-17",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": null,
+        "district": "Innenstadt-Nord"
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-006",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-24",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": null,
+        "district": "Innenstadt-Nord"
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-007",
+      "event_name": "Ein bisschen Baum muss sein",
+      "date": "2026-11-29",
+      "start_time": "11:00",
+      "end_time": null,
+      "location": {
+        "venue": "Stadt- und Landesbibliothek Dortmund",
+        "address": null,
+        "district": "Innenstadt-West"
+      },
+      "event_type": "public",
+      "event_category": "Kabarett & Comedy",
+      "description": "Event listed in the City of Dortmund event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-008",
+      "event_name": "Auf die Würfel, fertig, los!",
+      "date": "2026-12-12",
+      "start_time": "15:15",
+      "end_time": null,
+      "location": {
+        "venue": "Stadt- und Landesbibliothek Dortmund",
+        "address": null,
+        "district": "Innenstadt-West"
+      },
+      "event_type": "public",
+      "event_category": "Community / Games",
+      "description": "Games afternoon listed in the City of Dortmund event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-009",
+      "event_name": "Texte treffen Töne – Begegnung im Studio B",
+      "date": "2027-01-25",
+      "start_time": "19:00",
+      "end_time": "20:10",
+      "location": {
+        "venue": "Stadt- und Landesbibliothek Dortmund",
+        "address": null,
+        "district": "Innenstadt-West"
+      },
+      "event_type": "public",
+      "event_category": "Concert / Music",
+      "description": "Music event listed in the City of Dortmund event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-010",
+      "event_name": "Halloween Familienfest",
+      "date": "2026-10-31",
+      "start_time": "17:00",
+      "end_time": "20:00",
+      "location": {
+        "venue": "Westfalenpark Dortmund",
+        "address": null,
+        "district": "Innenstadt-Ost"
+      },
+      "event_type": "public",
+      "event_category": "Family / Festival",
+      "description": "Halloween family event listed in the City of Dortmund's Events & Highlights calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-011",
+      "event_name": "30. Dortmunder Hansemarkt",
+      "date": "2026-11-04",
+      "start_time": null,
+      "end_time": null,
+      "location": {
+        "venue": "Various locations in Dortmund",
+        "address": null,
+        "district": null
+      },
+      "event_type": "public",
+      "event_category": "Market / Festival",
+      "description": "Historic-themed market with crafts, culture and food; exact daily schedule should be checked on the official calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
+    },
+    {
+      "event_id": "DO-EVT-SYN-001",
+      "event_name": "Community Potluck & Meet-up",
+      "date": "2026-10-24",
+      "start_time": "11:00",
+      "end_time": "13:00",
+      "location": {
+        "venue": "Space DO-SYN-0058",
+        "space_id": "DO-SYN-0058",
+        "address": "DEMO LISTING 058, Platzhalterplatz 27, 44328 Dortmund (synthetic)",
+        "district": "Scharnhorst",
+        "postcode": "44328",
+        "latitude": 51.554317,
+        "longitude": 7.54082
+      },
+      "event_type": "public",
+      "event_category": "community",
+      "description": "Bring a dish to share and meet people from the neighbourhood.",
+      "capacity_people": 10,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "tutoring",
+        "photography",
+        "office",
+        "art"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-002",
+      "event_name": "Beginner Photography Walkshop",
+      "date": "2026-10-30",
+      "start_time": "17:30",
+      "end_time": "19:30",
+      "location": {
+        "venue": "Space DO-SYN-0013",
+        "space_id": "DO-SYN-0013",
+        "address": "DEMO LISTING 013, Innovationsweg 87, 44309 Dortmund (synthetic)",
+        "district": "Brackel",
+        "postcode": "44309",
+        "latitude": 51.528098,
+        "longitude": 7.568975
+      },
+      "event_type": "public",
+      "event_category": "workshop",
+      "description": "A friendly session on composition, lighting and smartphone photography.",
+      "capacity_people": 50,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "art",
+        "music",
+        "small business",
+        "dance"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-003",
+      "event_name": "Board Games Social Evening",
+      "date": "2026-11-07",
+      "start_time": "16:00",
+      "end_time": "18:00",
+      "location": {
+        "venue": "Space DO-SYN-0141",
+        "space_id": "DO-SYN-0141",
+        "address": "DEMO LISTING 141, Prototypgasse 82, 44145 Dortmund (synthetic)",
+        "district": "Innenstadt-Nord",
+        "postcode": "44145",
+        "latitude": 51.528893,
+        "longitude": 7.471046
+      },
+      "event_type": "public",
+      "event_category": "community",
+      "description": "Open table games and casual socialising for new and experienced players.",
+      "capacity_people": 4,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "small business",
+        "photography",
+        "pop-up retail",
+        "education",
+        "pet training (subject to approval)"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-004",
+      "event_name": "Creative Reuse Craft Workshop",
+      "date": "2026-11-14",
+      "start_time": "10:30",
+      "end_time": "12:30",
+      "location": {
+        "venue": "Space DO-SYN-0126",
+        "space_id": "DO-SYN-0126",
+        "address": "DEMO LISTING 126, Musterallee 65, 44287 Dortmund (synthetic)",
+        "district": "Aplerbeck",
+        "postcode": "44287",
+        "latitude": 51.482265,
+        "longitude": 7.567745
+      },
+      "event_type": "public",
+      "event_category": "arts and crafts",
+      "description": "Make useful objects from reusable materials in a relaxed group setting.",
+      "capacity_people": 4,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "coworking",
+        "education"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-005",
+      "event_name": "Local Makers Pop-up",
+      "date": "2026-11-21",
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "location": {
+        "venue": "Space DO-SYN-0115",
+        "space_id": "DO-SYN-0115",
+        "address": "DEMO LISTING 115, Projektstraße 15, 44287 Dortmund (synthetic)",
+        "district": "Aplerbeck",
+        "postcode": "44287",
+        "latitude": 51.48231,
+        "longitude": 7.567066
+      },
+      "event_type": "public",
+      "event_category": "market",
+      "description": "A small showcase for local makers, crafts and independent projects.",
+      "capacity_people": 6,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "tutoring",
+        "crafts",
+        "dance",
+        "pop-up retail"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-006",
+      "event_name": "Study Together: Focus Session",
+      "date": "2026-11-28",
+      "start_time": "18:00",
+      "end_time": "20:00",
+      "location": {
+        "venue": "Space DO-SYN-0072",
+        "space_id": "DO-SYN-0072",
+        "address": "DEMO LISTING 072, Ideenallee 63, 44137 Dortmund (synthetic)",
+        "district": "Innenstadt-West",
+        "postcode": "44137",
+        "latitude": 51.511286,
+        "longitude": 7.456192
+      },
+      "event_type": "public",
+      "event_category": "education",
+      "description": "A quiet co-working and study session with short breaks.",
+      "capacity_people": 20,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "coworking",
+        "workshops",
+        "meetings"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-007",
+      "event_name": "Neighbourhood Language Café",
+      "date": "2026-12-05",
+      "start_time": "11:00",
+      "end_time": "13:00",
+      "location": {
+        "venue": "Space DO-SYN-0053",
+        "space_id": "DO-SYN-0053",
+        "address": "DEMO LISTING 053, Teststraße 33, 44137 Dortmund (synthetic)",
+        "district": "Innenstadt-West",
+        "postcode": "44137",
+        "latitude": 51.50967,
+        "longitude": 7.452307
+      },
+      "event_type": "public",
+      "event_category": "community",
+      "description": "Practice languages through informal conversation and games.",
+      "capacity_people": 2,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "wellness",
+        "office",
+        "small business"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-008",
+      "event_name": "Acoustic Open Mic",
+      "date": "2026-12-13",
+      "start_time": "15:00",
+      "end_time": "17:00",
+      "location": {
+        "venue": "Space DO-SYN-0280",
+        "space_id": "DO-SYN-0280",
+        "address": "DEMO LISTING 280, Innovationsweg 25, 44287 Dortmund (synthetic)",
+        "district": "Aplerbeck",
+        "postcode": "44287",
+        "latitude": 51.480151,
+        "longitude": 7.563317
+      },
+      "event_type": "public",
+      "event_category": "music",
+      "description": "An informal public evening for acoustic music, poetry and spoken word.",
+      "capacity_people": 4,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "art",
+        "pop-up retail",
+        "pet training (subject to approval)",
+        "meetings",
+        "workshops"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-009",
+      "event_name": "Plant Swap & Care Workshop",
+      "date": "2027-01-09",
+      "start_time": "10:00",
+      "end_time": "12:00",
+      "location": {
+        "venue": "Space DO-SYN-0045",
+        "space_id": "DO-SYN-0045",
+        "address": "DEMO LISTING 045, Ideenallee 87, 44369 Dortmund (synthetic)",
+        "district": "Huckarde",
+        "postcode": "44369",
+        "latitude": 51.535762,
+        "longitude": 7.415132
+      },
+      "event_type": "public",
+      "event_category": "workshop",
+      "description": "Swap cuttings and learn simple plant-care tips.",
+      "capacity_people": 12,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "crafts",
+        "wellness",
+        "photography"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-010",
+      "event_name": "Intro to Digital Skills",
+      "date": "2027-01-16",
+      "start_time": "17:00",
+      "end_time": "19:00",
+      "location": {
+        "venue": "Space DO-SYN-0217",
+        "space_id": "DO-SYN-0217",
+        "address": "DEMO LISTING 217, Beispielstraße 20, 44369 Dortmund (synthetic)",
+        "district": "Huckarde",
+        "postcode": "44369",
+        "latitude": 51.53373,
+        "longitude": 7.408349
+      },
+      "event_type": "public",
+      "event_category": "education",
+      "description": "A practical beginner-friendly session on useful digital tools.",
+      "capacity_people": 15,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "wellness",
+        "pop-up retail",
+        "education",
+        "photography"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-011",
+      "event_name": "Community Repair Café",
+      "date": "2027-02-06",
+      "start_time": "13:00",
+      "end_time": "15:00",
+      "location": {
+        "venue": "Space DO-SYN-0017",
+        "space_id": "DO-SYN-0017",
+        "address": "DEMO LISTING 017, Teststraße 78, 44135 Dortmund (synthetic)",
+        "district": "Innenstadt-Ost",
+        "postcode": "44135",
+        "latitude": 51.515713,
+        "longitude": 7.493543
+      },
+      "event_type": "public",
+      "event_category": "community",
+      "description": "Bring a small item and learn basic repair skills with other attendees.",
+      "capacity_people": 10,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "office",
+        "crafts",
+        "meetings",
+        "pop-up retail",
+        "tutoring"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-012",
+      "event_name": "Art Jam: Draw and Connect",
+      "date": "2027-02-20",
+      "start_time": "11:00",
+      "end_time": "13:00",
+      "location": {
+        "venue": "Space DO-SYN-0016",
+        "space_id": "DO-SYN-0016",
+        "address": "DEMO LISTING 016, Innovationsweg 8, 44143 Dortmund (synthetic)",
+        "district": "Kaiserbrunnen",
+        "postcode": "44143",
+        "latitude": 51.522057,
+        "longitude": 7.499466
+      },
+      "event_type": "public",
+      "event_category": "arts and crafts",
+      "description": "A casual creative session; all experience levels are welcome.",
+      "capacity_people": 20,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "photography",
+        "small business",
+        "coworking",
+        "wellness",
+        "meetings"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-013",
+      "event_name": "Small Business Networking Meetup",
+      "date": "2027-03-06",
+      "start_time": "16:00",
+      "end_time": "18:00",
+      "location": {
+        "venue": "Space DO-SYN-0048",
+        "space_id": "DO-SYN-0048",
+        "address": "DEMO LISTING 048, Innovationsweg 91, 44369 Dortmund (synthetic)",
+        "district": "Huckarde",
+        "postcode": "44369",
+        "latitude": 51.532937,
+        "longitude": 7.415855
+      },
+      "event_type": "public",
+      "event_category": "networking",
+      "description": "Meet local founders, freelancers and people exploring new ideas.",
+      "capacity_people": 20,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "creative studio",
+        "small business"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-014",
+      "event_name": "Wellbeing & Stretch Session",
+      "date": "2027-03-20",
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "location": {
+        "venue": "Space DO-SYN-0112",
+        "space_id": "DO-SYN-0112",
+        "address": "DEMO LISTING 112, Fiktivweg 96, 44369 Dortmund (synthetic)",
+        "district": "Huckarde",
+        "postcode": "44369",
+        "latitude": 51.528726,
+        "longitude": 7.41002
+      },
+      "event_type": "public",
+      "event_category": "wellness",
+      "description": "A gentle movement session followed by tea and conversation.",
+      "capacity_people": 10,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "pop-up retail",
+        "crafts"
+      ]
+    },
+    {
+      "event_id": "DO-EVT-SYN-015",
+      "event_name": "Weekend Pop-up Shop",
+      "date": "2027-04-10",
+      "start_time": "11:00",
+      "end_time": "13:00",
+      "location": {
+        "venue": "Space DO-SYN-0120",
+        "space_id": "DO-SYN-0120",
+        "address": "DEMO LISTING 120, Projektstraße 15, 44339 Dortmund (synthetic)",
+        "district": "Eving",
+        "postcode": "44339",
+        "latitude": 51.551837,
+        "longitude": 7.475694
+      },
+      "event_type": "public",
+      "event_category": "market",
+      "description": "A demo pop-up featuring independent products and community projects.",
+      "capacity_people": 20,
+      "join_mode": "open",
+      "is_synthetic": true,
+      "demo_notice": "Fictional demo event at a synthetic demo listing. Not a real scheduled event.",
+      "space_purposes": [
+        "dance",
+        "music",
+        "small business",
+        "crafts"
+      ]
+    }
+  ]
+}
