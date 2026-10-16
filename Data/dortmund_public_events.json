@@ -3,29 +3,74 @@
   "schema_version": "1.0",
   "generated_on": "2026-10-16",
   "date_range": {
-    "from": "2026-10-16",
-    "to": "2027-04-16"
+    "start": "2026-10-16",
+    "end": "2027-04-16"
   },
   "event_type_values": [
     "public"
   ],
-  "total_events": 26,
-  "official_events_count": 11,
+  "total_events": 46,
+  "official_events_count": 31,
   "synthetic_demo_events_count": 15,
-  "notice": "Official events are sourced from the City of Dortmund event calendar and should be rechecked before production use. Synthetic events are fictional demos at synthetic spaces and must not be presented as real events.",
+  "notice": "Official events are sourced from City of Dortmund listings and should be rechecked with the source before attendance. Venue coordinates and Google Maps links are navigation pins; pins for broad or multi-location events are approximate. Synthetic demo events and their spaces are fictional.",
   "sources": [
-    {
-      "name": "City of Dortmund – Events & Highlights",
-      "url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
-      "used_for": "Official event names, dates, times and venues where shown."
-    },
-    {
-      "name": "City of Dortmund – Veranstaltungskalender",
-      "url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/",
-      "used_for": "Official event calendar listings."
-    }
+    "Official City of Dortmund event calendar: https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/",
+    "Official City of Dortmund Events & Highlights: https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
+    "Official City of Dortmund Westfalenpark events: https://www.dortmund.de/themen/freizeit-und-kultur/parks-seen-und-zoo/westfalenpark/die-veranstaltungen/"
   ],
   "events": [
+    {
+      "event_id": "DO-EVT-OFFICIAL-012",
+      "event_name": "2. Philharmonisches Konzert: Kopfkino",
+      "date": "2026-10-20",
+      "start_time": "19:30",
+      "end_time": null,
+      "location": {
+        "venue": "Konzerthaus Dortmund",
+        "address": "Brückstraße 21, 44135 Dortmund",
+        "postcode": "44135",
+        "district": "Innenstadt-West",
+        "latitude": 51.5154,
+        "longitude": 7.4667,
+        "google_maps_link": "https://www.google.com/maps?q=51.5154,7.4667",
+        "coordinates": {
+          "latitude": 51.5154,
+          "longitude": 7.4667
+        }
+      },
+      "event_type": "public",
+      "event_category": "Classical music",
+      "description": "Philharmonic concert listed in the City of Dortmund's event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-013",
+      "event_name": "Führung über die herbstliche Naturschutzinsel",
+      "date": "2026-10-22",
+      "start_time": "16:00",
+      "end_time": "17:30",
+      "location": {
+        "venue": "AGARD-Naturschutzhaus im Westfalenpark",
+        "address": "An der Buschmühle 3, 44139 Dortmund (inside Westfalenpark)",
+        "postcode": "44139",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.4955,
+        "longitude": 7.4783,
+        "google_maps_link": "https://www.google.com/maps?q=51.4955,7.4783",
+        "coordinates": {
+          "latitude": 51.4955,
+          "longitude": 7.4783
+        }
+      },
+      "event_type": "public",
+      "event_category": "Nature & education",
+      "description": "Guided autumn nature walk listed on the City of Dortmund's Westfalenpark events page.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Westfalenpark events",
+      "source_url": "https://www.dortmund.de/themen/freizeit-und-kultur/parks-seen-und-zoo/westfalenpark/die-veranstaltungen/"
+    },
     {
       "event_id": "DO-EVT-OFFICIAL-001",
       "event_name": "Green Movies 2026 – Ernte teilen – Anders ackern für die Umwelt",
@@ -34,8 +79,16 @@
       "end_time": null,
       "location": {
         "venue": "sweetSixteen-Kino im Depot",
-        "address": null,
-        "district": "Innenstadt-Nord"
+        "address": "Immermannstraße 29, 44147 Dortmund",
+        "district": "Innenstadt-Nord",
+        "postcode": "44147",
+        "latitude": 51.5284,
+        "longitude": 7.4557,
+        "google_maps_link": "https://www.google.com/maps?q=51.5284,7.4557",
+        "coordinates": {
+          "latitude": 51.5284,
+          "longitude": 7.4557
+        }
       },
       "event_type": "public",
       "event_category": "Theater & Film",
@@ -43,186 +96,6 @@
       "is_synthetic": false,
       "source": "Official City of Dortmund event calendar",
       "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-002",
-      "event_name": "Green Movies 2026 – Barbara Buser – Pionierin der Nachhaltigkeit",
-      "date": "2026-10-29",
-      "start_time": "19:00",
-      "end_time": null,
-      "location": {
-        "venue": "sweetSixteen-Kino im Depot",
-        "address": null,
-        "district": "Innenstadt-Nord"
-      },
-      "event_type": "public",
-      "event_category": "Theater & Film",
-      "description": "Film in the Green Movies environmental film series.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-003",
-      "event_name": "Filmreihe Architektur und Film 2026",
-      "date": "2026-11-03",
-      "start_time": "19:00",
-      "end_time": null,
-      "location": {
-        "venue": "sweetSixteen-Kino im Depot",
-        "address": null,
-        "district": "Innenstadt-Nord"
-      },
-      "event_type": "public",
-      "event_category": "Filmkunst & Kino",
-      "description": "Screening in the 2026 Architecture and Film series; the city calendar lists additional dates.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-004",
-      "event_name": "Filmreihe Architektur und Film 2026",
-      "date": "2026-11-10",
-      "start_time": "19:00",
-      "end_time": null,
-      "location": {
-        "venue": "sweetSixteen-Kino im Depot",
-        "address": null,
-        "district": "Innenstadt-Nord"
-      },
-      "event_type": "public",
-      "event_category": "Filmkunst & Kino",
-      "description": "Screening in the 2026 Architecture and Film series.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-005",
-      "event_name": "Filmreihe Architektur und Film 2026",
-      "date": "2026-11-17",
-      "start_time": "19:00",
-      "end_time": null,
-      "location": {
-        "venue": "sweetSixteen-Kino im Depot",
-        "address": null,
-        "district": "Innenstadt-Nord"
-      },
-      "event_type": "public",
-      "event_category": "Filmkunst & Kino",
-      "description": "Screening in the 2026 Architecture and Film series.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-006",
-      "event_name": "Filmreihe Architektur und Film 2026",
-      "date": "2026-11-24",
-      "start_time": "19:00",
-      "end_time": null,
-      "location": {
-        "venue": "sweetSixteen-Kino im Depot",
-        "address": null,
-        "district": "Innenstadt-Nord"
-      },
-      "event_type": "public",
-      "event_category": "Filmkunst & Kino",
-      "description": "Screening in the 2026 Architecture and Film series.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-007",
-      "event_name": "Ein bisschen Baum muss sein",
-      "date": "2026-11-29",
-      "start_time": "11:00",
-      "end_time": null,
-      "location": {
-        "venue": "Stadt- und Landesbibliothek Dortmund",
-        "address": null,
-        "district": "Innenstadt-West"
-      },
-      "event_type": "public",
-      "event_category": "Kabarett & Comedy",
-      "description": "Event listed in the City of Dortmund event calendar.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-008",
-      "event_name": "Auf die Würfel, fertig, los!",
-      "date": "2026-12-12",
-      "start_time": "15:15",
-      "end_time": null,
-      "location": {
-        "venue": "Stadt- und Landesbibliothek Dortmund",
-        "address": null,
-        "district": "Innenstadt-West"
-      },
-      "event_type": "public",
-      "event_category": "Community / Games",
-      "description": "Games afternoon listed in the City of Dortmund event calendar.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-009",
-      "event_name": "Texte treffen Töne – Begegnung im Studio B",
-      "date": "2027-01-25",
-      "start_time": "19:00",
-      "end_time": "20:10",
-      "location": {
-        "venue": "Stadt- und Landesbibliothek Dortmund",
-        "address": null,
-        "district": "Innenstadt-West"
-      },
-      "event_type": "public",
-      "event_category": "Concert / Music",
-      "description": "Music event listed in the City of Dortmund event calendar.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-010",
-      "event_name": "Halloween Familienfest",
-      "date": "2026-10-31",
-      "start_time": "17:00",
-      "end_time": "20:00",
-      "location": {
-        "venue": "Westfalenpark Dortmund",
-        "address": null,
-        "district": "Innenstadt-Ost"
-      },
-      "event_type": "public",
-      "event_category": "Family / Festival",
-      "description": "Halloween family event listed in the City of Dortmund's Events & Highlights calendar.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
-    },
-    {
-      "event_id": "DO-EVT-OFFICIAL-011",
-      "event_name": "30. Dortmunder Hansemarkt",
-      "date": "2026-11-04",
-      "start_time": null,
-      "end_time": null,
-      "location": {
-        "venue": "Various locations in Dortmund",
-        "address": null,
-        "district": null
-      },
-      "event_type": "public",
-      "event_category": "Market / Festival",
-      "description": "Historic-themed market with crafts, culture and food; exact daily schedule should be checked on the official calendar.",
-      "is_synthetic": false,
-      "source": "Official City of Dortmund event calendar",
-      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
     },
     {
       "event_id": "DO-EVT-SYN-001",
@@ -237,7 +110,13 @@
         "district": "Scharnhorst",
         "postcode": "44328",
         "latitude": 51.554317,
-        "longitude": 7.54082
+        "longitude": 7.54082,
+        "google_maps_link": "https://www.google.com/maps?q=51.554317,7.54082",
+        "coordinates": {
+          "latitude": 51.554317,
+          "longitude": 7.54082
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "community",
@@ -254,6 +133,58 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-014",
+      "event_name": "Hagebuttenbunt – KreativWorkshop",
+      "date": "2026-10-27",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "location": {
+        "venue": "Westfalenpark Dortmund",
+        "address": "An der Buschmühle 3, 44139 Dortmund",
+        "postcode": "44139",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.4955,
+        "longitude": 7.4783,
+        "google_maps_link": "https://www.google.com/maps?q=51.4955,7.4783",
+        "coordinates": {
+          "latitude": 51.4955,
+          "longitude": 7.4783
+        }
+      },
+      "event_type": "public",
+      "event_category": "Workshop",
+      "description": "Creative seasonal workshop listed on the City of Dortmund's Westfalenpark events page.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Westfalenpark events",
+      "source_url": "https://www.dortmund.de/themen/freizeit-und-kultur/parks-seen-und-zoo/westfalenpark/die-veranstaltungen/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-002",
+      "event_name": "Green Movies 2026 – Barbara Buser – Pionierin der Nachhaltigkeit",
+      "date": "2026-10-29",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": "Immermannstraße 29, 44147 Dortmund",
+        "district": "Innenstadt-Nord",
+        "postcode": "44147",
+        "latitude": 51.5284,
+        "longitude": 7.4557,
+        "google_maps_link": "https://www.google.com/maps?q=51.5284,7.4557",
+        "coordinates": {
+          "latitude": 51.5284,
+          "longitude": 7.4557
+        }
+      },
+      "event_type": "public",
+      "event_category": "Theater & Film",
+      "description": "Film in the Green Movies environmental film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
       "event_id": "DO-EVT-SYN-002",
       "event_name": "Beginner Photography Walkshop",
       "date": "2026-10-30",
@@ -266,7 +197,13 @@
         "district": "Brackel",
         "postcode": "44309",
         "latitude": 51.528098,
-        "longitude": 7.568975
+        "longitude": 7.568975,
+        "google_maps_link": "https://www.google.com/maps?q=51.528098,7.568975",
+        "coordinates": {
+          "latitude": 51.528098,
+          "longitude": 7.568975
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "workshop",
@@ -283,6 +220,137 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-010",
+      "event_name": "Halloween Familienfest",
+      "date": "2026-10-31",
+      "start_time": "17:00",
+      "end_time": "20:00",
+      "location": {
+        "venue": "Westfalenpark Dortmund",
+        "address": "An der Buschmühle 3, 44139 Dortmund",
+        "district": "Innenstadt-Ost",
+        "postcode": "44139",
+        "latitude": 51.4955,
+        "longitude": 7.4783,
+        "google_maps_link": "https://www.google.com/maps?q=51.4955,7.4783",
+        "coordinates": {
+          "latitude": 51.4955,
+          "longitude": 7.4783
+        }
+      },
+      "event_type": "public",
+      "event_category": "Family / Festival",
+      "description": "Halloween family event listed in the City of Dortmund's Events & Highlights calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-003",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-03",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": "Immermannstraße 29, 44147 Dortmund",
+        "district": "Innenstadt-Nord",
+        "postcode": "44147",
+        "latitude": 51.5284,
+        "longitude": 7.4557,
+        "google_maps_link": "https://www.google.com/maps?q=51.5284,7.4557",
+        "coordinates": {
+          "latitude": 51.5284,
+          "longitude": 7.4557
+        }
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series; the city calendar lists additional dates.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-015",
+      "event_name": "Talkrunde: Invasive Arten in Parks – wie wir damit umgehen sollten",
+      "date": "2026-11-04",
+      "start_time": "18:30",
+      "end_time": "20:00",
+      "location": {
+        "venue": "AGARD-Naturschutzhaus im Westfalenpark",
+        "address": "An der Buschmühle 3, 44139 Dortmund (inside Westfalenpark)",
+        "postcode": "44139",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.4955,
+        "longitude": 7.4783,
+        "google_maps_link": "https://www.google.com/maps?q=51.4955,7.4783",
+        "coordinates": {
+          "latitude": 51.4955,
+          "longitude": 7.4783
+        }
+      },
+      "event_type": "public",
+      "event_category": "Nature & discussion",
+      "description": "Discussion event listed on the City of Dortmund's Westfalenpark events page.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Westfalenpark events",
+      "source_url": "https://www.dortmund.de/themen/freizeit-und-kultur/parks-seen-und-zoo/westfalenpark/die-veranstaltungen/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-011",
+      "event_name": "30. Dortmunder Hansemarkt",
+      "date": "2026-11-04",
+      "start_time": null,
+      "end_time": null,
+      "location": {
+        "venue": "Various locations in Dortmund",
+        "address": "Dortmunder Innenstadt (representative pin: Alter Markt, 44137 Dortmund)",
+        "district": "Innenstadt-West",
+        "postcode": "44137",
+        "latitude": 51.5136,
+        "longitude": 7.4653,
+        "location_note": "Approximate central-city map pin; official listing describes multiple venues.",
+        "google_maps_link": "https://www.google.com/maps?q=51.5136,7.4653",
+        "coordinates": {
+          "latitude": 51.5136,
+          "longitude": 7.4653
+        }
+      },
+      "event_type": "public",
+      "event_category": "Market / Festival",
+      "description": "Historic-themed market with crafts, culture and food; exact daily schedule should be checked on the official calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-016",
+      "event_name": "Wandelbarer Westfalenpark",
+      "date": "2026-11-05",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "location": {
+        "venue": "Westfalenpark Dortmund",
+        "address": "An der Buschmühle 3, 44139 Dortmund",
+        "postcode": "44139",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.4955,
+        "longitude": 7.4783,
+        "google_maps_link": "https://www.google.com/maps?q=51.4955,7.4783",
+        "coordinates": {
+          "latitude": 51.4955,
+          "longitude": 7.4783
+        }
+      },
+      "event_type": "public",
+      "event_category": "Guided tour",
+      "description": "Park event listed on the City of Dortmund's Westfalenpark events page.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Westfalenpark events",
+      "source_url": "https://www.dortmund.de/themen/freizeit-und-kultur/parks-seen-und-zoo/westfalenpark/die-veranstaltungen/"
+    },
+    {
       "event_id": "DO-EVT-SYN-003",
       "event_name": "Board Games Social Evening",
       "date": "2026-11-07",
@@ -295,7 +363,13 @@
         "district": "Innenstadt-Nord",
         "postcode": "44145",
         "latitude": 51.528893,
-        "longitude": 7.471046
+        "longitude": 7.471046,
+        "google_maps_link": "https://www.google.com/maps?q=51.528893,7.471046",
+        "coordinates": {
+          "latitude": 51.528893,
+          "longitude": 7.471046
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "community",
@@ -313,6 +387,214 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-017",
+      "event_name": "St. Martinszug",
+      "date": "2026-11-07",
+      "start_time": "16:45",
+      "end_time": null,
+      "location": {
+        "venue": "Westfalenpark Dortmund",
+        "address": "An der Buschmühle 3, 44139 Dortmund",
+        "postcode": "44139",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.4955,
+        "longitude": 7.4783,
+        "google_maps_link": "https://www.google.com/maps?q=51.4955,7.4783",
+        "coordinates": {
+          "latitude": 51.4955,
+          "longitude": 7.4783
+        }
+      },
+      "event_type": "public",
+      "event_category": "Family",
+      "description": "Traditional lantern procession listed by the City of Dortmund; ticket availability may be limited.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund events & highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-018",
+      "event_name": "Tango Argentino // Caio Rodriguez y su Orquesta",
+      "date": "2026-11-07",
+      "start_time": "20:00",
+      "end_time": null,
+      "location": {
+        "venue": "Dietrich-Keuning-Haus",
+        "address": "Leopoldstraße 50–58, 44147 Dortmund",
+        "postcode": "44147",
+        "district": "Innenstadt-Nord",
+        "latitude": 51.5252,
+        "longitude": 7.4661,
+        "google_maps_link": "https://www.google.com/maps?q=51.5252,7.4661",
+        "coordinates": {
+          "latitude": 51.5252,
+          "longitude": 7.4661
+        }
+      },
+      "event_type": "public",
+      "event_category": "Dance & music",
+      "description": "Tango event listed in the City of Dortmund's event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund events & highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-031",
+      "event_name": "Fritz Brinkhoff – der Vater des Dortmunder Exports",
+      "date": "2026-11-08",
+      "start_time": "12:30",
+      "end_time": "13:30",
+      "location": {
+        "venue": "Brauerei-Museum Dortmund",
+        "address": "Steigerstraße 16, 44145 Dortmund",
+        "postcode": "44145",
+        "district": "Innenstadt-Nord",
+        "latitude": 51.5357,
+        "longitude": 7.4633,
+        "coordinates": {
+          "latitude": 51.5357,
+          "longitude": 7.4633
+        },
+        "google_maps_link": "https://www.google.com/maps?q=51.5357,7.4633"
+      },
+      "event_type": "public",
+      "event_category": "Guided tour / local history",
+      "description": "Guided tour listed in the City of Dortmund event calendar, about Fritz Brinkhoff and the history of Dortmund Export beer.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://application.dortmund.de/dortmund-erleben/veranstaltungskalender/termin_143256.html"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-019",
+      "event_name": "LesArt.Stadion: Christoph Biermann und Ronny Blaschke",
+      "date": "2026-11-09",
+      "start_time": "19:30",
+      "end_time": null,
+      "location": {
+        "venue": "Signal Iduna Park",
+        "address": "Strobelallee 50, 44139 Dortmund",
+        "postcode": "44139",
+        "district": "Innenstadt-West",
+        "latitude": 51.4926,
+        "longitude": 7.4518,
+        "google_maps_link": "https://www.google.com/maps?q=51.4926,7.4518",
+        "coordinates": {
+          "latitude": 51.4926,
+          "longitude": 7.4518
+        }
+      },
+      "event_type": "public",
+      "event_category": "Literature & sport",
+      "description": "Reading and conversation about football literature, listed in the City of Dortmund's events & highlights.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund events & highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-004",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-10",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": "Immermannstraße 29, 44147 Dortmund",
+        "district": "Innenstadt-Nord",
+        "postcode": "44147",
+        "latitude": 51.5284,
+        "longitude": 7.4557,
+        "google_maps_link": "https://www.google.com/maps?q=51.5284,7.4557",
+        "coordinates": {
+          "latitude": 51.5284,
+          "longitude": 7.4557
+        }
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-020",
+      "event_name": "Talkrunde: Dortmunder Parks – was da kreucht und fleucht",
+      "date": "2026-11-11",
+      "start_time": "18:30",
+      "end_time": "20:00",
+      "location": {
+        "venue": "AGARD-Naturschutzhaus im Westfalenpark",
+        "address": "An der Buschmühle 3, 44139 Dortmund (inside Westfalenpark)",
+        "postcode": "44139",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.4955,
+        "longitude": 7.4783,
+        "google_maps_link": "https://www.google.com/maps?q=51.4955,7.4783",
+        "coordinates": {
+          "latitude": 51.4955,
+          "longitude": 7.4783
+        }
+      },
+      "event_type": "public",
+      "event_category": "Nature & discussion",
+      "description": "Nature discussion listed on the City of Dortmund's Westfalenpark events page.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Westfalenpark events",
+      "source_url": "https://www.dortmund.de/themen/freizeit-und-kultur/parks-seen-und-zoo/westfalenpark/die-veranstaltungen/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-022",
+      "event_name": "The World of Hans Zimmer – A New Dimension",
+      "date": "2026-11-12",
+      "start_time": "19:30",
+      "end_time": null,
+      "event_type": "public",
+      "event_category": "Concert / music",
+      "description": "Concert listed in the City of Dortmund's Events & Highlights calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Events & Highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
+      "location": {
+        "venue": "Westfalenhalle Dortmund",
+        "address": "Rheinlanddamm 200, 44139 Dortmund",
+        "postcode": "44139",
+        "district": "Innenstadt-West",
+        "latitude": 51.4965,
+        "longitude": 7.4556,
+        "google_maps_link": "https://www.google.com/maps?q=51.4965,7.4556",
+        "coordinates": {
+          "latitude": 51.4965,
+          "longitude": 7.4556
+        }
+      }
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-023",
+      "event_name": "Comedy: Thorsten Sträter – Die Zyklopen von Saint-Tropez 2026",
+      "date": "2026-11-13",
+      "start_time": "20:00",
+      "end_time": null,
+      "event_type": "public",
+      "event_category": "Comedy",
+      "description": "Comedy show listed in the City of Dortmund's Events & Highlights calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Events & Highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
+      "location": {
+        "venue": "Westfalenhalle Dortmund",
+        "address": "Rheinlanddamm 200, 44139 Dortmund",
+        "postcode": "44139",
+        "district": "Innenstadt-West",
+        "latitude": 51.4965,
+        "longitude": 7.4556,
+        "google_maps_link": "https://www.google.com/maps?q=51.4965,7.4556",
+        "coordinates": {
+          "latitude": 51.4965,
+          "longitude": 7.4556
+        }
+      }
+    },
+    {
       "event_id": "DO-EVT-SYN-004",
       "event_name": "Creative Reuse Craft Workshop",
       "date": "2026-11-14",
@@ -325,7 +607,13 @@
         "district": "Aplerbeck",
         "postcode": "44287",
         "latitude": 51.482265,
-        "longitude": 7.567745
+        "longitude": 7.567745,
+        "google_maps_link": "https://www.google.com/maps?q=51.482265,7.567745",
+        "coordinates": {
+          "latitude": 51.482265,
+          "longitude": 7.567745
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "arts and crafts",
@@ -340,6 +628,137 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-005",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-17",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": "Immermannstraße 29, 44147 Dortmund",
+        "district": "Innenstadt-Nord",
+        "postcode": "44147",
+        "latitude": 51.5284,
+        "longitude": 7.4557,
+        "google_maps_link": "https://www.google.com/maps?q=51.5284,7.4557",
+        "coordinates": {
+          "latitude": 51.5284,
+          "longitude": 7.4557
+        }
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-024",
+      "event_name": "3. Philharmonisches Konzert: Urknall",
+      "date": "2026-11-17",
+      "start_time": "19:30",
+      "end_time": "21:25",
+      "event_type": "public",
+      "event_category": "Classical music",
+      "description": "Philharmonic concert listed in the City of Dortmund's Events & Highlights calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Events & Highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
+      "location": {
+        "venue": "Konzerthaus Dortmund",
+        "address": "Brückstraße 21, 44135 Dortmund",
+        "postcode": "44135",
+        "district": "Innenstadt-West",
+        "latitude": 51.5154,
+        "longitude": 7.4667,
+        "google_maps_link": "https://www.google.com/maps?q=51.5154,7.4667",
+        "coordinates": {
+          "latitude": 51.5154,
+          "longitude": 7.4667
+        }
+      }
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-025",
+      "event_name": "Weihnachtsstadt Dortmund 2026 – opening day",
+      "date": "2026-11-19",
+      "start_time": "11:00",
+      "end_time": "21:00",
+      "event_type": "public",
+      "event_category": "Market / seasonal festival",
+      "description": "Opening day of Dortmund's Christmas market season; the official calendar lists the event across multiple dates and central-city locations.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Events & Highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
+      "location": {
+        "venue": "Dortmunder Innenstadt",
+        "address": "Innenstadt Dortmund (representative pin: Friedensplatz, 44135 Dortmund)",
+        "postcode": "44135",
+        "district": "Innenstadt-West",
+        "latitude": 51.5135,
+        "longitude": 7.4632,
+        "location_note": "Approximate central-city map pin; the event spans multiple locations.",
+        "google_maps_link": "https://www.google.com/maps?q=51.5135,7.4632",
+        "coordinates": {
+          "latitude": 51.5135,
+          "longitude": 7.4632
+        }
+      }
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-021",
+      "event_name": "Grafik aus Dortmund – exhibition",
+      "date": "2026-11-20",
+      "start_time": "11:00",
+      "end_time": "20:30",
+      "location": {
+        "venue": "Depot Dortmund",
+        "address": "Immermannstraße 29, 44147 Dortmund",
+        "postcode": "44147",
+        "district": "Innenstadt-Nord",
+        "latitude": 51.5284,
+        "longitude": 7.4557,
+        "google_maps_link": "https://www.google.com/maps?q=51.5284,7.4557",
+        "coordinates": {
+          "latitude": 51.5284,
+          "longitude": 7.4557
+        }
+      },
+      "event_type": "public",
+      "event_category": "Art & exhibition",
+      "description": "Exhibition featuring 36 artists, listed by the City of Dortmund's Kulturbüro. This is one of multiple dates for the exhibition.",
+      "is_synthetic": false,
+      "source": "City of Dortmund – Kulturbüro",
+      "source_url": "https://application.dortmund.de/rathaus-und-verwaltung/verwaltung/kulturbetriebe/kulturbuero/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-026",
+      "event_name": "Tag des Dortmunder Exports",
+      "date": "2026-11-21",
+      "start_time": "12:00",
+      "end_time": "22:00",
+      "event_type": "public",
+      "event_category": "Community / local business",
+      "description": "Event listed by the City of Dortmund; the official listing gives the venue address as Elias-Bahn-Weg 2, 44263 Dortmund.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Events & Highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/termin_146504.html",
+      "location": {
+        "venue": "Bergmann Brauerei",
+        "address": "Elias-Bahn-Weg 2, 44263 Dortmund",
+        "postcode": "44263",
+        "district": "Hörde",
+        "latitude": 51.4887,
+        "longitude": 7.4685,
+        "google_maps_link": "https://www.google.com/maps?q=51.4887,7.4685",
+        "coordinates": {
+          "latitude": 51.4887,
+          "longitude": 7.4685
+        }
+      }
+    },
+    {
       "event_id": "DO-EVT-SYN-005",
       "event_name": "Local Makers Pop-up",
       "date": "2026-11-21",
@@ -352,7 +771,13 @@
         "district": "Aplerbeck",
         "postcode": "44287",
         "latitude": 51.48231,
-        "longitude": 7.567066
+        "longitude": 7.567066,
+        "google_maps_link": "https://www.google.com/maps?q=51.48231,7.567066",
+        "coordinates": {
+          "latitude": 51.48231,
+          "longitude": 7.567066
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "market",
@@ -369,6 +794,84 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-006",
+      "event_name": "Filmreihe Architektur und Film 2026",
+      "date": "2026-11-24",
+      "start_time": "19:00",
+      "end_time": null,
+      "location": {
+        "venue": "sweetSixteen-Kino im Depot",
+        "address": "Immermannstraße 29, 44147 Dortmund",
+        "district": "Innenstadt-Nord",
+        "postcode": "44147",
+        "latitude": 51.5284,
+        "longitude": 7.4557,
+        "google_maps_link": "https://www.google.com/maps?q=51.5284,7.4557",
+        "coordinates": {
+          "latitude": 51.5284,
+          "longitude": 7.4557
+        }
+      },
+      "event_type": "public",
+      "event_category": "Filmkunst & Kino",
+      "description": "Screening in the 2026 Architecture and Film series.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-027",
+      "event_name": "58. Dortmunder Bücherstreit",
+      "date": "2026-11-26",
+      "start_time": "19:30",
+      "end_time": null,
+      "event_type": "public",
+      "event_category": "Literature / discussion",
+      "description": "Literature discussion listed in the City of Dortmund's Events & Highlights calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund – Events & Highlights",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/events-und-highlights/",
+      "location": {
+        "venue": "Stadt- und Landesbibliothek - Studio B",
+        "address": "Max-von-der-Grün-Platz 1–3, 44137 Dortmund",
+        "postcode": "44137",
+        "district": "Innenstadt-West",
+        "latitude": 51.5145,
+        "longitude": 7.4653,
+        "google_maps_link": "https://www.google.com/maps?q=51.5145,7.4653",
+        "coordinates": {
+          "latitude": 51.5145,
+          "longitude": 7.4653
+        }
+      }
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-028",
+      "event_name": "Buchvorstellung: Norbert Frei – Konrad Adenauer. Kanzler nach der Katastrophe",
+      "date": "2026-11-26",
+      "start_time": "19:30",
+      "end_time": null,
+      "event_type": "public",
+      "event_category": "Talk / book presentation",
+      "description": "Book presentation listed in the City of Dortmund's event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/",
+      "location": {
+        "venue": "Stadtarchiv Dortmund",
+        "address": "Märkische Straße 14, 44141 Dortmund",
+        "postcode": "44141",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.5094,
+        "longitude": 7.4771,
+        "google_maps_link": "https://www.google.com/maps?q=51.5094,7.4771",
+        "coordinates": {
+          "latitude": 51.5094,
+          "longitude": 7.4771
+        }
+      }
+    },
+    {
       "event_id": "DO-EVT-SYN-006",
       "event_name": "Study Together: Focus Session",
       "date": "2026-11-28",
@@ -381,7 +884,13 @@
         "district": "Innenstadt-West",
         "postcode": "44137",
         "latitude": 51.511286,
-        "longitude": 7.456192
+        "longitude": 7.456192,
+        "google_maps_link": "https://www.google.com/maps?q=51.511286,7.456192",
+        "coordinates": {
+          "latitude": 51.511286,
+          "longitude": 7.456192
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "education",
@@ -397,6 +906,58 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-007",
+      "event_name": "Ein bisschen Baum muss sein",
+      "date": "2026-11-29",
+      "start_time": "11:00",
+      "end_time": null,
+      "location": {
+        "venue": "Stadt- und Landesbibliothek Dortmund",
+        "address": "Max-von-der-Grün-Platz 1–3, 44137 Dortmund",
+        "district": "Innenstadt-West",
+        "postcode": "44137",
+        "latitude": 51.5145,
+        "longitude": 7.4653,
+        "google_maps_link": "https://www.google.com/maps?q=51.5145,7.4653",
+        "coordinates": {
+          "latitude": 51.5145,
+          "longitude": 7.4653
+        }
+      },
+      "event_type": "public",
+      "event_category": "Kabarett & Comedy",
+      "description": "Event listed in the City of Dortmund event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-029",
+      "event_name": "Vortrag: Gisbert Strotdrees – Jüdisches Landleben: Vergessene Welten in Westfalen",
+      "date": "2026-12-02",
+      "start_time": "19:00",
+      "end_time": null,
+      "event_type": "public",
+      "event_category": "Talk / history",
+      "description": "Lecture listed in the City of Dortmund's event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/",
+      "location": {
+        "venue": "Stadtarchiv Dortmund",
+        "address": "Märkische Straße 14, 44141 Dortmund",
+        "postcode": "44141",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.5094,
+        "longitude": 7.4771,
+        "google_maps_link": "https://www.google.com/maps?q=51.5094,7.4771",
+        "coordinates": {
+          "latitude": 51.5094,
+          "longitude": 7.4771
+        }
+      }
+    },
+    {
       "event_id": "DO-EVT-SYN-007",
       "event_name": "Neighbourhood Language Café",
       "date": "2026-12-05",
@@ -409,7 +970,13 @@
         "district": "Innenstadt-West",
         "postcode": "44137",
         "latitude": 51.50967,
-        "longitude": 7.452307
+        "longitude": 7.452307,
+        "google_maps_link": "https://www.google.com/maps?q=51.50967,7.452307",
+        "coordinates": {
+          "latitude": 51.50967,
+          "longitude": 7.452307
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "community",
@@ -425,6 +992,58 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-030",
+      "event_name": "Buchvorstellung: Volker Weiss – Das Deutsche Demokratische Reich",
+      "date": "2026-12-10",
+      "start_time": "19:00",
+      "end_time": null,
+      "event_type": "public",
+      "event_category": "Talk / book presentation",
+      "description": "Book presentation listed in the City of Dortmund's event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/",
+      "location": {
+        "venue": "Stadtarchiv Dortmund",
+        "address": "Märkische Straße 14, 44141 Dortmund",
+        "postcode": "44141",
+        "district": "Innenstadt-Ost",
+        "latitude": 51.5094,
+        "longitude": 7.4771,
+        "google_maps_link": "https://www.google.com/maps?q=51.5094,7.4771",
+        "coordinates": {
+          "latitude": 51.5094,
+          "longitude": 7.4771
+        }
+      }
+    },
+    {
+      "event_id": "DO-EVT-OFFICIAL-008",
+      "event_name": "Auf die Würfel, fertig, los!",
+      "date": "2026-12-12",
+      "start_time": "15:15",
+      "end_time": null,
+      "location": {
+        "venue": "Stadt- und Landesbibliothek Dortmund",
+        "address": "Max-von-der-Grün-Platz 1–3, 44137 Dortmund",
+        "district": "Innenstadt-West",
+        "postcode": "44137",
+        "latitude": 51.5145,
+        "longitude": 7.4653,
+        "google_maps_link": "https://www.google.com/maps?q=51.5145,7.4653",
+        "coordinates": {
+          "latitude": 51.5145,
+          "longitude": 7.4653
+        }
+      },
+      "event_type": "public",
+      "event_category": "Community / Games",
+      "description": "Games afternoon listed in the City of Dortmund event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
       "event_id": "DO-EVT-SYN-008",
       "event_name": "Acoustic Open Mic",
       "date": "2026-12-13",
@@ -437,7 +1056,13 @@
         "district": "Aplerbeck",
         "postcode": "44287",
         "latitude": 51.480151,
-        "longitude": 7.563317
+        "longitude": 7.563317,
+        "google_maps_link": "https://www.google.com/maps?q=51.480151,7.563317",
+        "coordinates": {
+          "latitude": 51.480151,
+          "longitude": 7.563317
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "music",
@@ -467,7 +1092,13 @@
         "district": "Huckarde",
         "postcode": "44369",
         "latitude": 51.535762,
-        "longitude": 7.415132
+        "longitude": 7.415132,
+        "google_maps_link": "https://www.google.com/maps?q=51.535762,7.415132",
+        "coordinates": {
+          "latitude": 51.535762,
+          "longitude": 7.415132
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "workshop",
@@ -495,7 +1126,13 @@
         "district": "Huckarde",
         "postcode": "44369",
         "latitude": 51.53373,
-        "longitude": 7.408349
+        "longitude": 7.408349,
+        "google_maps_link": "https://www.google.com/maps?q=51.53373,7.408349",
+        "coordinates": {
+          "latitude": 51.53373,
+          "longitude": 7.408349
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "education",
@@ -512,6 +1149,32 @@
       ]
     },
     {
+      "event_id": "DO-EVT-OFFICIAL-009",
+      "event_name": "Texte treffen Töne – Begegnung im Studio B",
+      "date": "2027-01-25",
+      "start_time": "19:00",
+      "end_time": "20:10",
+      "location": {
+        "venue": "Stadt- und Landesbibliothek Dortmund",
+        "address": "Max-von-der-Grün-Platz 1–3, 44137 Dortmund",
+        "district": "Innenstadt-West",
+        "postcode": "44137",
+        "latitude": 51.5145,
+        "longitude": 7.4653,
+        "google_maps_link": "https://www.google.com/maps?q=51.5145,7.4653",
+        "coordinates": {
+          "latitude": 51.5145,
+          "longitude": 7.4653
+        }
+      },
+      "event_type": "public",
+      "event_category": "Concert / Music",
+      "description": "Music event listed in the City of Dortmund event calendar.",
+      "is_synthetic": false,
+      "source": "Official City of Dortmund event calendar",
+      "source_url": "https://www.dortmund.de/dortmund-erleben/veranstaltungskalender/"
+    },
+    {
       "event_id": "DO-EVT-SYN-011",
       "event_name": "Community Repair Café",
       "date": "2027-02-06",
@@ -524,7 +1187,13 @@
         "district": "Innenstadt-Ost",
         "postcode": "44135",
         "latitude": 51.515713,
-        "longitude": 7.493543
+        "longitude": 7.493543,
+        "google_maps_link": "https://www.google.com/maps?q=51.515713,7.493543",
+        "coordinates": {
+          "latitude": 51.515713,
+          "longitude": 7.493543
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "community",
@@ -554,7 +1223,13 @@
         "district": "Kaiserbrunnen",
         "postcode": "44143",
         "latitude": 51.522057,
-        "longitude": 7.499466
+        "longitude": 7.499466,
+        "google_maps_link": "https://www.google.com/maps?q=51.522057,7.499466",
+        "coordinates": {
+          "latitude": 51.522057,
+          "longitude": 7.499466
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "arts and crafts",
@@ -584,7 +1259,13 @@
         "district": "Huckarde",
         "postcode": "44369",
         "latitude": 51.532937,
-        "longitude": 7.415855
+        "longitude": 7.415855,
+        "google_maps_link": "https://www.google.com/maps?q=51.532937,7.415855",
+        "coordinates": {
+          "latitude": 51.532937,
+          "longitude": 7.415855
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "networking",
@@ -611,7 +1292,13 @@
         "district": "Huckarde",
         "postcode": "44369",
         "latitude": 51.528726,
-        "longitude": 7.41002
+        "longitude": 7.41002,
+        "google_maps_link": "https://www.google.com/maps?q=51.528726,7.41002",
+        "coordinates": {
+          "latitude": 51.528726,
+          "longitude": 7.41002
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "wellness",
@@ -638,7 +1325,13 @@
         "district": "Eving",
         "postcode": "44339",
         "latitude": 51.551837,
-        "longitude": 7.475694
+        "longitude": 7.475694,
+        "google_maps_link": "https://www.google.com/maps?q=51.551837,7.475694",
+        "coordinates": {
+          "latitude": 51.551837,
+          "longitude": 7.475694
+        },
+        "location_note": "Synthetic demo listing and approximate demo coordinates; not a real property location."
       },
       "event_type": "public",
       "event_category": "market",
