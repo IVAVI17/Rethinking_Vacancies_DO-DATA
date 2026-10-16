@@ -130,7 +130,7 @@
             <div><label for="f-price-min">Minimum</label><div class="money-field"><span>€</span><input id="f-price-min" type="number" min="0" inputmode="numeric" aria-label="Minimum price in euros"></div></div>
             <div><label for="f-price-max">Maximum</label><div class="money-field"><span>€</span><input id="f-price-max" type="number" min="0" inputmode="numeric" aria-label="Maximum price in euros"></div></div>
           </div>
-          <div class="hint-inline" id="price-context">Loading price distribution…</div>
+          <div class="hint-inline" id="price-context">Loading demo price distribution…</div>
         </div>
         <div class="filter-section"><h3>Space &amp; capacity</h3><p class="sub">Choose the space size and number of people.</p>
           <div class="modal-grid">
@@ -179,7 +179,7 @@
     const emptyFilters = () => ({unit:'day',priceMin:null,priceMax:null,areaMin:null,areaMax:null,capacity:null,district:'',purpose:'',duration:'',wifi:false,kitchen:false,washroom:false,parking:false,condition:'',transit:null,deposit:'',negotiable:''});
     let applied=emptyFilters(),priceTouched=false,chartMax=350,chartMin=0,histogramValues=[],lastFocus=null;
     function getRate(p){const rates=p.price?.rates||{};
-      const chosen=applied.priceMin!==null||applied.priceMax!==null ? applied.unit : ['day','week','month','hour'].find(u=>Number.isFinite(rates[u]));
+      const chosen=(applied.priceMin!==null||applied.priceMax!==null) ? applied.unit : ['day','week','month','hour'].find(u=>Number.isFinite(rates[u]));
       return Number.isFinite(rates[chosen]) ? {unit:chosen,value:rates[chosen]} : null;
     }
     const numeric = id => $(id).value.trim()===''?null:Number($(id).value);
@@ -256,7 +256,6 @@
       for(const id of ['district','purpose','duration','condition','deposit','negotiable'])next[id]=$('f-'+id).value;
       for(const id of ['wifi','kitchen','washroom','parking'])next[id]=$('f-'+id).checked;
       applied=next;closeFilters();setFilterIndicator();
-      if(aiMatches!==null){aiMatches=null;$('clear-ai').hidden=true;$('ai-status').textContent='';$('ai-status').className='';}
       update();
     }
     const coordinates = p => [Number(p.address?.longitude),Number(p.address?.latitude)];
@@ -283,6 +282,7 @@
         return isLocated(p)&&txt.includes(term)&&matchesFilters(p);
       });
       map.getSource('spaces').setData(buildFeatures());$('count').textContent=`${filtered.length} ${aiMatches!==null?'AI-matched':'demo'} spaces`;
+      if(aiMatches!==null){$('ai-status').className='success';$('ai-status').textContent=`${filtered.length} matches found`;}
       const cards=$('cards');cards.replaceChildren();
       for(const p of filtered.slice(0,40)){
         const r=getRate(p),card=document.createElement('button');card.className='card';
@@ -293,7 +293,7 @@
         card.onclick=()=>openSpace(p);cards.appendChild(card);
       }
       if(filtered.length>40){const tip=document.createElement('p');tip.textContent=`Showing first 40 of ${filtered.length} matches; zoom and click the map for the rest.`;cards.appendChild(tip);}
-      if(!filtered.length)cards.textContent=aiMatches!==null?'No matching demo spaces. Try a broader AI prompt or clear advanced filters.':'No matching spaces. Change or clear the filters.';
+      if(!filtered.length)cards.textContent='No matching spaces.';
     }
     const byId=new Map();
     map.on('load',async()=>{
@@ -342,7 +342,7 @@
           const bounds=new maplibregl.LngLatBounds();pts.forEach(p=>bounds.extend(coordinates(p)));
           map.fitBounds(bounds,{padding:60,maxZoom:13.2,duration:600});
         }}
-      }catch(err){$('ai-status').className='error';$('ai-status').textContent=String(err.message||err)+'. You can still use manual filters below.';}
+      }catch(err){$('ai-status').className='error';$('ai-status').textContent=String(err.message||err);}
       finally{btn.disabled=false;btn.textContent='✦ Find matches';}
     }
     $('ai-form').addEventListener('submit',runAiSearch);
