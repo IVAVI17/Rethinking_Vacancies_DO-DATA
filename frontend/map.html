@@ -134,7 +134,13 @@ main > aside:not(.results-pane){background:#FFFFFF !important;border-right:1px s
  main:has(>.results-pane) > .results-pane{grid-column:3;grid-row:1;min-width:0}
 }
 .results-pane{background:#fff;border-left:1px solid #E6EAED;padding:18px 13px;overflow-y:auto;overscroll-behavior:contain}
-.results-pane #count{margin:0 0 14px;font-weight:850;font-size:14px;color:#253036}
+.results-pane .results-heading{display:flex;flex-direction:column;align-items:stretch;gap:9px;margin:0 0 14px;width:100%}
+    .results-pane #count{display:block;width:100%;white-space:nowrap;overflow:visible;margin:0;font-weight:850;font-size:14px;line-height:1.35;color:#253036}
+    .results-pane .sort-control{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
+    .results-pane .sort-control label{font-size:12px;color:#68727b;font-weight:800;white-space:nowrap;flex:0 0 auto}
+    .results-pane #sort-spaces{flex:1 1 auto;min-width:0;width:100%;max-width:none;padding:9px 30px 9px 11px;border:1px solid #dfe4e8;border-radius:11px;background:#fff;color:#263039;font:inherit;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 5px #15212b08}
+    .results-pane #sort-spaces:focus{outline:2px solid #f6a7b6;border-color:var(--red)}
+    @media(max-width:430px){.results-pane .results-heading{gap:8px}.results-pane #count{white-space:nowrap;font-size:14px}.results-pane .sort-control{gap:8px}}
 .results-pane .card{border-color:#E6E9EC;background:#fff;border-radius:14px;box-shadow:0 3px 10px #10213009}
 .results-pane .card:hover,.results-pane .card:focus{border-color:#D7AE00 !important;box-shadow:0 5px 18px #41350d16 !important}
 .results-pane .cardtop{gap:10px;align-items:flex-start}
@@ -409,9 +415,16 @@ main > aside:not(.results-pane) .section-label{margin-top:5px}
   </main>
   <script id="revive-move-results">
   // Move the exact same elements into the right column; all JS handlers remain bound.
-  (function(){const target=document.querySelector('.results-pane');
+  (function(){
+    const target=document.querySelector('.results-pane');
     const count=document.getElementById('count'),cards=document.getElementById('cards');
-    if(target && count && cards){target.append(count,cards);}})();
+    if(target && count && cards){
+      const heading=document.createElement('div');heading.className='results-heading';
+      const sort=document.createElement('div');sort.className='sort-control';
+      sort.innerHTML='<label for="sort-spaces">Sort by</label><select id="sort-spaces" aria-label="Sort spaces"><option value="default">Recommended</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="area-asc">Area: small to large</option><option value="area-desc">Area: large to small</option><option value="availability-asc">Availability: shortest period</option><option value="availability-desc">Availability: longest period</option><option value="rental-asc">Minimum rental: shortest</option><option value="rental-desc">Minimum rental: longest</option></select>';
+      heading.append(count,sort);target.append(heading,cards);
+    }
+  })();
   </script>
 
 
@@ -540,6 +553,33 @@ main > aside:not(.results-pane) .section-label{margin-top:5px}
     const short = x => x>=1000 ? `€${(x/1000).toFixed(1)}k`: `€${Math.round(x)}`;
     const rateUnit = {hour:'hr',day:'day',week:'wk',month:'mo'};
     let listings=[], filtered=[], ready=false, aiMatches=null;
+    let sortMode='default';
+    function availabilityWindowDays(p){
+      const a=p.availability||{},start=Date.parse(a.start_date||''),end=Date.parse(a.end_date||'');
+      return Number.isFinite(start)&&Number.isFinite(end)&&end>=start?(end-start)/86400000+1:null;
+    }
+    function minimumRentalHours(p){
+      const d=p.availability?.minimum_rental_duration||{},value=Number(d.value);
+      if(!Number.isFinite(value)||value<=0)return null;
+      const unit=String(d.unit||'').toLowerCase();
+      const factors={hour:1,hours:1,day:24,days:24,week:168,weeks:168,month:720,months:720,year:8760,years:8760};
+      return factors[unit]?value*factors[unit]:null;
+    }
+    function sortSpaces(items){
+      const copy=[...items];
+      const sorters={
+        'price-asc':(a,b)=>(getRate(a)?.value??Infinity)-(getRate(b)?.value??Infinity),
+        'price-desc':(a,b)=>(getRate(b)?.value??-Infinity)-(getRate(a)?.value??-Infinity),
+        'area-asc':(a,b)=>(Number(a.area_sqm)||Infinity)-(Number(b.area_sqm)||Infinity),
+        'area-desc':(a,b)=>(Number(b.area_sqm)||-Infinity)-(Number(a.area_sqm)||-Infinity),
+        'availability-asc':(a,b)=>(availabilityWindowDays(a)??Infinity)-(availabilityWindowDays(b)??Infinity),
+        'availability-desc':(a,b)=>(availabilityWindowDays(b)??-Infinity)-(availabilityWindowDays(a)??-Infinity),
+        'rental-asc':(a,b)=>(minimumRentalHours(a)??Infinity)-(minimumRentalHours(b)??Infinity),
+        'rental-desc':(a,b)=>(minimumRentalHours(b)??-Infinity)-(minimumRentalHours(a)??-Infinity)
+      };
+      if(sorters[sortMode])copy.sort(sorters[sortMode]);
+      return copy;
+    }
     const emptyFilters = () => ({unit:'day',priceMin:null,priceMax:null,areaMin:null,areaMax:null,capacity:null,district:'',purpose:'',duration:'',wifi:false,kitchen:false,washroom:false,parking:false,condition:'',transit:null,deposit:'',negotiable:''});
     let applied=emptyFilters(),priceTouched=false,chartMax=350,chartMin=0,histogramValues=[],lastFocus=null;
     function getRate(p){const rates=p.price?.rates||{};
@@ -690,7 +730,8 @@ main > aside:not(.results-pane) .section-label{margin-top:5px}
       map.getSource('spaces').setData(buildFeatures());$('count').textContent=`${filtered.length} ${aiMatches!==null?'AI-matched':'demo'} spaces`;
       if(aiMatches!==null){$('ai-status').className='success';$('ai-status').textContent=`${filtered.length} matches found`;}
       const cards=$('cards');cards.replaceChildren();
-      for(const p of filtered.slice(0,40)){
+      const displayListings=sortSpaces(filtered);
+      for(const p of displayListings.slice(0,40)){
         const r=getRate(p),card=document.createElement('button');card.className='card';
         const img=p.photos?.space_photo_url;
         card.innerHTML=`<div class="cardtop">${/^https:\/\//.test(img||'')?`<img class="thumb" src="${escapeHtml(img)}" alt="Illustrative space photo" loading="lazy">`:''}
@@ -701,6 +742,7 @@ main > aside:not(.results-pane) .section-label{margin-top:5px}
       if(filtered.length>40){const tip=document.createElement('p');tip.textContent=`Showing first 40 of ${filtered.length} matches; zoom and click the map for the rest.`;cards.appendChild(tip);}
       if(!filtered.length)cards.textContent='No matching spaces.';
     }
+    $('sort-spaces')?.addEventListener('change',e=>{sortMode=e.target.value;update();});
     const byId=new Map();
     map.on('load',async()=>{
       try{
