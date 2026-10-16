@@ -103,7 +103,7 @@
     const byId=new Map();
     map.on('load',async()=>{
       try{
-        const res=await fetch('./data/dortmund_synthetic_spaces.json');if(!res.ok)throw new Error('HTTP '+res.status);
+        const res=await fetch('./../Data/dortmund_synthetic_spaces.json');if(!res.ok)throw new Error('HTTP '+res.status);
         const data=await res.json();
         if(!Array.isArray(data.listings))throw new Error('JSON must have listings array');
         listings=data.listings.filter(p=>p.data_status==='synthetic_demo_only'&&isLocated(p));
