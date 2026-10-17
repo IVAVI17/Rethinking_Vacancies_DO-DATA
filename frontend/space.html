@@ -13,6 +13,11 @@ header{height:68px;display:flex;align-items:center;justify-content:space-between
 main{max-width:1080px;margin:24px auto;padding:0 18px 50px}
 .topline{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
 button{font:inherit;cursor:pointer}.back{border:1px solid #d9dfe5;background:white;border-radius:10px;padding:10px 13px;font-weight:750}
+.book-now{display:block;width:100%;border:0;border-radius:11px;padding:12px 18px;background:var(--red);color:#fff;font-weight:850;box-shadow:0 5px 14px #ef345526;transition:transform .15s,background .15s}
+.book-now:hover{background:#d82b4a;transform:translateY(-1px)}
+.book-now:focus-visible{outline:3px solid #f7a6b5;outline-offset:3px}
+.booking-demo-note{font-size:12px;color:var(--muted);margin:9px 0 0;line-height:1.45}
+
 h1{font-size:30px;letter-spacing:-.6px;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 18px;line-height:1.5}
 .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:180px;gap:8px;border-radius:18px;overflow:hidden;margin:18px 0 24px}
 .gallery img{width:100%;height:100%;object-fit:cover;background:#e9ebee}.gallery img:first-child{grid-row:span 2}
@@ -172,9 +177,9 @@ body:has(#submission-form) label{color:#29343B}
 <!-- REVIVE_CLEAN_MODERN_END -->
 </head>
 <body>
-<header><div class="brand">ReVive <b>Dortmund</b></div><span class="demo">SYNTHETIC DATA · HACKATHON DEMO</span></header>
+<header><div class="brand">ReVive <b>Dortmund</b></div><span class="demo">SPACE DETAILS</span></header>
 <main>
-  <div class="topline"><button class="back" id="back">← Back to spaces</button><span class="muted">Space details</span></div>
+  <div class="topline"><button class="back" id="back">← Back to spaces</button></div>
   <div id="status" class="muted">Loading listing details…</div>
   <div id="details" hidden>
     <h1 id="title"></h1><p id="subtitle" class="sub"></p>
@@ -186,6 +191,7 @@ body:has(#submission-form) label{color:#29343B}
       </div>
       <div>
         <section class="panel"><div id="price" class="price"></div><div id="rating-summary" class="muted" style="margin-top:7px"></div></section>
+        <section class="panel" id="booking-demo-panel"><h2>Interested in this space?</h2><button type="button" class="book-now" id="book-now-demo">Book now</button><p class="booking-demo-note">Demo only — online booking is not available yet.</p></section>
         <section class="panel"><h2>Reviews</h2><div id="reviews"></div>
           <h3 style="margin-top:20px">Add your review</h3>
           <form id="review-form">
@@ -368,6 +374,10 @@ $('review-form').addEventListener('submit',async event=>{
 });
 $('back').addEventListener('click',()=>{if(window.opener&&!window.opener.closed){window.close();}else{location.href='/';}});
 loadListing();
+
+document.getElementById('book-now-demo')?.addEventListener('click',()=>{
+  alert('This is a demo button. Online booking will be available in a future version.');
+});
 </script>
 </body>
 </html>
