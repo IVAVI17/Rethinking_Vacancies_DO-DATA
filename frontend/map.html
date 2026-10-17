@@ -364,9 +364,60 @@ main > aside:not(.results-pane) .section-label{margin-top:5px}
 
 </style>
 <!-- REVIVE_SMALL_LAYOUT_FINISH_END -->
+
+<!-- REVIVE_FINAL_UI_DETAILS_START -->
+<style id="revive-final-ui-details">
+/* Two visual-only account buttons; existing Add menu is left untouched. */
+header .revive-auth-actions{display:flex;align-items:center;gap:10px;margin-left:auto;min-width:0}
+header .revive-auth-action{display:inline-flex;justify-content:center;align-items:center;white-space:nowrap;border-radius:999px;padding:10px 17px;font:inherit;font-size:13px;font-weight:800;line-height:1.4;min-height:40px;cursor:default}
+header .revive-auth-login{color:#FFF;background:transparent;border:1px solid #D6DBDE}
+header .revive-auth-signup{color:#141B20;background:#FFD429;border:1px solid #FFD429}
+/* The two range inputs overlap. Keep the MIN thumb painted over the MAX range track. */
+#revive-price-slot #price-slider-min{z-index:3 !important}
+@media(max-width:600px){
+  header{gap:8px}
+  header .revive-auth-actions{gap:6px}
+  header .revive-auth-action{padding:7px 10px;font-size:11px;min-height:34px}
+}
+@media(max-width:375px){header .revive-auth-action{padding:6px 8px}}
+
+/* REVIVE_PRICE_TWO_HANDLES_FIX: show both real, independently draggable thumbs.
+   Generic input background/borders were painting white over the other range. */
+#revive-price-slot .range-wrap input[type="range"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#revive-price-slot .range-wrap input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#revive-price-slot .range-wrap input[type="range"]::-moz-range-track {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* Both thumbs are visible; minimum stays above maximum if they meet. */
+#revive-price-slot #price-slider-min { z-index: 3 !important; }
+#revive-price-slot #price-slider-max { z-index: 2 !important; }
+/* Keep keyboard focus visible on the thumb rather than around the entire rail. */
+#revive-price-slot .range-wrap input[type="range"]:focus-visible { outline: 0 !important; }
+#revive-price-slot .range-wrap input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px #DDB90080 !important;
+}
+#revive-price-slot .range-wrap input[type="range"]:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 3px #DDB90080 !important;
+}
+</style>
+<!-- REVIVE_FINAL_UI_DETAILS_END -->
 </head>
 <body>
-  <header><div class="brand">ReVive <b>Dortmund</b></div><button type="button" id="add-menu-trigger" class="add-menu-trigger" aria-haspopup="dialog" aria-expanded="false" aria-label="Add an event or listing"><span class="plus-symbol">+</span><span class="add-label">Add</span></button></header>
+  <header><div class="brand">ReVive <b>Dortmund</b></div><div class="revive-auth-actions"><button type="button" class="revive-auth-action revive-auth-login" aria-disabled="true" title="Coming soon">Log in</button><button type="button" class="revive-auth-action revive-auth-signup" aria-disabled="true" title="Coming soon">Sign up</button><button type="button" id="add-menu-trigger" class="add-menu-trigger" aria-haspopup="dialog" aria-expanded="false" aria-label="Add an event or listing"><span class="plus-symbol">+</span><span class="add-label">Add</span></button></div></header>
   <main>
     <aside>
       <h1>Discover spaces</h1><p>Explore possible short-term commercial rental experiences across Dortmund.</p>

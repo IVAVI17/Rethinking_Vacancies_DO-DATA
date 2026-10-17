@@ -175,6 +175,23 @@ body:has(#submission-form) label{color:#29343B}
 }
 </style>
 <!-- REVIVE_CLEAN_MODERN_END -->
+
+<!-- REVIVE_CONTACT_OWNER_START -->
+<style id="revive-contact-owner-styles">
+html:has(#revive-enquiry-section){scroll-behavior:smooth}
+.revive-contact-owner-action{display:flex;align-items:center;justify-content:center;width:100%;margin-top:14px;padding:12px 16px;border:1px solid #CED5D9;border-radius:11px;background:#fff;color:#1C2329;text-decoration:none;font-weight:800;font-size:14px;line-height:1.5}
+.revive-contact-owner-action:hover{border-color:#C8A000;background:#FFFDF4}
+.revive-contact-owner-action:focus-visible{outline:2px solid #DDB900;outline-offset:2px}
+.revive-enquiry-section{scroll-margin-top:88px}
+.revive-enquiry-section .revive-enquiry-copy{color:#69747E;line-height:1.6;margin:0 0 20px}
+.revive-enquiry-form{max-width:720px}
+.revive-enquiry-form label{display:block;font-size:13px;margin:15px 0 6px}
+.revive-enquiry-form input,.revive-enquiry-form select,.revive-enquiry-form textarea{display:block;width:100%;padding:12px;border:1px solid #D5DCE2;border-radius:10px;background:#fff;color:#1C2329;font:inherit}
+.revive-enquiry-form textarea{min-height:115px;resize:vertical}
+.revive-enquiry-form .submit{margin-top:20px}
+.revive-enquiry-form .revive-enquiry-note{color:#69747E;font-size:12px;line-height:1.5;margin:10px 0 0}
+</style>
+<!-- REVIVE_CONTACT_OWNER_END -->
 </head>
 <body>
 <header><div class="brand">ReVive <b>Dortmund</b></div><span class="demo">SPACE DETAILS</span></header>
@@ -191,7 +208,8 @@ body:has(#submission-form) label{color:#29343B}
       </div>
       <div>
         <section class="panel"><div id="price" class="price"></div><div id="rating-summary" class="muted" style="margin-top:7px"></div></section>
-        <section class="panel" id="booking-demo-panel"><h2>Interested in this space?</h2><button type="button" class="book-now" id="book-now-demo">Book now</button><p class="booking-demo-note">Demo only — online booking is not available yet.</p></section>
+        <section class="panel" id="booking-demo-panel"><h2>Interested in this space?</h2><button type="button" class="book-now" id="book-now-demo">Book now</button>
+<a class="revive-contact-owner-action" id="revive-contact-owner-action" href="#revive-enquiry-section">Contact owner</a></section>
         <section class="panel"><h2>Reviews</h2><div id="reviews"></div>
           <h3 style="margin-top:20px">Add your review</h3>
           <form id="review-form">
@@ -211,6 +229,31 @@ body:has(#submission-form) label{color:#29343B}
         </section>
       </div>
     </div>
+
+    <!-- ReVive enquiry form: at the end of this listing, after existing content. -->
+    <section class="panel revive-enquiry-section" id="revive-enquiry-section" aria-labelledby="revive-enquiry-title">
+      <h2 id="revive-enquiry-title">Contact the owner</h2>
+      <p class="revive-enquiry-copy">Ask about this space, arrange a viewing, or explore a business opportunity.</p>
+      <form class="revive-enquiry-form" id="revive-enquiry-form">
+        <label for="revive-enquiry-name">Your name</label>
+        <input id="revive-enquiry-name" name="name" type="text" placeholder="Your full name" maxlength="120" autocomplete="name" required>
+        <label for="revive-enquiry-email">Email address</label>
+        <input id="revive-enquiry-email" name="email" type="email" placeholder="you@example.com" maxlength="254" autocomplete="email" required>
+        <label for="revive-enquiry-interest">I'm interested in...</label>
+        <select id="revive-enquiry-interest" name="interest" required>
+          <option value="short-term-rental">Short-term rental</option>
+          <option value="event">Event</option>
+          <option value="business-collaboration" selected>Business collaboration</option>
+          <option value="long-term-rental">Long-term rental</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="revive-enquiry-message">Your message</label>
+        <textarea id="revive-enquiry-message" name="message" placeholder="Hi! I'm interested in using this space for a pop-up business..." maxlength="2000" required></textarea>
+        <button type="submit" class="submit">Send enquiry</button>
+        <div id="revive-enquiry-status" class="status" role="status" aria-live="polite"></div>
+        
+      </form>
+    </section>
   </div>
 </main>
 <script>
@@ -305,7 +348,6 @@ function renderListing(){
   // coordinates, review aggregates, photo metadata and other implementation fields.
   addGroupedField(all,'Address',getAddress());
   addGroupedField(all,'District',address.district);
-  addGroupedField(all,'Postcode',address.postcode);
   addGroupedField(all,'Area',listing.area_sqm!=null?`${listing.area_sqm} m²`:null);
   addGroupedField(all,'Capacity',listing.capacity_people!=null?`${listing.capacity_people} people`:null);
 
@@ -336,7 +378,6 @@ function renderListing(){
   addGroupedField(all,'Facilities',listing.facilities);
   addGroupedField(all,'Condition',listing.condition);
   addGroupedField(all,'Description',listing.description||listing.summary);
-  addGroupedField(all,'Contact',listing.contact);
 
   const photos=collectPhotoUrls(listing.photos||listing);
   const gallery=$('gallery');gallery.replaceChildren();
@@ -379,5 +420,17 @@ document.getElementById('book-now-demo')?.addEventListener('click',()=>{
   alert('This is a demo button. Online booking will be available in a future version.');
 });
 </script>
+
+<!-- REVIVE_ENQUIRY_JS_START -->
+<script id="revive-enquiry-js">
+// Only the demo enquiry form is handled here. Existing booking/review JS is untouched.
+document.getElementById('revive-enquiry-form').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const status = document.getElementById('revive-enquiry-status');
+  status.className = 'status';
+  status.textContent = 'Demo only — your enquiry was not sent to a property owner.';
+});
+</script>
+<!-- REVIVE_ENQUIRY_JS_END -->
 </body>
 </html>
