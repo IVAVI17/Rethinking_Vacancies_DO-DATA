@@ -150,9 +150,9 @@ We aim to move beyond listing vacant properties: the longer-term vision is a loc
 - **Pitch deck:** [Pitch deck URL.](https://drive.google.com/file/d/18TQSlHhD5rSS7CZTb6ZzRctqmKFvex6f/view?usp=sharing)
 ## Team
 
-| Name | Role |
-|---|---|
-| Avi Gupta | CEO |
-| Farah Somrani | COO |
-| Nixon M Paulson | CFO |
-| Türkan Yildizoglu | CTO |
+| Name | Role | LinkedIn Profile |
+|---|---|---|
+| Avi Gupta | CEO | [LinkedIn](https://www.linkedin.com/in/avi-gupta17/) |
+| Farah Somrani | COO | [LinkedIn](https://www.linkedin.com/in/farah-somrani-981a5526b) |
+| Nixon M Paulson | CFO | [LinkedIn](https://www.linkedin.com/in/nixon-m-paulson-b4b309252/) |
+| Türkan Yildizoglu | CTO | [Github](https://github.com/turkan367) |
