@@ -147,7 +147,7 @@ We aim to move beyond listing vacant properties: the longer-term vision is a loc
 
 ## Links
 - **Repository:** [GitHub repository URL](https://github.com/IVAVI17/Rethinking_Vacancies_DO-DATA)
-- **Pitch deck:** [Pitch deck URL.](https://drive.google.com/file/d/18TQSlHhD5rSS7CZTb6ZzRctqmKFvex6f/view?usp=sharing)
+- **Pitch deck:** [Pitch deck URL.](https://drive.google.com/file/d/12GPvNqUeaz4WX5hjnwKDIp7pg4J8_v69/view?usp=sharing)
 ## Team
 
 | Name | Role | LinkedIn Profile |
